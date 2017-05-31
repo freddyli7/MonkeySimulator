@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MonkeySimulatior</string>
+    <string name="title_activity_monkey_settings">Monkey Parameters Setting</string>
+
+</resources>
