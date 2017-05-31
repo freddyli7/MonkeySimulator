@@ -1,6 +1,5 @@
 package com.blackberry.monkeysimulatior;
 
-
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -46,10 +45,6 @@ public class MainActivity extends ActionBarActivity {
         ListView listView = (ListView) findViewById(R.id.app_listView);
 
         listView.setAdapter(appAdapter);
-
-
-
-
 
     }
 
