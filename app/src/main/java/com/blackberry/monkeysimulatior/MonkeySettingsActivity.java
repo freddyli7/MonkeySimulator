@@ -20,7 +20,6 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monkey_settings);
 
-
         String app_name_intent = getIntent().getStringExtra("app_name");
         String app_version_intent = getIntent().getStringExtra("app_version");
 

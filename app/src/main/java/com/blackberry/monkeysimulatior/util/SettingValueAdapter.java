@@ -61,14 +61,27 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
                     public void onClick(DialogInterface dialog, int which) {
 
                         //click ok
-                        Log.v("*****************",et.getText()+"");
-                        TextView value = new TextView(getContext());
+                        //Log.v("*****************",et.getText()+"");
+                        Log.v("*****************","whatwhat OK");
+                        /*TextView value = new TextView(getContext());
                         value.setText(et.getText());
-                        lv.addView(value);
+                        lv.addView(value);*/
 
                     }
                 });
-                alDia.setNegativeButton("Cancel", null);
+                alDia.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //click cancel
+                        //Log.v("*****************",et.getText()+"");
+                        Log.v("*****************","whatwhat CANCELs");
+                        /*TextView value = new TextView(getContext());
+                        value.setText(et.getText());
+                        lv.addView(value);*/
+
+                    }
+                });
                 alDia.show();
             }
         });
