@@ -2,6 +2,8 @@ package com.blackberry.monkeysimulatior;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,10 +34,11 @@ public class MonkeySettingsActivity extends AppCompatActivity {
 
         list = (ListView) findViewById(R.id.monkey_settings_listView);
 
-        SettingValueAdapter settingValueAdapter = new SettingValueAdapter(this, android.R.layout.simple_list_item_1, monkeySettings.getAllMonkeySettings());
-
         ListView listView = (ListView) findViewById(R.id.monkey_settings_listView);
 
+        SettingValueAdapter settingValueAdapter = new SettingValueAdapter(this, android.R.layout.simple_list_item_1, monkeySettings.getAllMonkeySettings());
+
         listView.setAdapter(settingValueAdapter);
+
     }
 }

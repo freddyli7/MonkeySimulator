@@ -36,7 +36,7 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, final View convertView, final ViewGroup parent) {
 
 
         //current parameter's name
@@ -44,12 +44,11 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
 
         final EditText et = new EditText(getContext());
 
-        View oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.activity_monkey_settings, parent, false);
+        final View oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.activity_monkey_settings, parent, false);
 
         TextView textView = (TextView) oneAppView.findViewById(R.id.app_name_field);
         final ListView lv = (ListView) oneAppView.findViewById(R.id.monkey_settings_listView);
         textView.setText(obj.toString());
-
 
 
         oneAppView.setOnClickListener(new View.OnClickListener() {
@@ -60,16 +59,15 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+
                         //click ok
                         //Log.v("*****************",et.getText()+"");
-                        Log.v("*****************","whatwhat OK");
+                        Log.d("*****************","whatwhat OK");
                         /*TextView value = new TextView(getContext());
                         value.setText(et.getText());
                         lv.addView(value);*/
-
-                        
-
                     }
+
                 });
                 alDia.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -77,15 +75,19 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
 
                         //click cancel
                         //Log.v("*****************",et.getText()+"");
-                        Log.v("*****************","whatwhat CANCELs");
+                        Log.d("*****************","whatwhat CANCEL");
                         /*TextView value = new TextView(getContext());
                         value.setText(et.getText());
                         lv.addView(value);*/
 
                     }
                 });
+                Log.d("FFF","*************");
+                parent.removeAllViewsInLayout();
+                Log.d("FFF","*************");
                 alDia.show();
             }
+
         });
 
 
