@@ -36,7 +36,7 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
     }
 
     @Override
-    public View getView(int position, final View convertView, final ViewGroup parent) {
+    public View getView(int position, View convertView, final ViewGroup parent) {
 
 
         //current parameter's name
@@ -44,7 +44,7 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
 
         final EditText et = new EditText(getContext());
 
-        final View oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.activity_monkey_settings, parent, false);
+        View oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.activity_monkey_settings, parent, false);
 
         TextView textView = (TextView) oneAppView.findViewById(R.id.app_name_field);
         final ListView lv = (ListView) oneAppView.findViewById(R.id.monkey_settings_listView);
