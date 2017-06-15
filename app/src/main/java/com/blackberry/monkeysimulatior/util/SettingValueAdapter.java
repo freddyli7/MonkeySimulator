@@ -67,6 +67,8 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
                         value.setText(et.getText());
                         lv.addView(value);*/
 
+                        
+
                     }
                 });
                 alDia.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
