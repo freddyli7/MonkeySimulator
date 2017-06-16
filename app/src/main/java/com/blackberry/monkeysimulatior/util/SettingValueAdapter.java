@@ -63,11 +63,8 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
                         //click ok
                         //Log.v("*****************",paramaterTextView.getText()+"");
                         Log.d("*****************","whatwhat OK");
-
                         settingsName.setText(currentSettingName + ": "+ paramatreTextView.getText());
-
                     }
-
                 });
                 alDia.show();
                 alDia.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -79,8 +76,7 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
                         Log.d("*****************","whatwhat CANCEL");
                         /*TextView value = new TextView(getContext());
                         value.setText(paramaterTextView.getText());
-                        settingsList.addView(value);
-*/
+                        settingsList.addView(value);*/
                     }
                 });
 
