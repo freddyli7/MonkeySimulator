@@ -85,9 +85,6 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
 
         });
 
-
-
-
         /*settingsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -124,17 +121,12 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
 
                     }
                 });
-<<<<<<< HEAD
-                alDia.show();*//*
-=======
 
-                
                 alDia.show();
->>>>>>> dev
+
             }
 
         });*/
-
 
 
         return oneAppView;
