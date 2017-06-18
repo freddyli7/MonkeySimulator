@@ -37,7 +37,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.monkey_settings_listView);
 
         //SettingValueAdapter settingValueAdapter = new SettingValueAdapter(this, android.R.layout.simple_list_item_1, monkeySettings.getAllMonkeySettings());
-        SettingValueAdapter settingValueAdapter = new SettingValueAdapter(this, android.R.layout.simple_expandable_list_item_1, monkeySettings.getAllMonkeySettings());
+        SettingValueAdapter settingValueAdapter = new SettingValueAdapter(this, android.R.layout.simple_list_item_1, monkeySettings.getAllMonkeySettings());
 
         listView.setAdapter(settingValueAdapter);
 
