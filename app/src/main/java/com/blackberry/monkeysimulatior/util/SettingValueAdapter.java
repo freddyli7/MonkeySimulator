@@ -82,6 +82,8 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
 
                     }
                 });
+
+                
                 alDia.show();
             }
         });
