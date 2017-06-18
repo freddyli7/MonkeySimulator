@@ -124,7 +124,13 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
 
                     }
                 });
+<<<<<<< HEAD
                 alDia.show();*//*
+=======
+
+                
+                alDia.show();
+>>>>>>> dev
             }
 
         });*/
