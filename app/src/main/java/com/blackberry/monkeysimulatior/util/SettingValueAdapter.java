@@ -51,7 +51,6 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
         settingsName.setText(settingsNameObj.toString());
 
         settingsName.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder alDia = new AlertDialog.Builder(getContext()).setTitle("Input value for " + settingsNameObj.toString()).setIcon(android.R.drawable.ic_dialog_info).setView(paramatreTextView);
@@ -86,8 +85,6 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
         });
 
 
-
-
         /*settingsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -96,7 +93,7 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
 
 
 
-                *//*AlertDialog.Builder alDia = new AlertDialog.Builder(getContext()).setTitle("Input value for " + settingsNameObj.toString()).setIcon(android.R.drawable.ic_dialog_info).setView(paramaterTextView);
+                AlertDialog.Builder alDia = new AlertDialog.Builder(getContext()).setTitle("Input value for " + settingsNameObj.toString()).setIcon(android.R.drawable.ic_dialog_info).setView(paramaterTextView);
                 alDia.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -105,9 +102,9 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
                         //click ok
                         //Log.v("*****************",paramaterTextView.getText()+"");
                         Log.d("*****************","whatwhat OK");
-                       *//**//* TextView value = new TextView(getContext());
+                       *//**//**//**//* TextView value = new TextView(getContext());
                         value.setText(paramaterTextView.getText());
-                        settingsList.addView(value);*//**//*
+                        settingsList.addView(value);*//**//**//**//*
                     }
 
                 });
@@ -118,25 +115,18 @@ public class SettingValueAdapter extends ArrayAdapter<String> {
                         //click cancel
                         //Log.v("*****************",paramaterTextView.getText()+"");
                         Log.d("*****************","whatwhat CANCEL");
-                        *//**//*TextView value = new TextView(getContext());
+                        *//**//**//**//*TextView value = new TextView(getContext());
                         value.setText(paramaterTextView.getText());
-                        settingsList.addView(value);*//**//*
+                        settingsList.addView(value);*//**//**//**//*
 
                     }
                 });
-<<<<<<< HEAD
-                alDia.show();*//*
-=======
-
-                
                 alDia.show();
->>>>>>> dev
+
             }
 
         });*/
-
-
-
+        
         return oneAppView;
     }
 
