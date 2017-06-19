@@ -21,11 +21,6 @@ public class MainActivity extends ActionBarActivity {
     private static final String PACKAGE_NAME = "com.blackberry.";
     private List<ApkApplications> appsName;
 
-
-    /*
-    * add some chagne for test
-    *
-    * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
