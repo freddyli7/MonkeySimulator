@@ -1,4 +1,4 @@
-package com.blackberry.monkeysimulatior.util;
+package com.blackberry.monkeysimulatior.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,11 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blackberry.monkeysimulatior.MonkeySettingsActivity;
 import com.blackberry.monkeysimulatior.R;
+import com.blackberry.monkeysimulatior.util.ApkApplications;
 
 import java.util.List;
 
@@ -29,13 +29,13 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
 
         final ApkApplications apkApplications = getItem(position);
 
-        View oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.activity_monkey_settings, parent, false);
+        View oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.activity_main, parent, false);
 
         //ImageView imageView = (ImageView) oneTeacherView.findViewById(R.id.app_mall_icon);
-        TextView textView = (TextView) oneAppView.findViewById(R.id.app_name_field);
+        TextView app_name_textView = (TextView) oneAppView.findViewById(R.id.app_name_field_main);
 
         //imageView.setImageResource(app.getImageId());
-        textView.setText(apkApplications.getApp_name());
+        app_name_textView.setText(apkApplications.getApp_name());
 
         oneAppView.setOnClickListener(new View.OnClickListener() {
             @Override
