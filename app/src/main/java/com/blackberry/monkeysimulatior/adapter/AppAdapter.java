@@ -29,7 +29,7 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
 
         final ApkApplications apkApplications = getItem(position);
 
-        View oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.activity_main, parent, false);
+        View oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.app_list, parent, false);
 
         //ImageView imageView = (ImageView) oneTeacherView.findViewById(R.id.app_mall_icon);
         TextView app_name_textView = (TextView) oneAppView.findViewById(R.id.app_name_field_main);
