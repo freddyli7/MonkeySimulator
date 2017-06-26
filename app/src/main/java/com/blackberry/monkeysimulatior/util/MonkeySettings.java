@@ -1,8 +1,12 @@
 package com.blackberry.monkeysimulatior.util;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by frlee on 5/30/17.
@@ -29,15 +33,33 @@ public class MonkeySettings {
         this.eventNumber = eventNumber;
     }
 
-    public List<String> getAllMonkeySettings(){
+    public List<String> getAllMonkeySettingsName(){
         List<String> settings = new ArrayList<String>();
         Field[] fields = MonkeySettings.class.getDeclaredFields();
         for (Field field :fields) {
             if(!field.getName().equalsIgnoreCase("serialversionuid") && !field.getName().equalsIgnoreCase("$change")){
                 settings.add(field.getName());
             }
-
         }
         return settings;
+    }
+
+    //TODO 注意value组装顺序
+    public List<String> getAllMonkeySettingsValues(@NonNull MonkeySettings obj){
+        List<String> values = new ArrayList<String>();
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for (Field field :fields) {
+            if(!field.getName().equalsIgnoreCase("serialversionuid") && !field.getName().equalsIgnoreCase("$change")){
+                field.setAccessible(true);
+                try{
+                    if(field.get(obj) != null){
+                        values.add(field.get(obj).toString());
+                    }
+                } catch (IllegalAccessException e) {
+                    Log.e("ERROR TAG", "Illegal access field for monkeySettingsObj");
+                }
+            }
+        }
+        return values;
     }
 }

@@ -21,4 +21,6 @@
             android:label="@string/title_activity_monkey_settings" />
     </application>
 
+    <permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></permission>
+
 </manifest>

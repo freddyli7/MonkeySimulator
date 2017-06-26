@@ -8,10 +8,18 @@ import android.widget.Button;
 
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blackberry.monkeysimulatior.util.AssembleMonkeyCommand;
+import com.blackberry.monkeysimulatior.util.CheckRoot;
 import com.blackberry.monkeysimulatior.util.MonkeySettings;
 import com.blackberry.monkeysimulatior.adapter.SettingValueAdapter;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 
 public class MonkeySettingsActivity extends AppCompatActivity {
 
@@ -43,7 +51,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
 
         list = (ListView) findViewById(R.id.monkey_settings_listView);
 
-        settingValueAdapter = new SettingValueAdapter(this, android.R.layout.simple_list_item_1, monkeySettings.getAllMonkeySettings());
+        settingValueAdapter = new SettingValueAdapter(this, android.R.layout.simple_list_item_1, monkeySettings.getAllMonkeySettingsName());
 
         list.setAdapter(settingValueAdapter);
 
@@ -59,7 +67,42 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(settingValueAdapter.getMonkeySettingsObj());
-            Log.e("Fuck....",finalMonkeyCommand);
+            Log.e("Fuck.  root ?...", CheckRoot.isRooted() + "");
+            if(CheckRoot.isRooted() == false){
+                Toast.makeText(getApplicationContext(), "Please root your device first !", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            try{
+                Process exeEcho = Runtime.getRuntime().exec("ls");
+//                exeEcho.getOutputStream().write(finalMonkeyCommand.getBytes());
+//                exeEcho.getOutputStream().flush();
+            } catch (IOException e) {
+                Log.e("Fuck....","SOMETHING WRONG IO");
+                e.printStackTrace();
+            }
+
+            /*BufferedReader reader = null;
+            String content = "";
+            try {
+                //("ps -P|grep bg")执行失败，PC端adb shell ps -P|grep bg执行成功
+                //Process process = Runtime.getRuntime().exec("ps -P|grep tv");
+                //-P 显示程序调度状态，通常是bg或fg，获取失败返回un和er
+                // Process process = Runtime.getRuntime().exec("ps -P");
+                //打印进程信息，不过滤任何条件
+                Process process = Runtime.getRuntime().exec("ps");
+                reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                StringBuffer output = new StringBuffer();
+                int read;
+                char[] buffer = new char[4096];
+                while ((read = reader.read(buffer)) > 0) {
+                    output.append(buffer, 0, read);
+                }
+                reader.close();
+                content = output.toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
         }
     }
 
