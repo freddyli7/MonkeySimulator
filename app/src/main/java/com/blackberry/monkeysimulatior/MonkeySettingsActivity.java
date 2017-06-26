@@ -67,17 +67,19 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(settingValueAdapter.getMonkeySettingsObj());
-            Log.e("Fuck.  root ?...", CheckRoot.isRooted() + "");
-            if(CheckRoot.isRooted() == false){
-                Toast.makeText(getApplicationContext(), "Please root your device first !", Toast.LENGTH_LONG).show();
-                return;
-            }
+            //Log.e("Fuck.  root ?...", CheckRoot.isRooted() + "");
+//            if(CheckRoot.isRooted() == false){
+//                Toast.makeText(getApplicationContext(), "Please root your device first !", Toast.LENGTH_LONG).show();
+//                return;
+//            }
 
             try{
-                Process exeEcho = Runtime.getRuntime().exec("ls");
+                //Process exeEcho = Runtime.getRuntime().exec("adb root");
+                Process pc = Runtime.getRuntime().exec("adb shell");
+                pc.waitFor();
 //                exeEcho.getOutputStream().write(finalMonkeyCommand.getBytes());
 //                exeEcho.getOutputStream().flush();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 Log.e("Fuck....","SOMETHING WRONG IO");
                 e.printStackTrace();
             }
