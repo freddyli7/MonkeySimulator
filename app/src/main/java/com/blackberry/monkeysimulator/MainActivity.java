@@ -1,4 +1,4 @@
-package com.blackberry.monkeysimulatior;
+package com.blackberry.monkeysimulator;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.ListView;
 
-import com.blackberry.monkeysimulatior.util.ApkApplications;
-import com.blackberry.monkeysimulatior.adapter.AppAdapter;
+import com.blackberry.monkeysimulator.util.ApkApplications;
+import com.blackberry.monkeysimulator.adapter.AppAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(com.blackberry.monkeysimulator.R.layout.activity_main);
 
         appsName = new ArrayList<ApkApplications>();
         Context context = this.getApplication().getBaseContext();
@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
             }
         }
 
-        app_list = (ListView) findViewById(R.id.app_listView);
+        app_list = (ListView) findViewById(com.blackberry.monkeysimulator.R.id.app_listView);
 
         AppAdapter appAdapter = new AppAdapter(this, android.R.layout.simple_list_item_1, appsName);
 

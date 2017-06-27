@@ -1,4 +1,4 @@
-package com.blackberry.monkeysimulatior.util;
+package com.blackberry.monkeysimulator.util;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -6,7 +6,6 @@ import android.util.Log;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by frlee on 5/30/17.

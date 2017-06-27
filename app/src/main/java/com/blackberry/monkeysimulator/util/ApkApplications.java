@@ -1,4 +1,4 @@
-package com.blackberry.monkeysimulatior.util;
+package com.blackberry.monkeysimulator.util;
 
 /**
  * Created by frlee on 5/30/17.

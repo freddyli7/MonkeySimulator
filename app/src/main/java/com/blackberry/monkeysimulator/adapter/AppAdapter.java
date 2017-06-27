@@ -1,4 +1,4 @@
-package com.blackberry.monkeysimulatior.adapter;
+package com.blackberry.monkeysimulator.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.blackberry.monkeysimulatior.MonkeySettingsActivity;
-import com.blackberry.monkeysimulatior.R;
-import com.blackberry.monkeysimulatior.util.ApkApplications;
+import com.blackberry.monkeysimulator.MonkeySettingsActivity;
+import com.blackberry.monkeysimulator.R;
+import com.blackberry.monkeysimulator.util.ApkApplications;
 
 import java.util.List;
 

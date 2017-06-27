@@ -1,4 +1,4 @@
-package com.blackberry.monkeysimulatior.util;
+package com.blackberry.monkeysimulator.util;
 
 import android.util.Log;
 

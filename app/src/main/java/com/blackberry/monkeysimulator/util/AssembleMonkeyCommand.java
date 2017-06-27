@@ -1,7 +1,6 @@
-package com.blackberry.monkeysimulatior.util;
+package com.blackberry.monkeysimulator.util;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 /**
  * Created by ruins7 on 2017-06-25.

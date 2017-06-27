@@ -1,4 +1,4 @@
-package com.blackberry.monkeysimulatior;
+package com.blackberry.monkeysimulator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,16 +10,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blackberry.monkeysimulatior.util.AssembleMonkeyCommand;
-import com.blackberry.monkeysimulatior.util.CheckRoot;
-import com.blackberry.monkeysimulatior.util.MonkeySettings;
-import com.blackberry.monkeysimulatior.adapter.SettingValueAdapter;
+import com.blackberry.monkeysimulator.util.AssembleMonkeyCommand;
+import com.blackberry.monkeysimulator.util.CheckRoot;
+import com.blackberry.monkeysimulator.util.MonkeySettings;
+import com.blackberry.monkeysimulator.adapter.SettingValueAdapter;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 
 public class MonkeySettingsActivity extends AppCompatActivity {
 
@@ -37,7 +34,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_monkey_settings);
+        setContentView(com.blackberry.monkeysimulator.R.layout.activity_monkey_settings);
 
         app_name_intent = getIntent().getStringExtra("app_name");
         app_version_intent = getIntent().getStringExtra("app_version");
@@ -46,17 +43,17 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         String packName = app_name_intent.substring(15, app_name_intent.length());
         packName = packName.replaceFirst(packName.substring(0, 1), packName.substring(0, 1).toUpperCase());
 
-        app_name = (TextView) findViewById(R.id.app_name_field_setting);
+        app_name = (TextView) findViewById(com.blackberry.monkeysimulator.R.id.app_name_field_setting);
         app_name.setText(packName + "    Version: " + app_version_intent);
 
-        list = (ListView) findViewById(R.id.monkey_settings_listView);
+        list = (ListView) findViewById(com.blackberry.monkeysimulator.R.id.monkey_settings_listView);
 
         settingValueAdapter = new SettingValueAdapter(this, android.R.layout.simple_list_item_1, monkeySettings.getAllMonkeySettingsName());
 
         list.setAdapter(settingValueAdapter);
 
         // click to assemble Monkey Command and run
-        runMonkeyButton = (Button) findViewById(R.id.run_monkey);
+        runMonkeyButton = (Button) findViewById(com.blackberry.monkeysimulator.R.id.run_monkey);
         runMonkeyCommand = new RunMonkeyCommand();
         runMonkeyButton.setOnClickListener(runMonkeyCommand);
 
