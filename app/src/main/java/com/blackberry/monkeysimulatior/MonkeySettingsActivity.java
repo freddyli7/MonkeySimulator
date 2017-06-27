@@ -67,18 +67,24 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(settingValueAdapter.getMonkeySettingsObj());
-            //Log.e("Fuck.  root ?...", CheckRoot.isRooted() + "");
-//            if(CheckRoot.isRooted() == false){
-//                Toast.makeText(getApplicationContext(), "Please root your device first !", Toast.LENGTH_LONG).show();
-//                return;
-//            }
-
+            // must be rooted
+            if(CheckRoot.isRooted() == false){
+                Toast.makeText(getApplicationContext(), "Please root your device first or use ENG device", Toast.LENGTH_LONG).show();
+                return;
+            }
             try{
-                //Process exeEcho = Runtime.getRuntime().exec("adb root");
-                Process pc = Runtime.getRuntime().exec("adb shell");
-                pc.waitFor();
-//                exeEcho.getOutputStream().write(finalMonkeyCommand.getBytes());
-//                exeEcho.getOutputStream().flush();
+                Process pc = Runtime.getRuntime().exec(finalMonkeyCommand);
+                //Process pc = Runtime.getRuntime().exec("ls -l");
+                int i = pc.waitFor();
+                Log.e("Fuck....",finalMonkeyCommand+ "--status: " + i + "");
+
+                BufferedReader buf = new BufferedReader(new InputStreamReader(pc.getInputStream()));
+                String str = new String();
+                while((str=buf.readLine())!=null){
+                    Log.e("Fuck....",str);
+
+                }
+
             } catch (Exception e) {
                 Log.e("Fuck....","SOMETHING WRONG IO");
                 e.printStackTrace();

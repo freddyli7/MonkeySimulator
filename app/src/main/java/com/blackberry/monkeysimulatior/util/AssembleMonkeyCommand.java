@@ -14,11 +14,11 @@ public class AssembleMonkeyCommand {
     public static String assembleMonkeyCommand(@NonNull MonkeySettings monkeySettingsObj){
         // TODO assmble Monkey command
         // adb shell monkey 500 -v
-        String finalAdbCommandString = "adb shell monkey ";
+        String finalAdbCommandString = "monkey ";
         for (String value : monkeySettingsObj.getAllMonkeySettingsValues(monkeySettingsObj)) {
-            finalAdbCommandString += value;
+            finalAdbCommandString += value+" ";
         }
-        return finalAdbCommandString;
+        return finalAdbCommandString.trim();
     }
 
 }
