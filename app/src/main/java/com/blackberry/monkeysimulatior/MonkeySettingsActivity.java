@@ -66,12 +66,18 @@ public class MonkeySettingsActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(settingValueAdapter.getMonkeySettingsObj());
-            // must be rooted
+            // 1.Must be rooted first
             if(CheckRoot.isRooted() == false){
                 Toast.makeText(getApplicationContext(), "Please root your device first or use ENG device", Toast.LENGTH_LONG).show();
                 return;
             }
+            // 2.Assemble command
+            finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(settingValueAdapter.getMonkeySettingsObj());
+            // 3.Open certain application
+            //TODO
+
+            // 4.Execute monkey command
+            // use side button to control
             try{
                 Process pc = Runtime.getRuntime().exec(finalMonkeyCommand);
                 //Process pc = Runtime.getRuntime().exec("ls -l");
@@ -82,13 +88,13 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 String str = new String();
                 while((str=buf.readLine())!=null){
                     Log.e("Fuck....",str);
-
                 }
-
             } catch (Exception e) {
                 Log.e("Fuck....","SOMETHING WRONG IO");
                 e.printStackTrace();
             }
+            // 5. Back to MonkeySimulator
+            // 6. Show result
 
             /*BufferedReader reader = null;
             String content = "";

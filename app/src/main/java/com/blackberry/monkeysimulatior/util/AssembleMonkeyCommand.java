@@ -9,11 +9,9 @@ import android.util.Log;
 
 public class AssembleMonkeyCommand {
 
-    private static String NO_VALUE_FOUND = "No values found";
-
     public static String assembleMonkeyCommand(@NonNull MonkeySettings monkeySettingsObj){
         // TODO assmble Monkey command
-        // adb shell monkey 500 -v
+        // command example: adb shell monkey 500 -v
         String finalAdbCommandString = "monkey ";
         for (String value : monkeySettingsObj.getAllMonkeySettingsValues(monkeySettingsObj)) {
             finalAdbCommandString += value+" ";
