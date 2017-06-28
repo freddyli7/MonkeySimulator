@@ -1,5 +1,6 @@
 package com.blackberry.monkeysimulator;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,8 +72,13 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             // 2.Assemble command
             finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(settingValueAdapter.getMonkeySettingsObj());
             // 3.Open certain application
-            //TODO
-
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage(app_name_intent);
+            if(launchIntent != null){
+                startActivity(launchIntent);
+            } else {
+                Toast.makeText(getApplicationContext(), "Current application can not be opened", Toast.LENGTH_LONG).show();
+                return;
+            }
             // 4.Execute monkey command
             // use side button to control
             try{
@@ -91,6 +97,11 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             // 5. Back to MonkeySimulator
+           /* Log.e("FFFFF",getPackageName()+"");
+            Intent launchIntent_current = getPackageManager().getLaunchIntentForPackage(getPackageName());
+            if(launchIntent_current != null){
+                startActivity(launchIntent_current);
+            }*/
             // 6. Show result
 
             /*BufferedReader reader = null;
