@@ -70,6 +70,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 return;
             }
             // 2.Assemble command
+
             finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(settingValueAdapter.getMonkeySettingsObj());
             // 3.Open certain application
             Intent launchIntent = getPackageManager().getLaunchIntentForPackage(app_name_intent);
