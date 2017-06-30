@@ -84,14 +84,20 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             try{
                 Process pc = Runtime.getRuntime().exec(finalMonkeyCommand);
                 //Process pc = Runtime.getRuntime().exec("ls -l");
+                //int ii = pc.exitValue();
+
                 int i = pc.waitFor();
                 Log.e("Fuck....",finalMonkeyCommand+ "--status: " + i + "");
 
+
                 BufferedReader buf = new BufferedReader(new InputStreamReader(pc.getInputStream()));
+                BufferedReader buf2 = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
                 String str = new String();
-                while((str=buf.readLine())!=null){
+                while((str=buf2.readLine())!=null){
                     Log.e("Fuck....",str);
                 }
+
+
             } catch (Exception e) {
                 Log.e("Fuck....","SOMETHING WRONG IO");
                 e.printStackTrace();
