@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            keyPassword 'android'
+            storeFile file('/home/frlee/dev/android/keyStoreForDebug/debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
@@ -11,19 +19,19 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    
     buildTypes {
         ext.alwaysUpdateBuildId = false
         debug {
             // Disable fabric build ID generation for debug builds
             ext.enableCrashlytics = false
+            signingConfig signingConfigs.debug
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
-
     dexOptions {
         maxProcessCount 8 // this is the default value
         javaMaxHeapSize "4g"
@@ -31,7 +39,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
