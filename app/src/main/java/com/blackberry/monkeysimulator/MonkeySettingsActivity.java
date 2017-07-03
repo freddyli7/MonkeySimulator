@@ -70,8 +70,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 return;
             }
             // 2.Assemble command
-
-            finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(settingValueAdapter.getMonkeySettingsObj());
+            finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(app_name_intent, settingValueAdapter.getMonkeySettingsObj());
             // 3.Open certain application
             Intent launchIntent = getPackageManager().getLaunchIntentForPackage(app_name_intent);
             if(launchIntent != null){
@@ -81,7 +80,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 return;
             }
             // 4.Execute monkey command
-            // use side button to control
+            // TODO use side button to control
             try{
                 Process pc = Runtime.getRuntime().exec(finalMonkeyCommand);
                 //Process pc = Runtime.getRuntime().exec("ls -l");
@@ -104,11 +103,11 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             // 5. Back to MonkeySimulator
-           /* Log.e("FFFFF",getPackageName()+"");
+            Log.e("FFFFF",getPackageName()+"");
             Intent launchIntent_current = getPackageManager().getLaunchIntentForPackage(getPackageName());
             if(launchIntent_current != null){
                 startActivity(launchIntent_current);
-            }*/
+            }
             // 6. Show result
 
             /*BufferedReader reader = null;
