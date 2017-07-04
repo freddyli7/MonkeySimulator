@@ -5,7 +5,9 @@ import android.util.Log;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by frlee on 5/30/17.
@@ -13,10 +15,12 @@ import java.util.List;
 
 public class MonkeySettings {
 
+    // General
+    private String eventNumber; // eventnumber
+    private String seedNumber; // seed value for pseudo-random number generator
+    private String informationLevel; // information level
 
-    private String eventNumber;
-    private String seedNumber;
-    private String infoLevel;
+    // Events
     private String throttle;
     private String pctTouch;
     private String pctMotion;
@@ -26,16 +30,19 @@ public class MonkeySettings {
     private String pctSyskeys;
     private String pctAppswitch;
     private String pctAnyevent;
-    private String c;
+
+    // Constraints
+//    private String c;
+
+    // Debugging
     private String dbgnoevent;
     private String hprof;
     private String ignoreCrashes;
     private String ignoreTimeout;
-    private String ignoreSecurityException;
+    private String ignoreSecurityExceptions;
     private String killProcessAfterError;
-    private String monitorNativeCrash;
+    private String monitorNativeCrashes;
     private String waitDbg;
-    private String help;
 
     public String getEventNumber() {
         return eventNumber;
@@ -53,12 +60,12 @@ public class MonkeySettings {
         this.seedNumber = seedNumber;
     }
 
-    public String getInfoLevel() {
-        return infoLevel;
+    public String getInformationLevel() {
+        return informationLevel;
     }
 
-    public void setInfoLevel(String infoLevel) {
-        this.infoLevel = infoLevel;
+    public void setInformationLevel(String informationLevel) {
+        this.informationLevel = informationLevel;
     }
 
     public String getThrottle() {
@@ -133,14 +140,6 @@ public class MonkeySettings {
         this.pctAnyevent = pctAnyevent;
     }
 
-    public String getC() {
-        return c;
-    }
-
-    public void setC(String c) {
-        this.c = c;
-    }
-
     public String getDbgnoevent() {
         return dbgnoevent;
     }
@@ -173,12 +172,12 @@ public class MonkeySettings {
         this.ignoreTimeout = ignoreTimeout;
     }
 
-    public String getIgnoreSecurityException() {
-        return ignoreSecurityException;
+    public String getIgnoreSecurityExceptions() {
+        return ignoreSecurityExceptions;
     }
 
-    public void setIgnoreSecurityException(String ignoreSecurityException) {
-        this.ignoreSecurityException = ignoreSecurityException;
+    public void setIgnoreSecurityExceptions(String ignoreSecurityExceptions) {
+        this.ignoreSecurityExceptions = ignoreSecurityExceptions;
     }
 
     public String getKillProcessAfterError() {
@@ -189,12 +188,12 @@ public class MonkeySettings {
         this.killProcessAfterError = killProcessAfterError;
     }
 
-    public String getMonitorNativeCrash() {
-        return monitorNativeCrash;
+    public String getMonitorNativeCrashes() {
+        return monitorNativeCrashes;
     }
 
-    public void setMonitorNativeCrash(String monitorNativeCrash) {
-        this.monitorNativeCrash = monitorNativeCrash;
+    public void setMonitorNativeCrashes(String monitorNativeCrashes) {
+        this.monitorNativeCrashes = monitorNativeCrashes;
     }
 
     public String getWaitDbg() {
@@ -203,14 +202,6 @@ public class MonkeySettings {
 
     public void setWaitDbg(String waitDbg) {
         this.waitDbg = waitDbg;
-    }
-
-    public String getHelp() {
-        return help;
-    }
-
-    public void setHelp(String help) {
-        this.help = help;
     }
 
     public List<String> getAllMonkeySettingsName(){
@@ -224,22 +215,4 @@ public class MonkeySettings {
         return settings;
     }
 
-    //TODO 注意value组装顺序
-    public List<String> getAllMonkeySettingsValues(@NonNull MonkeySettings obj){
-        List<String> values = new ArrayList<String>();
-        Field[] fields = obj.getClass().getDeclaredFields();
-        for (Field field :fields) {
-            if(!field.getName().equalsIgnoreCase("serialversionuid") && !field.getName().equalsIgnoreCase("$change")){
-                field.setAccessible(true);
-                try{
-                    if(field.get(obj) != null){
-                        values.add(field.get(obj).toString());
-                    }
-                } catch (IllegalAccessException e) {
-                    Log.e("ERROR TAG", "Illegal access field for monkeySettingsObj");
-                }
-            }
-        }
-        return values;
-    }
 }

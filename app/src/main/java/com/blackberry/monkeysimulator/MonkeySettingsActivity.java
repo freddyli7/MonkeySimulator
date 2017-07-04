@@ -71,6 +71,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             }
             // 2.Assemble command
             finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(app_name_intent, settingValueAdapter.getMonkeySettingsObj());
+            Log.e("....",finalMonkeyCommand);
             // 3.Open certain application
             Intent launchIntent = getPackageManager().getLaunchIntentForPackage(app_name_intent);
             if(launchIntent != null){
@@ -83,27 +84,19 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             // TODO use side button to control
             try{
                 Process pc = Runtime.getRuntime().exec(finalMonkeyCommand);
-                //Process pc = Runtime.getRuntime().exec("ls -l");
-                //int ii = pc.exitValue();
-
                 int i = pc.waitFor();
                 Log.e("....",finalMonkeyCommand+ "--status: " + i + "");
-
-
                 BufferedReader buf = new BufferedReader(new InputStreamReader(pc.getInputStream()));
-                BufferedReader buf2 = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
+                //BufferedReader buf2 = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
                 String str = new String();
                 while((str=buf.readLine())!=null){
                     Log.e("....",str);
                 }
-
-
             } catch (Exception e) {
-                Log.e("....","SOMETHING WRONG IO");
+                Log.e("....","SOMETHING WRONG");
                 e.printStackTrace();
             }
             // 5. Back to MonkeySimulator
-            Log.e("FFFFF",getPackageName()+"");
             Intent launchIntent_current = getPackageManager().getLaunchIntentForPackage(getPackageName());
             if(launchIntent_current != null){
                 startActivity(launchIntent_current);
