@@ -15,7 +15,6 @@
         android:textColor="@android:color/black"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:id="@+id/app_name_field_main"
-        android:background="@android:color/holo_blue_light"/>
+        android:id="@+id/app_name_field_main"/>
 
 </RelativeLayout>
