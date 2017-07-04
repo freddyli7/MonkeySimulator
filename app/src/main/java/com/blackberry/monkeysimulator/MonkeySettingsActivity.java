@@ -93,7 +93,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 BufferedReader buf = new BufferedReader(new InputStreamReader(pc.getInputStream()));
                 BufferedReader buf2 = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
                 String str = new String();
-                while((str=buf2.readLine())!=null){
+                while((str=buf.readLine())!=null){
                     Log.e("....",str);
                 }
 

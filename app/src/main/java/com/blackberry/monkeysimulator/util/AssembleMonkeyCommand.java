@@ -10,7 +10,7 @@ public class AssembleMonkeyCommand {
 
     public static String assembleMonkeyCommand(String targetAppName, @NonNull MonkeySettings monkeySettingsObj){
         // TODO assmble Monkey command
-        // command example: monkey com.teslacoilsw.launcher 200
+        // command example: monkey -p com.teslacoilsw.launcher 200
         String finalAdbCommandString = "monkey -p " + targetAppName + " ";
         for (String value : monkeySettingsObj.getAllMonkeySettingsValues(monkeySettingsObj)) {
             finalAdbCommandString += value+" ";
