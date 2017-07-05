@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blackberry.monkeysimulator.MonkeySettingsActivity;
 import com.blackberry.monkeysimulator.R;
@@ -20,6 +21,12 @@ import java.util.List;
 
 public class AppAdapter extends ArrayAdapter<ApkApplications> {
 
+    private static Intent launchIntent;
+    private static Intent intent;
+    private static String APP_NAME = "app_name";
+    private static String APP_VERSION = "app_version";
+    private static String APP_NOT_OPEN = "Current application can not be opened";
+
     public AppAdapter(Context context, int resource, List<ApkApplications> objects) {
         super(context, resource, objects);
     }
@@ -28,7 +35,6 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         final ApkApplications apkApplications = getItem(position);
-
         View oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.app_list, parent, false);
 
         //ImageView imageView = (ImageView) oneTeacherView.findViewById(R.id.app_mall_icon);
@@ -40,13 +46,17 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
         oneAppView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MonkeySettingsActivity.class);
-                intent.putExtra("app_name", apkApplications.getApp_name());
-                intent.putExtra("app_version", apkApplications.getApp_verison());
-                getContext().startActivity(intent);
+                launchIntent = getContext().getPackageManager().getLaunchIntentForPackage(apkApplications.getApp_name());
+                if(launchIntent == null){
+                    Toast.makeText(getContext(), APP_NOT_OPEN, Toast.LENGTH_LONG).show();
+                } else {
+                    intent = new Intent(getContext(), MonkeySettingsActivity.class);
+                    intent.putExtra(APP_NAME, apkApplications.getApp_name());
+                    intent.putExtra(APP_VERSION, apkApplications.getApp_verison());
+                    getContext().startActivity(intent);
+                }
             }
         });
-
         return oneAppView;
     }
 }

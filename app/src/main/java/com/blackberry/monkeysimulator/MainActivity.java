@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.blackberry.monkeysimulator.util.ApkApplications;
@@ -13,7 +13,7 @@ import com.blackberry.monkeysimulator.adapter.AppAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private static ListView app_list;
     private static final String PACKAGE_NAME = "com.blackberry.";
@@ -32,18 +32,12 @@ public class MainActivity extends ActionBarActivity {
         for (int i = 0; i < packageList.size(); i++){
             PackageInfo packageInfo = (PackageInfo) packageList.get(i);
             if(packageInfo.packageName.startsWith(PACKAGE_NAME)){
-                appsName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName+""));
+                appsName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName));
             }
         }
-
         app_list = (ListView) findViewById(com.blackberry.monkeysimulator.R.id.app_listView);
-
         AppAdapter appAdapter = new AppAdapter(this, android.R.layout.simple_list_item_1, appsName);
-
         app_list.setAdapter(appAdapter);
 
     }
-
-
-
 }

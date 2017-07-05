@@ -31,9 +31,6 @@ public class MonkeySettings {
     private String pctAppswitch;
     private String pctAnyevent;
 
-    // Constraints
-//    private String c;
-
     // Debugging
     private String dbgnoevent;
     private String hprof;
@@ -43,6 +40,9 @@ public class MonkeySettings {
     private String killProcessAfterError;
     private String monitorNativeCrashes;
     private String waitDbg;
+
+    // Constraints
+//    private String c;
 
     public String getEventNumber() {
         return eventNumber;

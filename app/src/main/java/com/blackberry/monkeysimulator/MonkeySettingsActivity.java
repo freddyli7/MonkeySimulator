@@ -1,5 +1,6 @@
 package com.blackberry.monkeysimulator;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,9 +29,15 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private static SettingValueAdapter settingValueAdapter;
     private static RunMonkeyCommand runMonkeyCommand;
     private static String finalMonkeyCommand;
+    private static Intent launchIntent;
+    private static Intent launchIntent_current;
+    private static ComponentName componentName;
 
-    private static String app_name_intent ;
-    private static String app_version_intent ;
+    private static String app_name_intent;
+    private static String app_version_intent;
+    private static String report;
+    private static StringBuffer sbReport;
+    private static String nameAndVersionPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +52,11 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         packName = packName.replaceFirst(packName.substring(0, 1), packName.substring(0, 1).toUpperCase());
 
         app_name = (TextView) findViewById(com.blackberry.monkeysimulator.R.id.app_name_field_setting);
-        app_name.setText(packName + "    Version: " + app_version_intent);
+        nameAndVersionPass = packName + "    Version: " + app_version_intent;
+        app_name.setText(nameAndVersionPass);
 
         list = (ListView) findViewById(com.blackberry.monkeysimulator.R.id.monkey_settings_listView);
-
         settingValueAdapter = new SettingValueAdapter(this, android.R.layout.simple_list_item_1, monkeySettings.getAllMonkeySettingsName());
-
         list.setAdapter(settingValueAdapter);
 
         // click to assemble Monkey Command and run
@@ -65,7 +71,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             // 1.Must be rooted first
-            if(CheckRoot.isRooted() == false){
+            if(!CheckRoot.isRooted()){
                 Toast.makeText(getApplicationContext(), "Please root your device first or use ENG device", Toast.LENGTH_LONG).show();
                 return;
             }
@@ -73,57 +79,34 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(app_name_intent, settingValueAdapter.getMonkeySettingsObj());
             Log.e("....",finalMonkeyCommand);
             // 3.Open certain application
-            Intent launchIntent = getPackageManager().getLaunchIntentForPackage(app_name_intent);
-            if(launchIntent != null){
-                startActivity(launchIntent);
-            } else {
-                Toast.makeText(getApplicationContext(), "Current application can not be opened", Toast.LENGTH_LONG).show();
-                return;
-            }
+            launchIntent = getPackageManager().getLaunchIntentForPackage(app_name_intent);
+            startActivity(launchIntent);
             // 4.Execute monkey command
             // TODO use side button to control
             try{
                 Process pc = Runtime.getRuntime().exec(finalMonkeyCommand);
-                int i = pc.waitFor();
-                Log.e("....",finalMonkeyCommand+ "--status: " + i + "");
+                // 5. record report
                 BufferedReader buf = new BufferedReader(new InputStreamReader(pc.getInputStream()));
                 //BufferedReader buf2 = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
-                String str = new String();
-                while((str=buf.readLine())!=null){
-                    Log.e("....",str);
+                report = new String();
+                sbReport = new StringBuffer();
+                while((report=buf.readLine())!=null){
+                    Log.e("..report..",report);
+                    sbReport.append(report);
                 }
             } catch (Exception e) {
                 Log.e("....","SOMETHING WRONG");
                 e.printStackTrace();
             }
-            // 5. Back to MonkeySimulator
-            Intent launchIntent_current = getPackageManager().getLaunchIntentForPackage(getPackageName());
-            if(launchIntent_current != null){
-                startActivity(launchIntent_current);
-            }
-            // 6. Show result
+            // 6. Back to MonkeySimulator, Show result
+            Toast.makeText(getApplicationContext(), "Monkey execution completed", Toast.LENGTH_LONG).show();
+            launchIntent_current = getPackageManager().getLaunchIntentForPackage(getPackageName());
+            componentName = new ComponentName(getPackageName(), "com.blackberry.monkeysimulator.ReportActivity");
+            launchIntent_current.setComponent(componentName);
+            launchIntent_current.putExtra("monkey_report", sbReport.toString());
+            launchIntent_current.putExtra("app_name_version", nameAndVersionPass);
+            startActivity(launchIntent_current);
 
-            /*BufferedReader reader = null;
-            String content = "";
-            try {
-                //("ps -P|grep bg")执行失败，PC端adb shell ps -P|grep bg执行成功
-                //Process process = Runtime.getRuntime().exec("ps -P|grep tv");
-                //-P 显示程序调度状态，通常是bg或fg，获取失败返回un和er
-                // Process process = Runtime.getRuntime().exec("ps -P");
-                //打印进程信息，不过滤任何条件
-                Process process = Runtime.getRuntime().exec("ps");
-                reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                StringBuffer output = new StringBuffer();
-                int read;
-                char[] buffer = new char[4096];
-                while ((read = reader.read(buffer)) > 0) {
-                    output.append(buffer, 0, read);
-                }
-                reader.close();
-                content = output.toString();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
         }
     }
 
