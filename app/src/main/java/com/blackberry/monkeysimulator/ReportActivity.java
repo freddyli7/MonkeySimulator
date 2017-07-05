@@ -87,7 +87,6 @@ public class ReportActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             Toast.makeText(getApplicationContext(), "Monkey result has been saved in SD card", Toast.LENGTH_LONG).show();
-
         }
     }
 

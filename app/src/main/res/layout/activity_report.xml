@@ -51,7 +51,6 @@
                     android:focusable="false"
                     android:focusableInTouchMode="false"
                     android:id="@+id/report_content"/>
-
         </ScrollView>
 
         <Button

@@ -1,13 +1,8 @@
 package com.blackberry.monkeysimulator.util;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by frlee on 5/30/17.
