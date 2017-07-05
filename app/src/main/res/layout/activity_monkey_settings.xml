@@ -8,14 +8,23 @@
         android:background="@android:color/white"
         tools:context=".MonkeySettingsActivity">
 
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="6dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:id="@+id/app_icon_field_setting"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="80dp"
+        android:paddingTop="15dp"
         android:text=""
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:textColor="@android:color/widget_edittext_dark"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:id="@+id/app_name_field_setting"/>
@@ -24,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="490dp"
         android:id="@+id/monkey_settings_listView"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_alignParentStart="true"/>
 
     <Button
@@ -36,6 +45,6 @@
         android:layout_below="@id/app_name_field_setting"
         android:text="Run"
         android:textSize="30sp"
-        android:background="@android:color/holo_green_dark"/>
+        android:background="@android:color/holo_green_light"/>
 
 </RelativeLayout>

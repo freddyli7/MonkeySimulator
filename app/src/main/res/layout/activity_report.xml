@@ -9,34 +9,45 @@
         tools:context=".ReportActivity"
         >
 
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="6dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:id="@+id/app_icon_field_report"/>
+
         <TextView
-            android:layout_width="match_parent"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="80dp"
+            android:paddingTop="15dp"
             android:text=""
-            android:textSize="20sp"
-            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:textColor="@android:color/widget_edittext_dark"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:id="@+id/app_name_field_report"/>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="490dp"
-            android:layout_marginTop="50dp"
+            android:layout_height="485dp"
+            android:layout_marginTop="70dp"
             android:scrollbars="horizontal"
             android:id="@+id/report_content_scroller">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
                     android:paddingTop="10dp"
+                    android:paddingBottom="15dp"
                     android:text=""
-                    android:textSize="18sp"
-                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/widget_edittext_dark"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
                     android:id="@+id/report_content"/>

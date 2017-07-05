@@ -2,20 +2,22 @@ package com.blackberry.monkeysimulator;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blackberry.monkeysimulator.adapter.SettingValueAdapter;
 import com.blackberry.monkeysimulator.util.AssembleMonkeyCommand;
 import com.blackberry.monkeysimulator.util.CheckRoot;
 import com.blackberry.monkeysimulator.util.MonkeySettings;
-import com.blackberry.monkeysimulator.adapter.SettingValueAdapter;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -24,6 +26,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
 
     private static ListView list;
     private static TextView app_name;
+    private static ImageView imageView;
     private static Button runMonkeyButton;
     private static MonkeySettings monkeySettings = new MonkeySettings();
     private static SettingValueAdapter settingValueAdapter;
@@ -38,6 +41,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private static String report;
     private static StringBuffer sbReport;
     private static String nameAndVersionPass;
+    private static Bitmap app_icon_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +50,17 @@ public class MonkeySettingsActivity extends AppCompatActivity {
 
         app_name_intent = getIntent().getStringExtra("app_name");
         app_version_intent = getIntent().getStringExtra("app_version");
+        app_icon_intent = getIntent().getParcelableExtra("app_icon");
 
         //get short name
         String packName = app_name_intent.substring(15, app_name_intent.length());
         packName = packName.replaceFirst(packName.substring(0, 1), packName.substring(0, 1).toUpperCase());
 
         app_name = (TextView) findViewById(com.blackberry.monkeysimulator.R.id.app_name_field_setting);
+        imageView = (ImageView) findViewById(R.id.app_icon_field_setting);
         nameAndVersionPass = packName + "    Version: " + app_version_intent;
         app_name.setText(nameAndVersionPass);
+        imageView.setImageBitmap(app_icon_intent);
 
         list = (ListView) findViewById(com.blackberry.monkeysimulator.R.id.monkey_settings_listView);
         settingValueAdapter = new SettingValueAdapter(this, android.R.layout.simple_list_item_1, monkeySettings.getAllMonkeySettingsName());
@@ -67,7 +74,6 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     }
 
     private class RunMonkeyCommand implements View.OnClickListener {
-
         @Override
         public void onClick(View v) {
             // 1.Must be rooted first
@@ -93,6 +99,8 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 while((report=buf.readLine())!=null){
                     Log.e("..report..",report);
                     sbReport.append(report);
+                    sbReport.append(report);
+                    sbReport.append(report);
                 }
             } catch (Exception e) {
                 Log.e("....","SOMETHING WRONG");
@@ -105,10 +113,10 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             launchIntent_current.setComponent(componentName);
             launchIntent_current.putExtra("monkey_report", sbReport.toString());
             launchIntent_current.putExtra("app_name_version", nameAndVersionPass);
+            launchIntent_current.putExtra("app_icon", app_icon_intent);
             startActivity(launchIntent_current);
 
         }
     }
-
 
 }

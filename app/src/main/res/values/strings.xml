@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MonkeySimulator</string>
+    <string name="app_name">Monkey</string>
     <string name="title_activity_monkey_settings">Monkey Parameters Setting</string>
 
 </resources>

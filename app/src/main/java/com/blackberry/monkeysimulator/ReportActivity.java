@@ -1,12 +1,14 @@
 package com.blackberry.monkeysimulator;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,9 @@ public class ReportActivity extends AppCompatActivity {
     private static boolean isExternalStorageAvailable = false;
     private static FileOutputStream fileOutputStream;
     private static File file;
+    private static Bitmap app_icon_intent;
+    private static ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class ReportActivity extends AppCompatActivity {
 
         report = getIntent().getStringExtra("monkey_report");
         nameAndVersionPass = getIntent().getStringExtra("app_name_version");
+        app_icon_intent = getIntent().getParcelableExtra("app_icon");
 
         reportArea = (TextView) findViewById(R.id.report_content);
         appNameArea = (TextView) findViewById(R.id.app_name_field_report);
@@ -58,6 +64,9 @@ public class ReportActivity extends AppCompatActivity {
 
         reportArea.setText(report);
         appNameArea.setText(nameAndVersionPass);
+
+        imageView = (ImageView) findViewById(R.id.app_icon_field_report);
+        imageView.setImageBitmap(app_icon_intent);
 
     }
 

@@ -31,8 +31,9 @@ public class MainActivity extends AppCompatActivity {
         List<PackageInfo> packageList = pm.getInstalledPackages(0);
         for (int i = 0; i < packageList.size(); i++){
             PackageInfo packageInfo = (PackageInfo) packageList.get(i);
+
             if(packageInfo.packageName.startsWith(PACKAGE_NAME)){
-                appsName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName));
+                appsName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName, packageInfo.applicationInfo.loadIcon(getPackageManager())));
             }
         }
         app_list = (ListView) findViewById(com.blackberry.monkeysimulator.R.id.app_listView);

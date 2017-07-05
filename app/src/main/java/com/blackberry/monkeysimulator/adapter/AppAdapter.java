@@ -2,10 +2,13 @@ package com.blackberry.monkeysimulator.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +28,9 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
     private static Intent intent;
     private static String APP_NAME = "app_name";
     private static String APP_VERSION = "app_version";
-    private static String APP_NOT_OPEN = "Current application can not be opened";
+    private static String APP_NOT_OPEN = "Current service can not be opened";
+    private static String APP_ICON = "app_icon";
+    private static Bitmap bitmap_icon;
 
     public AppAdapter(Context context, int resource, List<ApkApplications> objects) {
         super(context, resource, objects);
@@ -37,11 +42,11 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
         final ApkApplications apkApplications = getItem(position);
         View oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.app_list, parent, false);
 
-        //ImageView imageView = (ImageView) oneTeacherView.findViewById(R.id.app_mall_icon);
+        ImageView imageView = (ImageView) oneAppView.findViewById(R.id.app_icon_field_main);
         TextView app_name_textView = (TextView) oneAppView.findViewById(R.id.app_name_field_main);
 
-        //imageView.setImageResource(app.getImageId());
-        app_name_textView.setText(apkApplications.getApp_name());
+        imageView.setImageDrawable(apkApplications.getApp_icon());
+        app_name_textView.setText(apkApplications.getApp_name() + "\nv" + apkApplications.getApp_verison());
 
         oneAppView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +58,8 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
                     intent = new Intent(getContext(), MonkeySettingsActivity.class);
                     intent.putExtra(APP_NAME, apkApplications.getApp_name());
                     intent.putExtra(APP_VERSION, apkApplications.getApp_verison());
+                    bitmap_icon = ((BitmapDrawable) apkApplications.getApp_icon()).getBitmap();
+                    intent.putExtra(APP_ICON, bitmap_icon);
                     getContext().startActivity(intent);
                 }
             }
