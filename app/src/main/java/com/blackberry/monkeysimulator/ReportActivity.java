@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,7 +29,9 @@ public class ReportActivity extends AppCompatActivity {
     private static GoBackMonkey goBackMonkey;
     private static ExportMonkeyResults exportMonkeyResults;
     private static Intent intent;
-    private static boolean saveFile = false;
+    private static boolean isExternalStorageAvailable = false;
+    private static FileOutputStream fileOutputStream;
+    private static File file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,8 @@ public class ReportActivity extends AppCompatActivity {
         goBack = (Button) findViewById(R.id.back_monkey);
         exportResults = (Button) findViewById(R.id.export_report);
 
+        reportArea.setMovementMethod(new ScrollingMovementMethod());
+
         goBackMonkey = new GoBackMonkey();
         exportMonkeyResults = new ExportMonkeyResults();
 
@@ -52,7 +58,6 @@ public class ReportActivity extends AppCompatActivity {
 
         reportArea.setText(report);
         appNameArea.setText(nameAndVersionPass);
-
 
     }
 
@@ -67,27 +72,23 @@ public class ReportActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
-                saveFile = saveContentToSDCard("Monkey_results_for_" + nameAndVersionPass, report);
+                saveResultToSDCard("MonkeyResults:" + nameAndVersionPass+".txt", report);
             } catch (IOException e) {
+                Toast.makeText(getApplicationContext(), "Saving monkey result failed", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
+            Toast.makeText(getApplicationContext(), "Monkey result has been saved in SD card", Toast.LENGTH_LONG).show();
+
         }
     }
 
-    public boolean saveContentToSDCard(String fileNmae, String content) throws IOException {
-
-        boolean isExternalStorageAvailable = false;            //SD卡可读写的标志位
-        FileOutputStream fileOutputStream = null;            //FileOutputStream对象
-
-        //创建File对象，以SD卡所在的路径作为文件存储路径
-        File file = new File(Environment.getExternalStorageDirectory(), fileNmae);
-
-        //判断SD卡是否可读写
+    public boolean saveResultToSDCard(String fileName, String content) throws IOException {
+        file = new File(Environment.getExternalStorageDirectory(), fileName);
         if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             isExternalStorageAvailable = true;
-            fileOutputStream = new FileOutputStream(file);            //创建FileOutputStream对象
-            fileOutputStream.write(content.getBytes());                //向FileOutputStream对象中写入数据
-            if(fileOutputStream != null) {            //关闭FileOutputStream对象
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(content.getBytes());
+            if(fileOutputStream != null) {
                 fileOutputStream.close();
             }
         }

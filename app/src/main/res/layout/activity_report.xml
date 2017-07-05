@@ -15,44 +15,54 @@
             android:paddingTop="10dp"
             android:layout_height="50dp"
             android:text=""
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textColor="@android:color/black"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:id="@+id/app_name_field_report"/>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="490dp"
+            android:layout_marginTop="50dp"
+            android:scrollbars="horizontal"
+            android:id="@+id/report_content_scroller">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:id="@+id/report_content"/>
+
+        </ScrollView>
+
         <Button
             android:id="@+id/back_monkey"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="280dp"
+            android:layout_marginTop="500dp"
+            android:layout_marginStart="20dp"
+            android:layout_below="@id/app_name_field_report"
             android:text="Back"
-            android:textSize="30sp"
+            android:textSize="26sp"
             android:background="@android:color/holo_green_dark"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginTop="50dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:text=""
-            android:textSize="18sp"
-            android:textColor="@android:color/black"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:id="@+id/report_content"/>
 
         <Button
             android:id="@+id/export_report"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="500dp"
             android:layout_marginStart="280dp"
-            android:layout_below="@id/report_content"
+            android:layout_below="@id/app_name_field_report"
             android:text="Export results"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:background="@android:color/holo_green_dark"/>
 
 </RelativeLayout>
