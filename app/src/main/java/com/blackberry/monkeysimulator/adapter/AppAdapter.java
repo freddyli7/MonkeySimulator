@@ -31,6 +31,9 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
     private static String APP_NOT_OPEN = "Current service can not be opened";
     private static String APP_ICON = "app_icon";
     private static Bitmap bitmap_icon;
+    private static View oneAppView;
+    private static ImageView imageView;
+    private static TextView app_name_textView;
 
     public AppAdapter(Context context, int resource, List<ApkApplications> objects) {
         super(context, resource, objects);
@@ -40,10 +43,10 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         final ApkApplications apkApplications = getItem(position);
-        View oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.app_list, parent, false);
+        oneAppView = LayoutInflater.from(getContext()).inflate(R.layout.app_list, parent, false);
 
-        ImageView imageView = (ImageView) oneAppView.findViewById(R.id.app_icon_field_main);
-        TextView app_name_textView = (TextView) oneAppView.findViewById(R.id.app_name_field_main);
+        imageView = (ImageView) oneAppView.findViewById(R.id.app_icon_field_main);
+        app_name_textView = (TextView) oneAppView.findViewById(R.id.app_name_field_main);
 
         imageView.setImageDrawable(apkApplications.getApp_icon());
         app_name_textView.setText(apkApplications.getApp_name() + "\nv" + apkApplications.getApp_verison());

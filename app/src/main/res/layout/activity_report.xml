@@ -61,8 +61,8 @@
             android:layout_marginStart="20dp"
             android:layout_below="@id/app_name_field_report"
             android:text="Back"
-            android:textSize="26sp"
-            android:background="@android:color/holo_green_dark"/>
+            android:drawableLeft="@drawable/back"
+            android:background="#00000000"/>
 
         <Button
             android:id="@+id/export_report"
@@ -72,7 +72,7 @@
             android:layout_marginStart="280dp"
             android:layout_below="@id/app_name_field_report"
             android:text="Export results"
-            android:textSize="15sp"
-            android:background="@android:color/holo_green_dark"/>
+            android:drawableLeft="@drawable/save"
+            android:background="#00000000"/>
 
 </RelativeLayout>

@@ -41,6 +41,9 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private static StringBuffer sbReport;
     private static String nameAndVersionPass;
     private static Bitmap app_icon_intent;
+    private static Process pc;
+    private static BufferedReader bufInput;
+    private static BufferedReader bufError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,22 +86,24 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             // 2.Assemble command
             finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(app_name_intent, settingValueAdapter.getMonkeySettingsObj());
             Log.e("....",finalMonkeyCommand);
-            // 3.Open certain application
+            // 3.Open target application
             launchIntent = getPackageManager().getLaunchIntentForPackage(app_name_intent);
             startActivity(launchIntent);
             // 4.Execute monkey command
             // TODO use side button to control
             try{
-                Process pc = Runtime.getRuntime().exec(finalMonkeyCommand);
+                pc = Runtime.getRuntime().exec(finalMonkeyCommand);
                 // 5. record report
-                BufferedReader buf = new BufferedReader(new InputStreamReader(pc.getInputStream()));
-                //BufferedReader buf2 = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
+                bufInput = new BufferedReader(new InputStreamReader(pc.getInputStream()));
+                bufError = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
                 report = new String();
                 sbReport = new StringBuffer();
-                while((report=buf.readLine())!=null){
-                    Log.e("..report..",report);
+                while((report=bufInput.readLine())!=null){
+                    Log.e("..reportInput..",report);
                     sbReport.append(report);
-                    sbReport.append(report);
+                }
+                while((report=bufError.readLine())!=null){
+                    Log.e("..reportError..",report);
                     sbReport.append(report);
                 }
             } catch (Exception e) {
@@ -114,7 +119,6 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             launchIntent_current.putExtra("app_name_version", nameAndVersionPass);
             launchIntent_current.putExtra("app_icon", app_icon_intent);
             startActivity(launchIntent_current);
-
         }
     }
 
