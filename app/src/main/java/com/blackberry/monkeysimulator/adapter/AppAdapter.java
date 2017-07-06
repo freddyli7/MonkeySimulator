@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.blackberry.monkeysimulator.MonkeySettingsActivity;
 import com.blackberry.monkeysimulator.R;
-import com.blackberry.monkeysimulator.util.ApkApplications;
-import com.blackberry.monkeysimulator.util.CommonTools;
+import com.blackberry.monkeysimulator.entity.ApkApplications;
+import com.blackberry.monkeysimulator.tools.CommonTools;
 
 import java.util.List;
 

@@ -10,9 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.blackberry.monkeysimulator.util.CommonTools;
+import com.blackberry.monkeysimulator.adapter.SettingValueAdapter;
+import com.blackberry.monkeysimulator.entity.MonkeySettings;
+import com.blackberry.monkeysimulator.tools.CommonTools;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -75,6 +76,7 @@ public class ReportActivity extends AppCompatActivity {
     private class GoBackMonkey implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            SettingValueAdapter.setMonkeySettingsObj(new MonkeySettings());
             startActivity(intent);
         }
     }

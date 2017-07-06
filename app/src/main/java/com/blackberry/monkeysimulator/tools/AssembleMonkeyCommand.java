@@ -1,7 +1,9 @@
-package com.blackberry.monkeysimulator.util;
+package com.blackberry.monkeysimulator.tools;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+
+import com.blackberry.monkeysimulator.entity.MonkeySettings;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -56,7 +58,7 @@ public class AssembleMonkeyCommand {
     private static List<String> getAllMonkeySettingsValues(@NonNull MonkeySettings obj){
         List<String> values = new ArrayList<String>();
         Field[] fields = obj.getClass().getDeclaredFields();
-        for (Field field :fields) {
+        for (Field field : fields) {
             if(!field.getName().equalsIgnoreCase(SERIALVERSIONID) && !field.getName().equalsIgnoreCase($CHANGE)){
                 field.setAccessible(true);
                 try{

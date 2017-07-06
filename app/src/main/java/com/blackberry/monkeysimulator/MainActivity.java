@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
-import com.blackberry.monkeysimulator.util.ApkApplications;
+import com.blackberry.monkeysimulator.entity.ApkApplications;
 import com.blackberry.monkeysimulator.adapter.AppAdapter;
 
 import java.util.ArrayList;

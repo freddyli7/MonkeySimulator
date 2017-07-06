@@ -1,4 +1,4 @@
-package com.blackberry.monkeysimulator.util;
+package com.blackberry.monkeysimulator.entity;
 
 import android.graphics.drawable.Drawable;
 

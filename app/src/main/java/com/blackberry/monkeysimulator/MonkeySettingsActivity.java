@@ -13,9 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.blackberry.monkeysimulator.adapter.SettingValueAdapter;
-import com.blackberry.monkeysimulator.util.AssembleMonkeyCommand;
-import com.blackberry.monkeysimulator.util.CommonTools;
-import com.blackberry.monkeysimulator.util.MonkeySettings;
+import com.blackberry.monkeysimulator.tools.AssembleMonkeyCommand;
+import com.blackberry.monkeysimulator.tools.CommonTools;
+import com.blackberry.monkeysimulator.entity.MonkeySettings;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -85,11 +85,11 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private class RunMonkeyCommand implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            // check required parameter
-            if("".equals(settingValueAdapter.getMonkeySettingsObj().getEvent_number()) || settingValueAdapter.getMonkeySettingsObj().getEvent_number() == null){
-                commonTools.alarmToast(getBaseContext(), "event_number is required parameter");
+            // verify parameters input
+            if(!commonTools.paraInputVerify(settingValueAdapter.getMonkeySettingsObj(), getBaseContext())){
                 return;
             }
+
             // 1.Must be rooted first
             if(!CommonTools.isRooted()){
                 commonTools.alarmToast(getBaseContext(), "Please root your device first or use ENG device");
@@ -139,6 +139,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private class BackToAppList implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            SettingValueAdapter.setMonkeySettingsObj(new MonkeySettings());
             startActivity(launchIntent);
         }
     }
