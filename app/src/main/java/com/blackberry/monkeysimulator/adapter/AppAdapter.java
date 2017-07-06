@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blackberry.monkeysimulator.MonkeySettingsActivity;
 import com.blackberry.monkeysimulator.R;
 import com.blackberry.monkeysimulator.util.ApkApplications;
+import com.blackberry.monkeysimulator.util.CommonTools;
 
 import java.util.List;
 
@@ -34,6 +34,8 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
     private static View oneAppView;
     private static ImageView imageView;
     private static TextView app_name_textView;
+    private static CommonTools commonTools = new CommonTools();
+
 
     public AppAdapter(Context context, int resource, List<ApkApplications> objects) {
         super(context, resource, objects);
@@ -56,7 +58,7 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
             public void onClick(View v) {
                 launchIntent = getContext().getPackageManager().getLaunchIntentForPackage(apkApplications.getApp_name());
                 if(launchIntent == null){
-                    Toast.makeText(getContext(), APP_NOT_OPEN, Toast.LENGTH_LONG).show();
+                    commonTools.alarmToast(getContext(), APP_NOT_OPEN);
                 } else {
                     intent = new Intent(getContext(), MonkeySettingsActivity.class);
                     intent.putExtra(APP_NAME, apkApplications.getApp_name());

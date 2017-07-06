@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blackberry.monkeysimulator.util.CommonTools;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,7 +38,7 @@ public class ReportActivity extends AppCompatActivity {
     private static File file;
     private static Bitmap app_icon_intent;
     private static ImageView imageView;
-
+    private static CommonTools commonTools = new CommonTools();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class ReportActivity extends AppCompatActivity {
 
         reportArea = (TextView) findViewById(R.id.report_content);
         appNameArea = (TextView) findViewById(R.id.app_name_field_report);
-        goBack = (Button) findViewById(R.id.back_monkey);
+        goBack = (Button) findViewById(R.id.back_monkey_report);
         exportResults = (Button) findViewById(R.id.export_report);
 
         reportArea.setMovementMethod(new ScrollingMovementMethod());
@@ -83,10 +85,10 @@ public class ReportActivity extends AppCompatActivity {
             try {
                 saveResultToSDCard("MonkeyResults:" + nameAndVersionPass+".txt", report);
             } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "Saving monkey result failed", Toast.LENGTH_LONG).show();
+                commonTools.alarmToast(getBaseContext(), "Saving monkey result failed");
                 e.printStackTrace();
             }
-            Toast.makeText(getApplicationContext(), "Monkey result has been saved in SD card", Toast.LENGTH_LONG).show();
+            commonTools.alarmToast(getBaseContext(), "Monkey result has been saved in SD card");
         }
     }
 

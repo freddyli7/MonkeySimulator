@@ -11,11 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blackberry.monkeysimulator.adapter.SettingValueAdapter;
 import com.blackberry.monkeysimulator.util.AssembleMonkeyCommand;
-import com.blackberry.monkeysimulator.util.CheckRoot;
+import com.blackberry.monkeysimulator.util.CommonTools;
 import com.blackberry.monkeysimulator.util.MonkeySettings;
 
 import java.io.BufferedReader;
@@ -27,13 +26,16 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private static TextView app_name;
     private static ImageView imageView;
     private static Button runMonkeyButton;
+    private static Button backtoMainAppListButton;
     private static MonkeySettings monkeySettings = new MonkeySettings();
     private static SettingValueAdapter settingValueAdapter;
     private static RunMonkeyCommand runMonkeyCommand;
+    private static BackToAppList backToAppList;
     private static String finalMonkeyCommand;
     private static Intent launchIntent;
     private static Intent launchIntent_current;
     private static ComponentName componentName;
+    private static CommonTools commonTools = new CommonTools();
 
     private static String app_name_intent;
     private static String app_version_intent;
@@ -73,14 +75,24 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         runMonkeyCommand = new RunMonkeyCommand();
         runMonkeyButton.setOnClickListener(runMonkeyCommand);
 
+        backtoMainAppListButton = (Button) findViewById(R.id.back_monkey_setting);
+        backToAppList = new BackToAppList();
+        backtoMainAppListButton.setOnClickListener(backToAppList);
+        launchIntent = new Intent(this, MainActivity.class);
+
     }
 
     private class RunMonkeyCommand implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            // check required parameter
+            if("".equals(settingValueAdapter.getMonkeySettingsObj().getEvent_number()) || settingValueAdapter.getMonkeySettingsObj().getEvent_number() == null){
+                commonTools.alarmToast(getBaseContext(), "event_number is required parameter");
+                return;
+            }
             // 1.Must be rooted first
-            if(!CheckRoot.isRooted()){
-                Toast.makeText(getApplicationContext(), "Please root your device first or use ENG device", Toast.LENGTH_LONG).show();
+            if(!CommonTools.isRooted()){
+                commonTools.alarmToast(getBaseContext(), "Please root your device first or use ENG device");
                 return;
             }
             // 2.Assemble command
@@ -101,9 +113,11 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 while((report=bufInput.readLine())!=null){
                     Log.e("..reportInput..",report);
                     sbReport.append(report);
+                    sbReport.append("\n\n");
                 }
                 while((report=bufError.readLine())!=null){
                     Log.e("..reportError..",report);
+                    sbReport.append("Error:\n");
                     sbReport.append(report);
                 }
             } catch (Exception e) {
@@ -111,7 +125,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             // 6. Back to MonkeySimulator, Show result
-            Toast.makeText(getApplicationContext(), "Monkey execution completed", Toast.LENGTH_LONG).show();
+            commonTools.alarmToast(getBaseContext(), "Monkey execution completed");
             launchIntent_current = getPackageManager().getLaunchIntentForPackage(getPackageName());
             componentName = new ComponentName(getPackageName(), "com.blackberry.monkeysimulator.ReportActivity");
             launchIntent_current.setComponent(componentName);
@@ -121,5 +135,13 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             startActivity(launchIntent_current);
         }
     }
+
+    private class BackToAppList implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            startActivity(launchIntent);
+        }
+    }
+
 
 }

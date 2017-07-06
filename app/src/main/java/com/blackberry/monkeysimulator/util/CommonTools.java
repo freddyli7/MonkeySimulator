@@ -1,6 +1,8 @@
 package com.blackberry.monkeysimulator.util;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -8,7 +10,7 @@ import java.io.File;
  * Created by ruins7 on 2017-06-26.
  */
 
-public class CheckRoot {
+public class CommonTools {
 
     /**
      * Checks if the device is rooted.
@@ -46,5 +48,9 @@ public class CheckRoot {
         }
         Log.d("message-startUp: ", "RootUtil");
         return false;
+    }
+
+    public void alarmToast(Context context, String message){
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 }
