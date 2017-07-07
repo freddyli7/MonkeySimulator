@@ -49,6 +49,7 @@ public class AssembleMonkeyCommand {
         // command example: monkey -p com.teslacoilsw.launcher 200
         finalAdbCommandString = "monkey -p " + targetAppName + " ";
         for (String nameAndValue : getAllMonkeySettingsValues(monkeySettingsObj)) {
+            // event_number should be at the very end
             finalAdbCommandString += nameAndValue+" ";
         }
         Log.e("RRR", finalAdbCommandString);
@@ -63,36 +64,22 @@ public class AssembleMonkeyCommand {
                 field.setAccessible(true);
                 try{
                     if(field.get(obj) != null){
-                        if(field.getName().equalsIgnoreCase(INFORMATION_LEVEL)){
-                            int infoTimes = Integer.valueOf(field.get(obj).toString());
-                            String v = "-v ";
-                            String vfinal = "";
-                            for (int i = 0; i < infoTimes; i++){
-                                vfinal += v;
-                            }
-                            values.add(vfinal.trim());
-                        } else if(field.getName().equalsIgnoreCase(SEED_NUMBER)) {
-                            values.add("-s " + field.get(obj).toString() + " ");
-                        } else if(field.getName().equalsIgnoreCase(EVENT_NUMBER)) {
-                            values.add(field.get(obj).toString() + " ");
-                        } else if (field.getName().equalsIgnoreCase(THROTTLE)) {
-                            values.add("--throttle " + field.get(obj).toString() + " ");
-                        } else if (field.getName().equalsIgnoreCase(PAC_TOUCH)) {
-                            values.add("--pct-touch " + field.get(obj).toString() + "% ");
+                        if (field.getName().equalsIgnoreCase(PAC_TOUCH)) {
+                            values.add("--pct-touch " + field.get(obj).toString() + " ");
                         } else if (field.getName().equalsIgnoreCase(PAC_MOTION)) {
-                            values.add("--pct-motion " + field.get(obj).toString() + "% ");
+                            values.add("--pct-motion " + field.get(obj).toString() + " ");
                         } else if (field.getName().equalsIgnoreCase(PAC_TRACKBALL)) {
-                            values.add("--pct-trackball " + field.get(obj).toString() + "% ");
+                            values.add("--pct-trackball " + field.get(obj).toString() + " ");
                         } else if (field.getName().equalsIgnoreCase(PAC_NAV)) {
-                            values.add("--pct-nav " + field.get(obj).toString() + "% ");
+                            values.add("--pct-nav " + field.get(obj).toString() + " ");
                         } else if (field.getName().equalsIgnoreCase(PAC_MAJORNAV)) {
-                            values.add("--pct-majornav " + field.get(obj).toString() + "% ");
+                            values.add("--pct-majornav " + field.get(obj).toString() + " ");
                         } else if (field.getName().equalsIgnoreCase(PAC_SYSKEYS)) {
-                            values.add("--pct-syskeys " + field.get(obj).toString() + "% ");
+                            values.add("--pct-syskeys " + field.get(obj).toString() + " ");
                         } else if (field.getName().equalsIgnoreCase(PAC_APPSWITCH)) {
-                            values.add("--pct-appswitch " + field.get(obj).toString() + "% ");
+                            values.add("--pct-appswitch " + field.get(obj).toString() + " ");
                         } else if (field.getName().equalsIgnoreCase(PAC_ANYEVENT)) {
-                            values.add("--pct-anyevent " + field.get(obj).toString() + "% ");
+                            values.add("--pct-anyevent " + field.get(obj).toString() + " ");
                         } else if (field.getName().equalsIgnoreCase(DBG_NO_EVENT) && field.get(obj).toString().equals("1")) {
                             values.add("--dbg-no-events ");
                         } else if (field.getName().equalsIgnoreCase(HPROF) && field.get(obj).toString().equals("1")) {
@@ -109,6 +96,20 @@ public class AssembleMonkeyCommand {
                             values.add("--monitor-native-crashes ");
                         } else if (field.getName().equalsIgnoreCase(WAIT_DBG) && field.get(obj).toString().equals("1")) {
                             values.add("--wait-dbg ");
+                        } else if(field.getName().equalsIgnoreCase(INFORMATION_LEVEL)){
+                            int infoTimes = Integer.valueOf(field.get(obj).toString());
+                            String v = "-v ";
+                            String vfinal = "";
+                            for (int i = 0; i < infoTimes; i++){
+                                vfinal += v;
+                            }
+                            values.add(vfinal.trim());
+                        } else if(field.getName().equalsIgnoreCase(SEED_NUMBER)) {
+                            values.add("-s " + field.get(obj).toString() + " ");
+                        } else if (field.getName().equalsIgnoreCase(THROTTLE)) {
+                            values.add("--throttle " + field.get(obj).toString() + " ");
+                        } else if(field.getName().equalsIgnoreCase(EVENT_NUMBER)) {
+                            values.add(field.get(obj).toString() + " ");
                         }
                         //TODO other paras
                     }

@@ -5,12 +5,10 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.blackberry.monkeysimulator.adapter.SettingValueAdapter;
 import com.blackberry.monkeysimulator.entity.MonkeySettings;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.NoSuchElementException;
 
 /**
  * Created by ruins7 on 2017-06-26.
@@ -69,43 +67,72 @@ public class CommonTools {
         Field[] fields = monkeySettings.getClass().getDeclaredFields();
         for (Field field : fields) {
             if(!field.getName().equalsIgnoreCase(SERIALVERSIONID) && !field.getName().equalsIgnoreCase($CHANGE)){
-
-
-            field.setAccessible(true);
-            try {
-                // pct para verify
-                if(field.getName().startsWith("pct") && field.get(monkeySettings) != null && field.get(monkeySettings).toString().startsWith("0")){
-                    alarmToast(context, "Illegal input with " + field.getName());
-                    flag = false;
-                    break;
-                }
-                // event number verify
-                if(field.getName().equalsIgnoreCase("event_number") && ((NULL_STRING.equals(monkeySettings.getEvent_number()) || monkeySettings.getEvent_number() == null))){
-                    alarmToast(context, "event number is required parameter");
-                    flag = false;
-                    break;
-                }
-                if(field.getName().equalsIgnoreCase("event_number") && ((!NULL_STRING.equals(monkeySettings.getEvent_number()) || monkeySettings.getEvent_number() != null) && field.get(monkeySettings).toString().startsWith("0"))){
-                    alarmToast(context, "Illegal input with " + field.getName() + ", event number should be positive integer");
-                    flag = false;
-                    break;
-                }
-                // seed number and information level verify
-                if((field.getName().equalsIgnoreCase("seed_number") || field.getName().equalsIgnoreCase("information_level")) && field.get(monkeySettings) != null && field.get(monkeySettings).toString().startsWith("0")){
-                    alarmToast(context, "Illegal input with " + field.getName());
-                    flag = false;
-                    break;
-                }
-                // debug para verify
-                if(!field.getName().startsWith("pct") && !field.getName().equalsIgnoreCase("event_number") && !field.getName().equalsIgnoreCase("seed_number") && !field.getName().equalsIgnoreCase("information_level") && field.get(monkeySettings) != null && field.get(monkeySettings).toString() != "1"){
+                field.setAccessible(true);
+                try {
+                    // pct para verify
+                    if(field.getName().startsWith("pct") && field.get(monkeySettings) != null && field.get(monkeySettings).toString().startsWith("0")){
+                        alarmToast(context, "Illegal input with " + field.getName() + ", " + field.getName() + "could be empty or a percentage(1% - 100%)");
+                        flag = false;
+                        break;
+                    }
+                    if(field.getName().startsWith("pct") && field.get(monkeySettings) != null && Integer.valueOf(field.get(monkeySettings).toString()) > 100){
+                        alarmToast(context, "Illegal input with " + field.getName() + ", " + field.getName() + "could be empty or a percentage(1% - 100%)");
+                        flag = false;
+                        break;
+                    }
+                    // event number verify
+                    if(field.getName().equalsIgnoreCase("event_number") && ((NULL_STRING.equals(monkeySettings.getEvent_number()) || monkeySettings.getEvent_number() == null))){
+                        alarmToast(context, "event number is required parameter");
+                        flag = false;
+                        break;
+                    }
+                    if(field.getName().equalsIgnoreCase("event_number") && ((!NULL_STRING.equals(monkeySettings.getEvent_number()) || monkeySettings.getEvent_number() != null) && field.get(monkeySettings).toString().startsWith("0"))){
+                        alarmToast(context, "Illegal input with " + field.getName() + ", event number should be positive integer");
+                        flag = false;
+                        break;
+                    }
+                    if(field.getName().equalsIgnoreCase("event_number") && ((!NULL_STRING.equals(monkeySettings.getEvent_number()) || monkeySettings.getEvent_number() != null) && Integer.valueOf(field.get(monkeySettings).toString()) > 5000)){
+                        alarmToast(context, "Illegal input with " + field.getName() + ", event number should be positive integer but less then 5000");
+                        flag = false;
+                        break;
+                    }
+                    // seed number and information level verify
+                    if((field.getName().equalsIgnoreCase("seed_number") || field.getName().equalsIgnoreCase("information_level")) && field.get(monkeySettings) != null && field.get(monkeySettings).toString().startsWith("0")){
+                        alarmToast(context, "Illegal input with " + field.getName());
+                        flag = false;
+                        break;
+                    }
+                    if(field.getName().equalsIgnoreCase("seed_number") && field.get(monkeySettings) != null && Integer.valueOf(field.get(monkeySettings).toString()) > 2000){
+                        alarmToast(context, "Illegal input with " + field.getName()+ ", " + field.getName() + " should be less than 2000");
+                        flag = false;
+                        break;
+                    }
+                    if(field.getName().equalsIgnoreCase("information_level") && field.get(monkeySettings) != null && Integer.valueOf(field.get(monkeySettings).toString()) > 5){
+                        alarmToast(context, "Illegal input with " + field.getName()+ ", " + field.getName() + " should be less than or equal to 5");
+                        flag = false;
+                        break;
+                    }
+                    // debug para verify
+                    if(!field.getName().equals("throttle") && !field.getName().startsWith("pct") && !field.getName().equalsIgnoreCase("event_number") && !field.getName().equalsIgnoreCase("seed_number") && !field.getName().equalsIgnoreCase("information_level") && field.get(monkeySettings) != null && !field.get(monkeySettings).toString().equals("1")){
                     alarmToast(context, "Illegal input with " + field.getName() + ", value could be empty or 1");
                     flag = false;
                     break;
-                }
-            } catch (IllegalAccessException e) {
+                    }
+                    // throttle para verify
+                    if(field.getName().equals("throttle") && field.get(monkeySettings) != null && field.get(monkeySettings).toString().startsWith("0")){
+                        alarmToast(context, "Illegal input with " + field.getName() + ", value could be empty or less then 1000 milliseconds");
+                        flag = false;
+                        break;
+                    }
+                    if(field.getName().equals("throttle") && field.get(monkeySettings) != null && Integer.valueOf(field.get(monkeySettings).toString()) > 1000){
+                        alarmToast(context, "Illegal input with " + field.getName() + ", value could be empty or less then 1000 milliseconds");
+                        flag = false;
+                        break;
+                    }
+                } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-            }
+        }
         }
         return flag;
     }

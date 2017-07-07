@@ -85,14 +85,13 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private class RunMonkeyCommand implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            // verify parameters input
-            if(!commonTools.paraInputVerify(settingValueAdapter.getMonkeySettingsObj(), getBaseContext())){
-                return;
-            }
-
             // 1.Must be rooted first
             if(!CommonTools.isRooted()){
                 commonTools.alarmToast(getBaseContext(), "Please root your device first or use ENG device");
+                return;
+            }
+            // 2. verify parameters input
+            if(!commonTools.paraInputVerify(settingValueAdapter.getMonkeySettingsObj(), getBaseContext())){
                 return;
             }
             // 2.Assemble command

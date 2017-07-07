@@ -10,11 +10,6 @@ import java.util.List;
 
 public class MonkeySettings {
 
-    // General
-    private String event_number; // eventnumber
-    private String seed_number; // seed value for pseudo-random number generator
-    private String information_level; // information level
-
     // Events
     private String throttle;
     private String pct_touch;
@@ -30,11 +25,16 @@ public class MonkeySettings {
     private String dbg_no_event;
     private String hprof;
     private String ignore_crashes;
-    private String ignore_timeout;
+    private String ignore_timeouts;
     private String ignore_security_exceptions;
     private String kill_process_after_error;
     private String monitor_native_crashes;
     private String wait_dbg;
+
+    // General
+    private String event_number; // eventnumber
+    private String seed_number; // seed value for pseudo-random number generator
+    private String information_level; // information level
 
     // Constraints
 //    private String c;
@@ -163,12 +163,12 @@ public class MonkeySettings {
         this.ignore_crashes = ignore_crashes;
     }
 
-    public String getIgnore_timeout() {
-        return ignore_timeout;
+    public String getIgnore_timeouts() {
+        return ignore_timeouts;
     }
 
-    public void setIgnore_timeout(String ignore_timeout) {
-        this.ignore_timeout = ignore_timeout;
+    public void setIgnore_timeouts(String ignore_timeouts) {
+        this.ignore_timeouts = ignore_timeouts;
     }
 
     public String getIgnore_security_exceptions() {
