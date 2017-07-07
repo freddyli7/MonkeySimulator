@@ -3,7 +3,7 @@ Tool encapsulating monkey command for testing Android apps
 
 Version 1.0 
 
-Current version is used for BlackBerry apps.
+Current version is only used for BlackBerry apps.
 
 1. Fetching all BlackBerry apps first.
 2. Select one from app list and input Monkey parameteres.
