@@ -62,7 +62,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
 
         app_name = (TextView) findViewById(com.blackberry.monkeysimulator.R.id.app_name_field_setting);
         imageView = (ImageView) findViewById(R.id.app_icon_field_setting);
-        nameAndVersionPass = packName + "    Version: " + app_version_intent;
+        nameAndVersionPass = packName + "\nVersion: " + app_version_intent;
         app_name.setText(nameAndVersionPass);
         imageView.setImageBitmap(app_icon_intent);
 
@@ -109,15 +109,18 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 bufError = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
                 report = new String();
                 sbReport = new StringBuffer();
-                while((report=bufInput.readLine())!=null){
+                sbReport.append("Monkey Command : " + finalMonkeyCommand+"\n\n");
+                while((report=bufInput.readLine()) != null){
                     Log.e("..reportInput..",report);
                     sbReport.append(report);
-                    sbReport.append("\n\n");
+                    sbReport.append("\n");
                 }
-                while((report=bufError.readLine())!=null){
+
+                while((report=bufError.readLine()) != null){
                     Log.e("..reportError..",report);
-                    sbReport.append("Error:\n");
+                    sbReport.append("Error Message : \n");
                     sbReport.append(report);
+                    sbReport.append("\n");
                 }
             } catch (Exception e) {
                 Log.e("....","SOMETHING WRONG");

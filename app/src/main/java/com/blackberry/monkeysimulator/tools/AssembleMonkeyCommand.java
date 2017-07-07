@@ -18,6 +18,7 @@ public class AssembleMonkeyCommand {
     private static String finalAdbCommandString;
     private static String SERIALVERSIONID = "serialversionuid";
     private static String $CHANGE = "$change";
+    private static String event_num;;
 
     // General
     private static String EVENT_NUMBER = "event_number";
@@ -46,14 +47,17 @@ public class AssembleMonkeyCommand {
     private static String WAIT_DBG = "wait_dbg";
 
     public static String assembleMonkeyCommand(String targetAppName, @NonNull MonkeySettings monkeySettingsObj){
-        // command example: monkey -p com.teslacoilsw.launcher 200
+        // command example: monkey -p com.blackberry.hub --hprof -v -v -v --pct-motion 23 --pct-nav 30 -s 200 --throttle 500 1000
         finalAdbCommandString = "monkey -p " + targetAppName + " ";
         for (String nameAndValue : getAllMonkeySettingsValues(monkeySettingsObj)) {
             // event_number should be at the very end
+            if(!nameAndValue.startsWith("-")){
+                event_num = nameAndValue;
+                continue;
+            }
             finalAdbCommandString += nameAndValue+" ";
         }
-        Log.e("RRR", finalAdbCommandString);
-        return finalAdbCommandString.trim();
+        return finalAdbCommandString+event_num.trim();
     }
 
     private static List<String> getAllMonkeySettingsValues(@NonNull MonkeySettings obj){

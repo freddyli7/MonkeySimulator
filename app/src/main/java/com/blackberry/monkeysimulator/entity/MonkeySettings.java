@@ -37,7 +37,7 @@ public class MonkeySettings {
     private String information_level; // information level
 
     // Constraints
-//    private String c;
+//    private String c; // category
 
     // help
 //    private String help;
