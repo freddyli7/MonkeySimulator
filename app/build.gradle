@@ -4,7 +4,7 @@ android {
     signingConfigs {
         debug {
             keyPassword 'android'
-            storeFile file('/home/frlee/AndroidStudioProjects/MonkeySimulator/debug.keystore')
+            storeFile file('/Users/ruins7/AndroidStudioProjects/MonkeySimulator/debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
         }

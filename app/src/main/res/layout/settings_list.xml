@@ -12,6 +12,7 @@
         android:paddingLeft="20dp"
         android:text=""
         android:textColor="@android:color/widget_edittext_dark"
+
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:id="@+id/setting_name_field"/>
