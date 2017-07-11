@@ -1,7 +1,7 @@
 # MonkeySimulator
 Tool encapsulating monkey command for testing Android apps
 
-Version 1.0 
+Version 1.0
 
 Current version is only used for BlackBerry apps.
 
