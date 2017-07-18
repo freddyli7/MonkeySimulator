@@ -15,5 +15,5 @@ Version 1.0
 Version 1.1
 
 1. Displaying the entry value at para list after press OK.
-2. Reconstructuring part of methods to decreasing coupling.  
+2. Reconstructuring part of methods to decrease coupling.  
 
