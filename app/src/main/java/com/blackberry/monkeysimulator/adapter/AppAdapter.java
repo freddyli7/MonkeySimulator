@@ -26,10 +26,12 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
 
     private static Intent launchIntent;
     private static Intent intent;
-    private static String APP_NAME = "app_name";
-    private static String APP_VERSION = "app_version";
-    private static String APP_NOT_OPEN = "Current service can not be opened";
-    private static String APP_ICON = "app_icon";
+    private String APP_NAME;
+    private String APP_VERSION;
+    private String APP_NOT_OPEN;
+    private String APP_ICON;
+    private String RETURN_LINE;
+    private String VERSION_SMALL;
     private static Bitmap bitmap_icon;
     private static View oneAppView;
     private static ImageView imageView;
@@ -39,6 +41,14 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
 
     public AppAdapter(Context context, int resource, List<ApkApplications> objects) {
         super(context, resource, objects);
+
+        APP_NAME = getContext().getResources().getString(R.string.app_name_pass);
+        APP_VERSION = getContext().getResources().getString(R.string.app_version_pass);
+        APP_NOT_OPEN = getContext().getResources().getString(R.string.app_not_open_warning);
+        APP_ICON = getContext().getResources().getString(R.string.app_icon_pass);
+        RETURN_LINE = getContext().getResources().getString(R.string.return_line);
+        VERSION_SMALL = getContext().getResources().getString(R.string.app_version_small);
+
     }
 
     @Override
@@ -51,7 +61,7 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
         app_name_textView = (TextView) oneAppView.findViewById(R.id.app_name_field_main);
 
         imageView.setImageDrawable(apkApplications.getApp_icon());
-        app_name_textView.setText(apkApplications.getApp_name() + "\nv" + apkApplications.getApp_verison());
+        app_name_textView.setText(apkApplications.getApp_name() + RETURN_LINE + VERSION_SMALL + apkApplications.getApp_verison());
 
         oneAppView.setOnClickListener(new View.OnClickListener() {
             @Override

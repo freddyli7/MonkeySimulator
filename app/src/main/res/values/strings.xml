@@ -1,5 +1,27 @@
 <resources>
     <string name="app_name">Monkey</string>
+    <string name="app_real_name">monkeysimulator</string>
     <string name="title_activity_monkey_settings">Monkey Parameters Setting</string>
+    <string name="company_package">com.blackberry.</string>
+    <string name="return_line">\n</string>
+    <string name="app_version_small">v</string>
+    <string name="app_version_large">Version</string>
+    <string name="monkey_reportactivity">com.blackberry.monkeysimulator.ReportActivity</string>
+
+    <!-- Internal value pass strings -->
+    <string name="app_name_pass">app_name</string>
+    <string name="app_version_pass">app_version</string>
+    <string name="app_name_version_pass">app_name_version</string>
+    <string name="app_icon_pass">app_icon</string>
+    <string name="monkey_report">monkey_report</string>
+
+    <!-- Warning -->
+    <string name="app_not_open_warning">Current service can not be opened</string>
+    <string name="root_device_warning">Please root your device first or use ENG deviced</string>
+    <string name="monkey_execution_completed">Monkey execution completed</string>
+
+    <!-- Report -->
+    <string name="monkey_command">Monkey Command : </string>
+    <string name="error_message">Error Message : </string>
 
 </resources>

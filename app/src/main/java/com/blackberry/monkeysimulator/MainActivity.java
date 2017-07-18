@@ -16,7 +16,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static ListView app_list;
-    private static final String PACKAGE_NAME = "com.blackberry.";
+    private String PACKAGE_NAME;
+    private String APP_REAL_NAME;
     private List<ApkApplications> appsName;
 
     @Override
@@ -24,14 +25,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(com.blackberry.monkeysimulator.R.layout.activity_main);
 
-        appsName = new ArrayList<ApkApplications>();
+        this.PACKAGE_NAME = this.getString(R.string.company_package);
+        this.APP_REAL_NAME = this.getString(R.string.app_real_name);
+
+        appsName = new ArrayList<>();
         Context context = this.getApplication().getBaseContext();
         PackageManager pm = context.getPackageManager();
 
         List<PackageInfo> packageList = pm.getInstalledPackages(0);
         for (int i = 0; i < packageList.size(); i++){
-            PackageInfo packageInfo = (PackageInfo) packageList.get(i);
-            if(packageInfo.packageName.startsWith(PACKAGE_NAME) && !packageInfo.packageName.endsWith("monkeysimulator")){
+            PackageInfo packageInfo = packageList.get(i);
+            if(packageInfo.packageName.startsWith(PACKAGE_NAME) && !packageInfo.packageName.endsWith(APP_REAL_NAME)){
                 appsName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName, packageInfo.applicationInfo.loadIcon(getPackageManager())));
             }
         }
