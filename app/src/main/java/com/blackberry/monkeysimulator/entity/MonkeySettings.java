@@ -10,6 +10,9 @@ import java.util.List;
 
 public class MonkeySettings {
 
+    private final static String SERIALVERSIONUID = "serialversionuid";
+    private final static String CHANGE = "$change";
+
     // Events
     private String throttle;
     private String pct_touch;
@@ -207,7 +210,7 @@ public class MonkeySettings {
         List<String> settings = new ArrayList<String>();
         Field[] fields = MonkeySettings.class.getDeclaredFields();
         for (Field field :fields) {
-            if(!field.getName().equalsIgnoreCase("serialversionuid") && !field.getName().equalsIgnoreCase("$change")){
+            if(!field.getName().equalsIgnoreCase(SERIALVERSIONUID) && !field.getName().equalsIgnoreCase(CHANGE)){
                 settings.add(field.getName());
             }
         }

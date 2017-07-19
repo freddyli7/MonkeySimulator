@@ -40,15 +40,31 @@ public class ReportActivity extends AppCompatActivity {
     private static Bitmap app_icon_intent;
     private static ImageView imageView;
     private static CommonTools commonTools = new CommonTools();
+    private String MONKEY_REPORT;
+    private String APP_NAME_VERSION;
+    private String APP_ICON;
+    private String MONKEY_RESULTS;
+    private String RESULTS_TYPE;
+    private String SAVE_MONKEY_RESULT_FAIL;
+    private String SAVE_MONKEY_SD;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
-        report = getIntent().getStringExtra("monkey_report");
-        nameAndVersionPass = getIntent().getStringExtra("app_name_version");
-        app_icon_intent = getIntent().getParcelableExtra("app_icon");
+        MONKEY_REPORT = this.getString(R.string.monkey_report);
+        APP_NAME_VERSION = this.getString(R.string.app_name_version_pass);
+        APP_ICON = this.getString(R.string.app_icon_pass);
+        MONKEY_RESULTS = this.getString(R.string.monkey_results);
+        RESULTS_TYPE = this.getString(R.string.results_type);
+        SAVE_MONKEY_RESULT_FAIL = this.getString(R.string.save_monkey_result_fail);
+        SAVE_MONKEY_SD = this.getString(R.string.save_monkey_to_sd);
+
+        report = getIntent().getStringExtra(MONKEY_REPORT);
+        nameAndVersionPass = getIntent().getStringExtra(APP_NAME_VERSION);
+        app_icon_intent = getIntent().getParcelableExtra(APP_ICON);
 
         reportArea = (TextView) findViewById(R.id.report_content);
         appNameArea = (TextView) findViewById(R.id.app_name_field_report);
@@ -85,12 +101,12 @@ public class ReportActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
-                saveResultToSDCard("MonkeyResults:" + nameAndVersionPass+".txt", report);
+                saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass+RESULTS_TYPE, report);
             } catch (IOException e) {
-                commonTools.alarmToast(getBaseContext(), "Saving monkey result failed");
+                commonTools.alarmToast(getBaseContext(), SAVE_MONKEY_RESULT_FAIL);
                 e.printStackTrace();
             }
-            commonTools.alarmToast(getBaseContext(), "Monkey result has been saved in SD card");
+            commonTools.alarmToast(getBaseContext(), SAVE_MONKEY_SD);
         }
     }
 
