@@ -12,6 +12,7 @@ import java.util.List;
 
 public class MonkeySettings {
 
+    // 不需要展示的参数
     private final static String SERIALVERSIONUID = "serialversionuid";
     private final static String CHANGE = "change";
     private final static String $CHANGE = "$change";
@@ -213,6 +214,7 @@ public class MonkeySettings {
         List<String> settings = new ArrayList<>();
         Field[] fields = MonkeySettings.class.getDeclaredFields();
         for (Field field :fields) {
+            //不需要展示的参数
             if(!field.getName().equalsIgnoreCase(SERIALVERSIONUID) &&
                     !field.getName().equalsIgnoreCase(CHANGE) &&
                     !field.getName().equalsIgnoreCase($CHANGE)){
