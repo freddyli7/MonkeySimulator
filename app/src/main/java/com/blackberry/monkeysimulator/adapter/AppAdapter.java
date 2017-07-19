@@ -24,31 +24,29 @@ import java.util.List;
 
 public class AppAdapter extends ArrayAdapter<ApkApplications> {
 
-    private static Intent launchIntent;
-    private static Intent intent;
+    private Intent launchIntent;
+    private Intent intent;
     private String APP_NAME;
     private String APP_VERSION;
     private String APP_NOT_OPEN;
     private String APP_ICON;
     private String RETURN_LINE;
     private String VERSION_SMALL;
-    private static Bitmap bitmap_icon;
-    private static View oneAppView;
-    private static ImageView imageView;
-    private static TextView app_name_textView;
-    private static CommonTools commonTools = new CommonTools();
+    private Bitmap bitmap_icon;
+    private View oneAppView;
+    private ImageView imageView;
+    private TextView app_name_textView;
+    private CommonTools commonTools = new CommonTools();
 
 
     public AppAdapter(Context context, int resource, List<ApkApplications> objects) {
         super(context, resource, objects);
-
         APP_NAME = getContext().getResources().getString(R.string.app_name_pass);
         APP_VERSION = getContext().getResources().getString(R.string.app_version_pass);
         APP_NOT_OPEN = getContext().getResources().getString(R.string.app_not_open_warning);
         APP_ICON = getContext().getResources().getString(R.string.app_icon_pass);
         RETURN_LINE = getContext().getResources().getString(R.string.return_line);
         VERSION_SMALL = getContext().getResources().getString(R.string.app_version_small);
-
     }
 
     @Override

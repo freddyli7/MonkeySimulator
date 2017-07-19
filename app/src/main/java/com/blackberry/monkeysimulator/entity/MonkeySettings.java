@@ -1,5 +1,7 @@
 package com.blackberry.monkeysimulator.entity;
 
+import android.util.Log;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,8 @@ import java.util.List;
 public class MonkeySettings {
 
     private final static String SERIALVERSIONUID = "serialversionuid";
-    private final static String CHANGE = "$change";
+    private final static String CHANGE = "change";
+    private final static String $CHANGE = "$change";
 
     // Events
     private String throttle;
@@ -207,10 +210,12 @@ public class MonkeySettings {
     }
 
     public List<String> getAllMonkeySettingsName(){
-        List<String> settings = new ArrayList<String>();
+        List<String> settings = new ArrayList<>();
         Field[] fields = MonkeySettings.class.getDeclaredFields();
         for (Field field :fields) {
-            if(!field.getName().equalsIgnoreCase(SERIALVERSIONUID) && !field.getName().equalsIgnoreCase(CHANGE)){
+            if(!field.getName().equalsIgnoreCase(SERIALVERSIONUID) &&
+                    !field.getName().equalsIgnoreCase(CHANGE) &&
+                    !field.getName().equalsIgnoreCase($CHANGE)){
                 settings.add(field.getName());
             }
         }

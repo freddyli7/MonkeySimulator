@@ -1,6 +1,7 @@
 package com.blackberry.monkeysimulator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -9,16 +10,26 @@ import android.widget.ListView;
 
 import com.blackberry.monkeysimulator.entity.ApkApplications;
 import com.blackberry.monkeysimulator.adapter.AppAdapter;
+import com.blackberry.monkeysimulator.tools.CommonTools;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static ListView app_list;
+    private ListView app_list;
+    private ListView service_list;
     private String PACKAGE_NAME;
     private String APP_REAL_NAME;
     private List<ApkApplications> appsName;
+    private List<ApkApplications> servicesName;
+    private AppAdapter appAdapter;
+    private AppAdapter serviceAdapter;
+    private PackageInfo packageInfo;
+    private List<PackageInfo> packageList;
+    private PackageManager pm;
+    private Context context;
+    private Intent launchIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +40,27 @@ public class MainActivity extends AppCompatActivity {
         this.APP_REAL_NAME = this.getString(R.string.app_real_name);
 
         appsName = new ArrayList<>();
-        Context context = this.getApplication().getBaseContext();
-        PackageManager pm = context.getPackageManager();
+        servicesName = new ArrayList<>();
+        context = this.getApplication().getBaseContext();
+        pm = context.getPackageManager();
 
-        List<PackageInfo> packageList = pm.getInstalledPackages(0);
+        packageList = pm.getInstalledPackages(0);
         for (int i = 0; i < packageList.size(); i++){
-            PackageInfo packageInfo = packageList.get(i);
+            packageInfo = packageList.get(i);
             if(packageInfo.packageName.startsWith(PACKAGE_NAME) && !packageInfo.packageName.endsWith(APP_REAL_NAME)){
-                appsName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName, packageInfo.applicationInfo.loadIcon(getPackageManager())));
+                launchIntent = this.getPackageManager().getLaunchIntentForPackage(packageInfo.packageName);
+                if(launchIntent == null){
+                    servicesName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName, packageInfo.applicationInfo.loadIcon(getPackageManager())));
+                } else {
+                    appsName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName, packageInfo.applicationInfo.loadIcon(getPackageManager())));
+                }
             }
         }
-        app_list = (ListView) findViewById(com.blackberry.monkeysimulator.R.id.app_listView);
-        AppAdapter appAdapter = new AppAdapter(this, android.R.layout.simple_list_item_1, appsName);
+        app_list = (ListView) findViewById(R.id.app_listView);
+        service_list = (ListView) findViewById(R.id.service_listView);
+        appAdapter = new AppAdapter(this, android.R.layout.simple_list_item_1, appsName);
+        serviceAdapter = new AppAdapter(this, android.R.layout.simple_list_item_1, servicesName);
         app_list.setAdapter(appAdapter);
+        service_list.setAdapter(serviceAdapter);
     }
 }

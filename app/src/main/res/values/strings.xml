@@ -7,6 +7,7 @@
     <string name="app_version_small">v</string>
     <string name="app_version_large">Version</string>
     <string name="monkey_reportactivity">com.blackberry.monkeysimulator.ReportActivity</string>
+    <string name="para_required">-(*Required)</string>
 
     <!-- Internal value pass strings -->
     <string name="app_name_pass">app_name</string>
@@ -17,7 +18,7 @@
 
     <!-- Warning -->
     <string name="app_not_open_warning">Current service can not be opened</string>
-    <string name="root_device_warning">Please root your device first or use ENG deviced</string>
+    <string name="root_device_warning">Please root your device first or use ENG device</string>
     <string name="monkey_execution_completed">Monkey execution completed</string>
     <string name="save_monkey_result_fail">Saving monkey result failed</string>
     <string name="save_monkey_to_sd">Monkey result has been saved in SD card</string>
@@ -27,5 +28,12 @@
     <string name="error_message">Error Message : </string>
     <string name="monkey_results">MonkeyResults : </string>
     <string name="results_type">.txt</string>
+
+    <!-- Dialog -->
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="dialog_title">Entry value for :</string>
+
+
 
 </resources>

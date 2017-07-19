@@ -24,30 +24,31 @@ import static java.security.AccessController.getContext;
 
 public class MonkeySettingsActivity extends AppCompatActivity {
 
-    private static ListView list;
-    private static TextView app_name;
-    private static ImageView imageView;
-    private static Button runMonkeyButton;
-    private static Button backtoMainAppListButton;
-    private static MonkeySettings monkeySettings = new MonkeySettings();
-    private static SettingValueAdapter settingValueAdapter;
-    private static RunMonkeyCommand runMonkeyCommand;
-    private static BackToAppList backToAppList;
-    private static String finalMonkeyCommand;
-    private static Intent launchIntent;
-    private static Intent launchIntent_current;
-    private static ComponentName componentName;
-    private static CommonTools commonTools = new CommonTools();
+    private ListView list;
+    private TextView appName;
+    private ImageView imageView;
+    private Button runMonkeyButton;
+    private Button backToMainAppListButton;
+    private SettingValueAdapter settingValueAdapter;
+    private RunMonkeyCommand runMonkeyCommand;
+    private BackToAppList backToAppList;
+    private String finalMonkeyCommand;
+    private Intent launchIntent;
+    private Intent launchIntentCurrent;
+    private ComponentName componentName;
+    private CommonTools commonTools = new CommonTools();
+    private MonkeySettings monkeySettings = new MonkeySettings();
 
-    private static String app_name_intent;
-    private static String app_version_intent;
-    private static String report;
-    private static StringBuffer sbReport;
-    private static String nameAndVersionPass;
-    private static Bitmap app_icon_intent;
-    private static Process pc;
-    private static BufferedReader bufInput;
-    private static BufferedReader bufError;
+    private String appNameIntent;
+    private String appVersionIntent;
+    private String report;
+    private StringBuffer sbReport;
+    private String nameAndVersionPass;
+    private Bitmap appIconIntent;
+    private Process pc;
+    private BufferedReader bufInput;
+    private BufferedReader bufError;
+    private String packName;
 
     private String APP_NAME;
     private String APP_VERSION;
@@ -80,33 +81,33 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         MONKEY_REPORT = this.getString(R.string.monkey_report);
         APP_NAME_VERSION = this.getString(R.string.app_name_version_pass);
 
-        app_name_intent = getIntent().getStringExtra(APP_NAME);
-        app_version_intent = getIntent().getStringExtra(APP_VERSION);
-        app_icon_intent = getIntent().getParcelableExtra(APP_ICON);
+        appNameIntent = getIntent().getStringExtra(APP_NAME);
+        appVersionIntent = getIntent().getStringExtra(APP_VERSION);
+        appIconIntent = getIntent().getParcelableExtra(APP_ICON);
 
 
         //get short name of App
-        String packName = app_name_intent.substring(15, app_name_intent.length());
+        packName = appNameIntent.substring(15, appNameIntent.length());
         packName = packName.replaceFirst(packName.substring(0, 1), packName.substring(0, 1).toUpperCase());
 
-        app_name = (TextView) findViewById(com.blackberry.monkeysimulator.R.id.app_name_field_setting);
+        appName = (TextView) findViewById(R.id.app_name_field_setting);
         imageView = (ImageView) findViewById(R.id.app_icon_field_setting);
-        nameAndVersionPass = packName + RETURN_LINE + VERSION_LARGE + app_version_intent;
-        app_name.setText(nameAndVersionPass);
-        imageView.setImageBitmap(app_icon_intent);
+        nameAndVersionPass = packName + RETURN_LINE + VERSION_LARGE + appVersionIntent;
+        appName.setText(nameAndVersionPass);
+        imageView.setImageBitmap(appIconIntent);
 
-        list = (ListView) findViewById(com.blackberry.monkeysimulator.R.id.monkey_settings_listView);
+        list = (ListView) findViewById(R.id.monkey_settings_listView);
         settingValueAdapter = new SettingValueAdapter(this, android.R.layout.simple_list_item_1, monkeySettings.getAllMonkeySettingsName());
         list.setAdapter(settingValueAdapter);
 
         // click to assemble Monkey Command and run
-        runMonkeyButton = (Button) findViewById(com.blackberry.monkeysimulator.R.id.run_monkey);
+        runMonkeyButton = (Button) findViewById(R.id.run_monkey);
         runMonkeyCommand = new RunMonkeyCommand();
         runMonkeyButton.setOnClickListener(runMonkeyCommand);
 
-        backtoMainAppListButton = (Button) findViewById(R.id.back_monkey_setting);
+        backToMainAppListButton = (Button) findViewById(R.id.back_monkey_setting);
         backToAppList = new BackToAppList();
-        backtoMainAppListButton.setOnClickListener(backToAppList);
+        backToMainAppListButton.setOnClickListener(backToAppList);
         launchIntent = new Intent(this, MainActivity.class);
 
     }
@@ -124,10 +125,10 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 return;
             }
             // 2.Assemble command
-            finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(app_name_intent, settingValueAdapter.getMonkeySettingsObj());
+            finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(appNameIntent, settingValueAdapter.getMonkeySettingsObj());
             Log.e("....", finalMonkeyCommand);
             // 3.Open target application
-            launchIntent = getPackageManager().getLaunchIntentForPackage(app_name_intent);
+            launchIntent = getPackageManager().getLaunchIntentForPackage(appNameIntent);
             startActivity(launchIntent);
             // 4.Execute monkey command
             // TODO use side button to control
@@ -157,13 +158,13 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             }
             // 6. Back to MonkeySimulator, Show result
             commonTools.alarmToast(getBaseContext(), EXECUTION_COMPLETE);
-            launchIntent_current = getPackageManager().getLaunchIntentForPackage(getPackageName());
+            launchIntentCurrent = getPackageManager().getLaunchIntentForPackage(getPackageName());
             componentName = new ComponentName(getPackageName(), MONKEY_REPORT_ACTIVITY);
-            launchIntent_current.setComponent(componentName);
-            launchIntent_current.putExtra(MONKEY_REPORT, sbReport.toString());
-            launchIntent_current.putExtra(APP_NAME_VERSION, nameAndVersionPass);
-            launchIntent_current.putExtra(APP_ICON, app_icon_intent);
-            startActivity(launchIntent_current);
+            launchIntentCurrent.setComponent(componentName);
+            launchIntentCurrent.putExtra(MONKEY_REPORT, sbReport.toString());
+            launchIntentCurrent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
+            launchIntentCurrent.putExtra(APP_ICON, appIconIntent);
+            startActivity(launchIntentCurrent);
         }
     }
 

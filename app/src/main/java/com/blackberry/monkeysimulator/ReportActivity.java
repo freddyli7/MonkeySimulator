@@ -25,21 +25,21 @@ import java.io.IOException;
 
 public class ReportActivity extends AppCompatActivity {
 
-    private static String report;
-    private static String nameAndVersionPass;
-    private static TextView reportArea;
-    private static TextView appNameArea;
-    private static Button goBack;
-    private static Button exportResults;
-    private static GoBackMonkey goBackMonkey;
-    private static ExportMonkeyResults exportMonkeyResults;
-    private static Intent intent;
-    private static boolean isExternalStorageAvailable = false;
-    private static FileOutputStream fileOutputStream;
-    private static File file;
-    private static Bitmap app_icon_intent;
-    private static ImageView imageView;
-    private static CommonTools commonTools = new CommonTools();
+    private String report;
+    private String nameAndVersionPass;
+    private TextView reportArea;
+    private TextView appNameArea;
+    private Button goBack;
+    private Button exportResults;
+    private GoBackMonkey goBackMonkey;
+    private ExportMonkeyResults exportMonkeyResults;
+    private Intent intent;
+    private boolean isExternalStorageAvailable = false;
+    private FileOutputStream fileOutputStream;
+    private File file;
+    private Bitmap appIconIntent;
+    private ImageView imageView;
+    private CommonTools commonTools = new CommonTools();
     private String MONKEY_REPORT;
     private String APP_NAME_VERSION;
     private String APP_ICON;
@@ -64,7 +64,7 @@ public class ReportActivity extends AppCompatActivity {
 
         report = getIntent().getStringExtra(MONKEY_REPORT);
         nameAndVersionPass = getIntent().getStringExtra(APP_NAME_VERSION);
-        app_icon_intent = getIntent().getParcelableExtra(APP_ICON);
+        appIconIntent = getIntent().getParcelableExtra(APP_ICON);
 
         reportArea = (TextView) findViewById(R.id.report_content);
         appNameArea = (TextView) findViewById(R.id.app_name_field_report);
@@ -85,7 +85,7 @@ public class ReportActivity extends AppCompatActivity {
         appNameArea.setText(nameAndVersionPass);
 
         imageView = (ImageView) findViewById(R.id.app_icon_field_report);
-        imageView.setImageBitmap(app_icon_intent);
+        imageView.setImageBitmap(appIconIntent);
 
     }
 
