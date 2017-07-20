@@ -17,7 +17,7 @@
     <string name="monkey_report">monkey_report</string>
 
     <!-- Warning -->
-    <string name="app_not_open_warning">Current service can not be opened</string>
+    <string name="app_not_open_warning">Service can not be opened</string>
     <string name="root_device_warning">Please root your device first or use ENG device</string>
     <string name="monkey_execution_completed">Monkey execution completed</string>
     <string name="save_monkey_result_fail">Saving monkey result failed</string>

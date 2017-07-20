@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,35 +11,32 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.blackberry.monkeysimulator.entity.ApkApplications;
 import com.blackberry.monkeysimulator.adapter.AppAdapter;
-import com.blackberry.monkeysimulator.tools.CommonTools;
-
-import org.w3c.dom.Text;
+import com.blackberry.monkeysimulator.entity.ApkApplications;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class ServiceActivity extends AppCompatActivity {
 
-    private ListView app_list;
+    private ListView service_list;
     private String PACKAGE_NAME;
     private String APP_REAL_NAME;
     private List<ApkApplications> appsName;
     private List<ApkApplications> servicesName;
-    private AppAdapter appAdapter;
+    private AppAdapter serviceAdapter;
     private PackageInfo packageInfo;
     private List<PackageInfo> packageList;
     private PackageManager pm;
     private Context context;
     private Intent launchIntent;
-    private TextView serviceTitleBtn;
-    private CheckAllServices checkAllServices;
+    private TextView appTitleBtn;
+    private CheckAllApps checkAllApps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.blackberry.monkeysimulator.R.layout.activity_main);
+        setContentView(R.layout.activity_main_service);
 
         this.PACKAGE_NAME = this.getString(R.string.company_package);
         this.APP_REAL_NAME = this.getString(R.string.app_real_name);
@@ -62,22 +58,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        app_list = (ListView) findViewById(R.id.app_listView);
-        appAdapter = new AppAdapter(this, android.R.layout.simple_list_item_1, appsName);
-        app_list.setAdapter(appAdapter);
+        service_list = (ListView) findViewById(R.id.service_listView);
+        serviceAdapter = new AppAdapter(this, android.R.layout.simple_list_item_1, servicesName);
+        service_list.setAdapter(serviceAdapter);
 
-        serviceTitleBtn = (TextView) findViewById(R.id.service_title_main);
-        checkAllServices = new CheckAllServices();
-        serviceTitleBtn.setOnClickListener(checkAllServices);
-        launchIntent = new Intent(this, ServiceActivity.class);
-
+        appTitleBtn = (TextView) findViewById(R.id.app_title_service);
+        checkAllApps = new CheckAllApps();
+        appTitleBtn.setOnClickListener(checkAllApps);
+        launchIntent = new Intent(this, MainActivity.class);
     }
 
-    private class CheckAllServices implements View.OnClickListener {
+    private class CheckAllApps implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            Log.e("FFFF", "?????????");
-            startActivity(launchIntent);
+            Log.e("FFFF", "????#####");
+           startActivity(launchIntent);
         }
     }
 }

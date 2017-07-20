@@ -176,5 +176,4 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         }
     }
 
-
 }

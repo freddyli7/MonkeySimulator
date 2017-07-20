@@ -19,6 +19,8 @@
         <activity
             android:name=".MonkeySettingsActivity"/>
         <activity
+            android:name=".ServiceActivity"/>
+        <activity
             android:name=".ReportActivity"
             android:exported="true"/>
     </application>
