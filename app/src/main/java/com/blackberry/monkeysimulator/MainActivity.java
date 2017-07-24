@@ -4,19 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.blackberry.monkeysimulator.entity.ApkApplications;
 import com.blackberry.monkeysimulator.adapter.AppAdapter;
-import com.blackberry.monkeysimulator.tools.CommonTools;
-
-import org.w3c.dom.Text;
+import com.blackberry.monkeysimulator.entity.ApkApplications;
 
 import java.util.ArrayList;
 import java.util.List;
