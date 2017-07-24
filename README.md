@@ -23,7 +23,10 @@ Version 1.2
 2. Separate all Strings inside the code.
 3. Be able to save input values for next time convenience.
 
+Bug:
+
+    Input empty value on optional paras works fine on DTEK60 but doesn't on KeyOne. 
+
 Version 2.0
 
 1. Add button control.
-

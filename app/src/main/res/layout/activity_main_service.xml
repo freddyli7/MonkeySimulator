@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/app_title_service"
         android:layout_width="190dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:text="Applications"
         android:textAlignment="center"
         android:textColor="@android:color/widget_edittext_dark"
@@ -20,21 +20,18 @@
     <TextView
         android:id="@+id/service_title_service"
         android:layout_width="220dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginStart="190dp"
         android:text="Services"
-        android:background="@android:color/holo_orange_light"
+        android:background="@color/colorPrimaryDark"
         android:textAlignment="center"
-        android:textColor="@android:color/widget_edittext_dark"
+        android:textColor="@android:color/white"
         android:textSize="30sp" />
 
     <ListView
         android:id="@+id/service_listView"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="332dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/app_title_service"
-        android:layout_marginStart="21dp" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"/>
 
 </RelativeLayout>

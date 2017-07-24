@@ -71,7 +71,6 @@ public class ServiceActivity extends AppCompatActivity {
     private class CheckAllApps implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            Log.e("FFFF", "????#####");
            startActivity(launchIntent);
         }
     }
