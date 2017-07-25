@@ -53,8 +53,6 @@ public class ServiceActivity extends AppCompatActivity {
                 launchIntent = this.getPackageManager().getLaunchIntentForPackage(packageInfo.packageName);
                 if(launchIntent == null){
                     servicesName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName, packageInfo.applicationInfo.loadIcon(getPackageManager())));
-                } else {
-                    appsName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName, packageInfo.applicationInfo.loadIcon(getPackageManager())));
                 }
             }
         }

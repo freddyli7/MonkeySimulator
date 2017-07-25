@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.blackberry.monkeysimulator.adapter.SettingValueAdapter;
+import com.blackberry.monkeysimulator.entity.MonkeyParaInstance;
 import com.blackberry.monkeysimulator.entity.MonkeySettings;
 import com.blackberry.monkeysimulator.tools.AssembleMonkeyCommand;
 import com.blackberry.monkeysimulator.tools.CommonTools;
@@ -49,6 +50,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private BufferedReader bufInput;
     private BufferedReader bufError;
     private String packName;
+    private MonkeyParaInstance monkeyParaInstance ;
 
     private String APP_NAME;
     private String APP_VERSION;
@@ -106,7 +108,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         runMonkeyButton.setOnClickListener(runMonkeyCommand);
 
         backToMainAppListButton = (Button) findViewById(R.id.back_monkey_setting);
-        backToAppList = new BackToAppList();
+
         backToMainAppListButton.setOnClickListener(backToAppList);
         launchIntent = new Intent(this, MainActivity.class);
 
@@ -156,7 +158,10 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 Log.e("....", "SOMETHING WRONG");
                 e.printStackTrace();
             }
-            // 6. Back to MonkeySimulator, Show result
+            // todo 6. save current para values to application session
+            monkeyParaInstance = (MonkeyParaInstance) getApplication();
+            monkeyParaInstance.setMonkeySettings(settingValueAdapter.getMonkeySettingsObj());
+            // 7. Back to MonkeySimulator, Show result
             commonTools.alarmToast(getBaseContext(), EXECUTION_COMPLETE);
             launchIntentCurrent = getPackageManager().getLaunchIntentForPackage(getPackageName());
             componentName = new ComponentName(getPackageName(), MONKEY_REPORT_ACTIVITY);

@@ -50,9 +50,7 @@ public class MainActivity extends AppCompatActivity {
             packageInfo = packageList.get(i);
             if(packageInfo.packageName.startsWith(PACKAGE_NAME) && !packageInfo.packageName.endsWith(APP_REAL_NAME)){
                 launchIntent = this.getPackageManager().getLaunchIntentForPackage(packageInfo.packageName);
-                if(launchIntent == null){
-                    servicesName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName, packageInfo.applicationInfo.loadIcon(getPackageManager())));
-                } else {
+                if(launchIntent != null){
                     appsName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName, packageInfo.applicationInfo.loadIcon(getPackageManager())));
                 }
             }
