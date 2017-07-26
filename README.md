@@ -20,8 +20,8 @@ Current version is only used for **BlackBerry** apps.
 **Version 1.3**
 
 
-2. Separate all Strings inside the code.
-3. Be able to save input values for next time convenience.
+1. Separate all Strings inside the code.
+2. Be able to save input values for next time convenience.
 
 **Bug:**
     Input empty value on optional paras works fine on DTEK60 but doesn't on KeyOne. 
