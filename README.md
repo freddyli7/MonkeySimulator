@@ -1,7 +1,7 @@
 # MonkeySimulator
 Tool encapsulating monkey command for testing Android apps
 
-Current version is only used for BlackBerry apps.
+Current version is only used for **BlackBerry** apps.
 
 Version 1.0
 
@@ -19,14 +19,17 @@ Version 1.1
   
 Version 1.3
 
-1. Add Category para.
+
 2. Separate all Strings inside the code.
 3. Be able to save input values for next time convenience.
 
 Bug:
-
     Input empty value on optional paras works fine on DTEK60 but doesn't on KeyOne. 
+    
+Version 1.4
+
+1. Add Category para.
 
 Version 2.0
 
-1. Add button control.
+1. Add button to control Monkey during execution.
