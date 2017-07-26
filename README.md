@@ -12,24 +12,24 @@ Version 1.0
 5. Go back to app list or save the report to SD card for further analysis.
 
 
-**Version 1.1
+**Version 1.1**
 
 1. Display the entry value at para list after press OK.
 2. Reconstructure part of methods to decrease coupling.
   
-**Version 1.3
+**Version 1.3**
 
 
 2. Separate all Strings inside the code.
 3. Be able to save input values for next time convenience.
 
-**Bug:
+**Bug:**
     Input empty value on optional paras works fine on DTEK60 but doesn't on KeyOne. 
     
-**Version 1.4
+**Version 1.4**
 
 1. Add Category para.
 
-**Version 2.0
+**Version 2.0**
 
 1. Add button to control Monkey during execution.
