@@ -14,7 +14,8 @@
         android:layout_height="45dp"
         android:text="Applications"
         android:textAlignment="center"
-        android:textColor="@android:color/widget_edittext_dark"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
         android:textSize="30sp"/>
 
     <TextView
@@ -23,15 +24,14 @@
         android:layout_height="45dp"
         android:layout_marginStart="190dp"
         android:text="Services"
-        android:background="@color/colorPrimaryDark"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/widget_edittext_dark"
         android:textSize="30sp" />
 
     <ListView
         android:id="@+id/service_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="45dp"/>
 
 </RelativeLayout>

@@ -38,6 +38,7 @@ public class ServiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_service);
 
         this.PACKAGE_NAME = this.getString(R.string.company_package);
+        this.PACKAGE_NAME = this.getString(R.string.company_package);
         this.APP_REAL_NAME = this.getString(R.string.app_real_name);
 
         servicesName = new ArrayList<>();

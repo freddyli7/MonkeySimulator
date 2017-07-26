@@ -33,7 +33,6 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private Intent launchIntent;
     private Intent launchIntentCurrent;
     private ComponentName componentName;
-    private CommonTools commonTools = new CommonTools();
     private MonkeySettings monkeySettings = new MonkeySettings();
 
     private String appNameIntent;
@@ -113,11 +112,11 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         public void onClick(View v) {
             // 1.Must be rooted first
             if (!CommonTools.isRooted()) {
-                commonTools.alarmToast(getBaseContext(), ROOT_DEVICE_WARNING);
+                CommonTools.alarmToast(getBaseContext(), ROOT_DEVICE_WARNING);
                 return;
             }
             // 2. verify parameters input
-            if (!commonTools.paraInputVerify(settingValueAdapter.getMonkeySettingsObj(), getBaseContext())) {
+            if (!CommonTools.paraInputVerify(settingValueAdapter.getMonkeySettingsObj(), getBaseContext())) {
                 return;
             }
             // 2.Assemble command
@@ -151,12 +150,12 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             } catch (Exception e) {
                 //Log.e("....", "SOMETHING WRONG");
                 //e.printStackTrace();
-                commonTools.alarmToast(getBaseContext(), "Looks like something wrong to execute the Monkey");
+                CommonTools.alarmToast(getBaseContext(), "Looks like something wrong to execute the Monkey");
             }
             // 6. save current para values to application session
             MonkeySettings.setMonkeySettings(settingValueAdapter.getMonkeySettingsObj());
             // 7. Back to MonkeySimulator, Show result
-            commonTools.alarmToast(getBaseContext(), EXECUTION_COMPLETE);
+            CommonTools.alarmToast(getBaseContext(), EXECUTION_COMPLETE);
             launchIntentCurrent = getPackageManager().getLaunchIntentForPackage(getPackageName());
             componentName = new ComponentName(getPackageName(), MONKEY_REPORT_ACTIVITY);
             launchIntentCurrent.setComponent(componentName);

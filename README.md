@@ -24,7 +24,8 @@ Current version is only used for **BlackBerry** apps.
 2. Be able to save input values for next time convenience.
 
 **Bug:**
-    Input empty value on optional paras works fine on DTEK60 but doesn't on KeyOne. 
+    
+    1.Input empty value on optional paras works fine on KeyOne but doesn't on DTEK60. 
     
 **Version 1.4**
 
