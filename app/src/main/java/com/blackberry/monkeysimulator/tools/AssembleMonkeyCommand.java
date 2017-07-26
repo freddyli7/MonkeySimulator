@@ -20,7 +20,6 @@ public class AssembleMonkeyCommand {
     private static String SERIALVERSIONID = "serialversionuid";
     private static String $CHANGE = "$change";
     private static String event_num;
-    ;
 
     // General
     private static String EVENT_NUMBER = "event_number";
@@ -47,8 +46,6 @@ public class AssembleMonkeyCommand {
     private static String KILL_PROCESS_AFTER_ERROR = "kill_process_after_error";
     private static String MONITOR_NATIVE_CRASHES = "monitor_native_crashes";
     private static String WAIT_DBG = "wait_dbg";
-
-    private static CommonTools commonTools = new CommonTools();
 
     public static String assembleMonkeyCommand(String targetAppName, @NonNull MonkeySettings monkeySettingsObj, Context context) {
         // command example: monkey -p com.blackberry.hub --hprof -v -v -v --pct-motion 23 --pct-nav 30 -s 200 --throttle 500 1000
@@ -123,7 +120,7 @@ public class AssembleMonkeyCommand {
                     }
                 } catch (IllegalAccessException e) {
                     //Log.e("ERROR TAG", "Illegal access field for monkeySettingsObj");
-                    commonTools.alarmToast(context, "Can't access to this parameter currently");
+                    CommonTools.alarmToast(context, "Can't access to this parameter currently");
                 }
             }
         }

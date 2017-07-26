@@ -39,7 +39,6 @@ public class ReportActivity extends AppCompatActivity {
     private File file;
     private Bitmap appIconIntent;
     private ImageView imageView;
-    private CommonTools commonTools = new CommonTools();
     private String MONKEY_REPORT;
     private String APP_NAME_VERSION;
     private String APP_ICON;
@@ -102,10 +101,10 @@ public class ReportActivity extends AppCompatActivity {
             try {
                 saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass+RESULTS_TYPE, report);
             } catch (IOException e) {
-                commonTools.alarmToast(getBaseContext(), SAVE_MONKEY_RESULT_FAIL);
+                CommonTools.alarmToast(getBaseContext(), SAVE_MONKEY_RESULT_FAIL);
                 //e.printStackTrace();
             }
-            commonTools.alarmToast(getBaseContext(), SAVE_MONKEY_SD);
+            CommonTools.alarmToast(getBaseContext(), SAVE_MONKEY_SD);
         }
     }
 

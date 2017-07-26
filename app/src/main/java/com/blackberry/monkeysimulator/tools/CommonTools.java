@@ -21,7 +21,18 @@ public class CommonTools {
     private static String $CHANGE = "$change";
     private static String MONKNEYSETTINGS = "MonkeySettings";
 
-    private CommonTools commonTools = new CommonTools();
+    private static CommonTools commonTools;
+
+    public static CommonTools getCommonTools() {
+        if(commonTools == null){
+            return new CommonTools();
+        }
+        return commonTools;
+    }
+
+    public static void setCommonTools(CommonTools commonToolsPass) {
+        commonTools = commonToolsPass;
+    }
 
     /**
      * Checks if the device is rooted.
@@ -61,11 +72,11 @@ public class CommonTools {
         return false;
     }
 
-    public void alarmToast(Context context, String message) {
+    public static void alarmToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
-    public boolean paraInputVerify(@NonNull MonkeySettings monkeySettings, Context context) {
+    public static boolean paraInputVerify(@NonNull MonkeySettings monkeySettings, Context context) {
         boolean flag = true;
         Field[] fields = monkeySettings.getClass().getDeclaredFields();
         for (Field field : fields) {
@@ -134,7 +145,7 @@ public class CommonTools {
                     }
                 } catch (IllegalAccessException e) {
                     //e.printStackTrace();
-                    commonTools.alarmToast(context, "Can't access to this parameter currently");
+                    alarmToast(context, "Can't access to this parameter currently");
                 }
             }
         }

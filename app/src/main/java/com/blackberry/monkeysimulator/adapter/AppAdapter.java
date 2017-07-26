@@ -36,7 +36,6 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
     private View oneAppView;
     private ImageView imageView;
     private TextView app_name_textView;
-    private CommonTools commonTools = new CommonTools();
 
     public AppAdapter(Context context, int resource, List<ApkApplications> objects) {
         super(context, resource, objects);
@@ -58,18 +57,18 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
         app_name_textView = (TextView) oneAppView.findViewById(R.id.app_name_field_main);
 
         imageView.setImageDrawable(apkApplications.getApp_icon());
-        app_name_textView.setText(apkApplications.getApp_name() + RETURN_LINE + VERSION_SMALL + apkApplications.getApp_verison());
+        app_name_textView.setText(apkApplications.getApp_name() + RETURN_LINE + VERSION_SMALL + apkApplications.getApp_version());
 
         oneAppView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launchIntent = getContext().getPackageManager().getLaunchIntentForPackage(apkApplications.getApp_name());
                 if(launchIntent == null){
-                    commonTools.alarmToast(getContext(), APP_NOT_OPEN);
+                    CommonTools.alarmToast(getContext(), APP_NOT_OPEN);
                 } else {
                     intent = new Intent(getContext(), MonkeySettingsActivity.class);
                     intent.putExtra(APP_NAME, apkApplications.getApp_name());
-                    intent.putExtra(APP_VERSION, apkApplications.getApp_verison());
+                    intent.putExtra(APP_VERSION, apkApplications.getApp_version());
                     bitmap_icon = ((BitmapDrawable) apkApplications.getApp_icon()).getBitmap();
                     intent.putExtra(APP_ICON, bitmap_icon);
                     getContext().startActivity(intent);
