@@ -1,9 +1,9 @@
 # MonkeySimulator
-Tool encapsulating monkey command for testing Android apps
+Tool encapsulating monkey command for performance and pressure testing on Android apps
 
 Current version is only used for **BlackBerry** apps.
 
-Version 1.0
+**Version 1.0**
 
 1. Fetch all BlackBerry apps first(Both apps and services), displaying as app name with current version.
 2. Select one from app list and entry Monkey parameteres.
