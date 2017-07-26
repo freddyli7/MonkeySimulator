@@ -1,5 +1,6 @@
 package com.blackberry.monkeysimulator.entity;
 
+import android.app.Application;
 import android.util.Log;
 
 import java.lang.reflect.Field;
@@ -10,12 +11,10 @@ import java.util.List;
  * Created by frlee on 5/30/17.
  */
 
-public class MonkeySettings {
+public class MonkeySettings extends Application {
 
-    // 不需要展示的参数
-    private final static String SERIALVERSIONUID = "serialversionuid";
-    private final static String CHANGE = "change";
-    private final static String $CHANGE = "$change";
+    // 全局对象，用于存储monkey参数，以便下一次重用
+    private static MonkeySettings monkeySettings;
 
     // Events
     private String throttle;
@@ -49,6 +48,22 @@ public class MonkeySettings {
     // help
 //    private String help;
 
+    public static MonkeySettings getMonkeySettings() {
+        if(monkeySettings == null){
+            return new MonkeySettings();
+        }
+        return monkeySettings;
+    }
+
+    public static void setMonkeySettings(MonkeySettings monkeySettingsPass) {
+        monkeySettings = monkeySettingsPass;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        monkeySettings = this;
+    }
 
     public String getEvent_number() {
         return event_number;
@@ -215,9 +230,9 @@ public class MonkeySettings {
         Field[] fields = MonkeySettings.class.getDeclaredFields();
         for (Field field :fields) {
             //不需要展示的参数
-            if(!field.getName().equalsIgnoreCase(SERIALVERSIONUID) &&
-                    !field.getName().equalsIgnoreCase(CHANGE) &&
-                    !field.getName().equalsIgnoreCase($CHANGE)){
+            if(!field.getName().equalsIgnoreCase("serialversionuid") &&
+                    !field.getName().startsWith("$change") &&
+            !field.getName().equalsIgnoreCase("monkeySettings")){
                 settings.add(field.getName());
             }
         }

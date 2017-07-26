@@ -19,6 +19,7 @@ public class CommonTools {
     private static String NULL_STRING = "";
     private static String SERIALVERSIONID = "serialversionuid";
     private static String $CHANGE = "$change";
+    private static String MONKNEYSETTINGS = "MonkeySettings";
 
     /**
      * Checks if the device is rooted.
@@ -66,7 +67,7 @@ public class CommonTools {
         boolean flag = true;
         Field[] fields = monkeySettings.getClass().getDeclaredFields();
         for (Field field : fields) {
-            if(!field.getName().equalsIgnoreCase(SERIALVERSIONID) && !field.getName().equalsIgnoreCase($CHANGE)){
+            if(!field.getName().equalsIgnoreCase(SERIALVERSIONID) && !field.getName().equalsIgnoreCase($CHANGE) && !field.getName().equalsIgnoreCase(MONKNEYSETTINGS)){
                 field.setAccessible(true);
                 try {
                     // pct para verify

@@ -4,6 +4,7 @@
     android:sharedUserId="android.uid.system">
 
     <application
+        android:name=".entity.MonkeySettings"
         android:allowBackup="true"
         android:icon="@mipmap/monkey"
         android:label="@string/app_name"

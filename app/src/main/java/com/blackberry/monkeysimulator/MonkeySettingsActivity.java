@@ -13,15 +13,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.blackberry.monkeysimulator.adapter.SettingValueAdapter;
-import com.blackberry.monkeysimulator.entity.MonkeyParaInstance;
 import com.blackberry.monkeysimulator.entity.MonkeySettings;
 import com.blackberry.monkeysimulator.tools.AssembleMonkeyCommand;
 import com.blackberry.monkeysimulator.tools.CommonTools;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
-import static java.security.AccessController.getContext;
 
 public class MonkeySettingsActivity extends AppCompatActivity {
 
@@ -50,7 +47,6 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private BufferedReader bufInput;
     private BufferedReader bufError;
     private String packName;
-    private MonkeyParaInstance monkeyParaInstance ;
 
     private String APP_NAME;
     private String APP_VERSION;
@@ -87,7 +83,6 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         appVersionIntent = getIntent().getStringExtra(APP_VERSION);
         appIconIntent = getIntent().getParcelableExtra(APP_ICON);
 
-
         //get short name of App
         packName = appNameIntent.substring(15, appNameIntent.length());
         packName = packName.replaceFirst(packName.substring(0, 1), packName.substring(0, 1).toUpperCase());
@@ -108,7 +103,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         runMonkeyButton.setOnClickListener(runMonkeyCommand);
 
         backToMainAppListButton = (Button) findViewById(R.id.back_monkey_setting);
-
+        backToAppList = new BackToAppList();
         backToMainAppListButton.setOnClickListener(backToAppList);
         launchIntent = new Intent(this, MainActivity.class);
 
@@ -158,9 +153,8 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 Log.e("....", "SOMETHING WRONG");
                 e.printStackTrace();
             }
-            // todo 6. save current para values to application session
-            monkeyParaInstance = (MonkeyParaInstance) getApplication();
-            monkeyParaInstance.setMonkeySettings(settingValueAdapter.getMonkeySettingsObj());
+            // 6. save current para values to application session
+            MonkeySettings.setMonkeySettings(settingValueAdapter.getMonkeySettingsObj());
             // 7. Back to MonkeySimulator, Show result
             commonTools.alarmToast(getBaseContext(), EXECUTION_COMPLETE);
             launchIntentCurrent = getPackageManager().getLaunchIntentForPackage(getPackageName());

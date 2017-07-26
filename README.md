@@ -17,7 +17,7 @@ Version 1.1
 1. Display the entry value at para list after press OK.
 2. Reconstructure part of methods to decrease coupling.
   
-Version 1.2
+Version 1.3
 
 1. Add Category para.
 2. Separate all Strings inside the code.
