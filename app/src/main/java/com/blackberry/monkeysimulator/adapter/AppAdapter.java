@@ -38,7 +38,6 @@ public class AppAdapter extends ArrayAdapter<ApkApplications> {
     private TextView app_name_textView;
     private CommonTools commonTools = new CommonTools();
 
-
     public AppAdapter(Context context, int resource, List<ApkApplications> objects) {
         super(context, resource, objects);
         APP_NAME = getContext().getResources().getString(R.string.app_name_pass);

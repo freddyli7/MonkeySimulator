@@ -48,7 +48,6 @@ public class ReportActivity extends AppCompatActivity {
     private String SAVE_MONKEY_RESULT_FAIL;
     private String SAVE_MONKEY_SD;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +103,7 @@ public class ReportActivity extends AppCompatActivity {
                 saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass+RESULTS_TYPE, report);
             } catch (IOException e) {
                 commonTools.alarmToast(getBaseContext(), SAVE_MONKEY_RESULT_FAIL);
-                e.printStackTrace();
+                //e.printStackTrace();
             }
             commonTools.alarmToast(getBaseContext(), SAVE_MONKEY_SD);
         }

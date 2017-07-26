@@ -1,5 +1,6 @@
 package com.blackberry.monkeysimulator.tools;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -18,7 +19,8 @@ public class AssembleMonkeyCommand {
     private static String finalAdbCommandString;
     private static String SERIALVERSIONID = "serialversionuid";
     private static String $CHANGE = "$change";
-    private static String event_num;;
+    private static String event_num;
+    ;
 
     // General
     private static String EVENT_NUMBER = "event_number";
@@ -46,28 +48,30 @@ public class AssembleMonkeyCommand {
     private static String MONITOR_NATIVE_CRASHES = "monitor_native_crashes";
     private static String WAIT_DBG = "wait_dbg";
 
-    public static String assembleMonkeyCommand(String targetAppName, @NonNull MonkeySettings monkeySettingsObj){
+    private static CommonTools commonTools = new CommonTools();
+
+    public static String assembleMonkeyCommand(String targetAppName, @NonNull MonkeySettings monkeySettingsObj, Context context) {
         // command example: monkey -p com.blackberry.hub --hprof -v -v -v --pct-motion 23 --pct-nav 30 -s 200 --throttle 500 1000
         finalAdbCommandString = "monkey -p " + targetAppName + " ";
-        for (String nameAndValue : getAllMonkeySettingsValues(monkeySettingsObj)) {
+        for (String nameAndValue : getAllMonkeySettingsValues(monkeySettingsObj, context)) {
             // event_number should be at the very end
-            if(!nameAndValue.startsWith("-")){
+            if (!nameAndValue.startsWith("-")) {
                 event_num = nameAndValue;
                 continue;
             }
-            finalAdbCommandString += nameAndValue+" ";
+            finalAdbCommandString += nameAndValue + " ";
         }
-        return finalAdbCommandString+event_num.trim();
+        return finalAdbCommandString + event_num.trim();
     }
 
-    private static List<String> getAllMonkeySettingsValues(@NonNull MonkeySettings obj){
+    private static List<String> getAllMonkeySettingsValues(@NonNull MonkeySettings obj, Context context) {
         List<String> values = new ArrayList<String>();
         Field[] fields = obj.getClass().getDeclaredFields();
         for (Field field : fields) {
-            if(!field.getName().equalsIgnoreCase(SERIALVERSIONID) && !field.getName().equalsIgnoreCase($CHANGE)){
+            if (!field.getName().equalsIgnoreCase(SERIALVERSIONID) && !field.getName().equalsIgnoreCase($CHANGE)) {
                 field.setAccessible(true);
-                try{
-                    if(field.get(obj) != null){
+                try {
+                    if (field.get(obj) != null) {
                         if (field.getName().equalsIgnoreCase(PAC_TOUCH)) {
                             values.add("--pct-touch " + field.get(obj).toString() + " ");
                         } else if (field.getName().equalsIgnoreCase(PAC_MOTION)) {
@@ -100,25 +104,26 @@ public class AssembleMonkeyCommand {
                             values.add("--monitor-native-crashes ");
                         } else if (field.getName().equalsIgnoreCase(WAIT_DBG) && field.get(obj).toString().equals("1")) {
                             values.add("--wait-dbg ");
-                        } else if(field.getName().equalsIgnoreCase(INFORMATION_LEVEL)){
+                        } else if (field.getName().equalsIgnoreCase(INFORMATION_LEVEL)) {
                             int infoTimes = Integer.valueOf(field.get(obj).toString());
                             String v = "-v ";
                             String vfinal = "";
-                            for (int i = 0; i < infoTimes; i++){
+                            for (int i = 0; i < infoTimes; i++) {
                                 vfinal += v;
                             }
                             values.add(vfinal.trim());
-                        } else if(field.getName().equalsIgnoreCase(SEED_NUMBER)) {
+                        } else if (field.getName().equalsIgnoreCase(SEED_NUMBER)) {
                             values.add("-s " + field.get(obj).toString() + " ");
                         } else if (field.getName().equalsIgnoreCase(THROTTLE)) {
                             values.add("--throttle " + field.get(obj).toString() + " ");
-                        } else if(field.getName().equalsIgnoreCase(EVENT_NUMBER)) {
+                        } else if (field.getName().equalsIgnoreCase(EVENT_NUMBER)) {
                             values.add(field.get(obj).toString() + " ");
                         }
                         //TODO other paras
                     }
                 } catch (IllegalAccessException e) {
-                    Log.e("ERROR TAG", "Illegal access field for monkeySettingsObj");
+                    //Log.e("ERROR TAG", "Illegal access field for monkeySettingsObj");
+                    commonTools.alarmToast(context, "Can't access to this parameter currently");
                 }
             }
         }

@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private String PACKAGE_NAME;
     private String APP_REAL_NAME;
     private List<ApkApplications> appsName;
-    private List<ApkApplications> servicesName;
     private AppAdapter appAdapter;
     private PackageInfo packageInfo;
     private List<PackageInfo> packageList;
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         this.APP_REAL_NAME = this.getString(R.string.app_real_name);
 
         appsName = new ArrayList<>();
-        servicesName = new ArrayList<>();
         context = this.getApplication().getBaseContext();
         pm = context.getPackageManager();
 

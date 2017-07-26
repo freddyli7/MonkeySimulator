@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -122,8 +121,8 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 return;
             }
             // 2.Assemble command
-            finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(appNameIntent, settingValueAdapter.getMonkeySettingsObj());
-            Log.e("....", finalMonkeyCommand);
+            finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(appNameIntent, settingValueAdapter.getMonkeySettingsObj(), getBaseContext());
+            //Log.e("....", finalMonkeyCommand);
             // 3.Open target application
             launchIntent = getPackageManager().getLaunchIntentForPackage(appNameIntent);
             startActivity(launchIntent);
@@ -138,20 +137,21 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 sbReport = new StringBuffer();
                 sbReport.append(MONKEY_COMMAND + finalMonkeyCommand + RETURN_LINE + RETURN_LINE);
                 while ((report = bufInput.readLine()) != null) {
-                    Log.e("..reportInput..", report);
+                    //Log.e("..reportInput..", report);
                     sbReport.append(report);
                     sbReport.append(RETURN_LINE);
                 }
 
                 while ((report = bufError.readLine()) != null) {
-                    Log.e("..reportError..", report);
+                    //Log.e("..reportError..", report);
                     sbReport.append(ERROR_MESSAGE + RETURN_LINE);
                     sbReport.append(report);
                     sbReport.append(RETURN_LINE);
                 }
             } catch (Exception e) {
-                Log.e("....", "SOMETHING WRONG");
-                e.printStackTrace();
+                //Log.e("....", "SOMETHING WRONG");
+                //e.printStackTrace();
+                commonTools.alarmToast(getBaseContext(), "Looks like something wrong to execute the Monkey");
             }
             // 6. save current para values to application session
             MonkeySettings.setMonkeySettings(settingValueAdapter.getMonkeySettingsObj());
