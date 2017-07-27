@@ -57,9 +57,10 @@ public class MainActivity extends AppCompatActivity {
         appAdapter = new AppAdapter(this, android.R.layout.simple_list_item_1, appsName);
         app_list.setAdapter(appAdapter);
 
-        serviceTitleBtn = (TextView) findViewById(R.id.service_title_main);
+        // disable services part
+        //serviceTitleBtn = (TextView) findViewById(R.id.service_title_main);
         checkAllServices = new CheckAllServices();
-        serviceTitleBtn.setOnClickListener(checkAllServices);
+        //serviceTitleBtn.setOnClickListener(checkAllServices);
         launchIntent = new Intent(this, ServiceActivity.class);
 
     }
