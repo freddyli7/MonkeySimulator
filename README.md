@@ -25,7 +25,7 @@ Current version is only used for **BlackBerry** apps.
 
 **Bug:**
     
-    1.Input empty value on optional paras works fine on KeyOne but doesn't on DTEK60. 
+    1. Inputing empty value on optional paras works fine on KeyOne but doesn't on DTEK60. 
     
 **Version 1.4**
 
@@ -34,3 +34,7 @@ Current version is only used for **BlackBerry** apps.
 **Version 2.0**
 
 1. Add button to control Monkey during execution.
+
+**Version 2.1**
+
+1. Add filter to the final result display. eg. Exceptions, errors, crashes.
