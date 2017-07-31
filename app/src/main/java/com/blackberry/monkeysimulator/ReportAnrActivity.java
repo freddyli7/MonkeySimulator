@@ -32,11 +32,14 @@ public class ReportAnrActivity extends AppCompatActivity {
     private Button goBack;
     private Button exportResults;
     private TextView goExceptionButton;
+    private TextView goGeneralButton;
     private GoBackMonkey goBackMonkey;
     private GoException goException;
+    private GoGeneral goGeneral;
     private ExportMonkeyResults exportMonkeyResults;
     private Intent intent;
     private Intent exceptionIntent;
+    private Intent generalnIntent;
     private boolean isExternalStorageAvailable = false;
     private FileOutputStream fileOutputStream;
     private File file;
@@ -72,6 +75,7 @@ public class ReportAnrActivity extends AppCompatActivity {
         goBack = (Button) findViewById(R.id.back_monkey_report_anr);
         exportResults = (Button) findViewById(R.id.export_report_anr);
         goExceptionButton = (TextView) findViewById(R.id.exception_report_anr);
+        goGeneralButton = (TextView) findViewById(R.id.all_info_report_anr);
 
         // content set
         reportArea.setText(report);
@@ -95,6 +99,11 @@ public class ReportAnrActivity extends AppCompatActivity {
         goException = new GoException();
         goExceptionButton.setOnClickListener(goException);
         exceptionIntent = new Intent(this, ReportExceptionActivity.class);
+
+        // go to general report
+        goGeneral = new GoGeneral();
+        goGeneralButton.setOnClickListener(goGeneral);
+        generalnIntent = new Intent(this, ReportActivity.class);
 
 
     }
@@ -141,6 +150,17 @@ public class ReportAnrActivity extends AppCompatActivity {
             exceptionIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
             exceptionIntent.putExtra(APP_ICON, appIconIntent);
             startActivity(exceptionIntent);
+        }
+    }
+
+    public class GoGeneral implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            // TODO report filter exception
+            generalnIntent.putExtra(MONKEY_REPORT, report);
+            generalnIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
+            generalnIntent.putExtra(APP_ICON, appIconIntent);
+            startActivity(generalnIntent);
         }
     }
 
