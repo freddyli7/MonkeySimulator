@@ -22,6 +22,10 @@
         <activity
             android:name=".ServiceActivity"/>
         <activity
+            android:name=".ReportAnrActivity"/>
+        <activity
+            android:name=".ReportExceptionActivity"/>
+        <activity
             android:name=".ReportActivity"
             android:exported="true"/>
     </application>

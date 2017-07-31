@@ -18,28 +18,24 @@ import com.blackberry.monkeysimulator.tools.CommonTools;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.GatheringByteChannel;
 
 /**
- * Created by frlee on 7/5/17.
+ * Created by frlee on 7/31/17.
  */
 
-public class ReportActivity extends AppCompatActivity {
+public class ReportAnrActivity extends AppCompatActivity {
 
     private String report;
     private String nameAndVersionPass;
     private TextView reportArea;
     private TextView appNameArea;
     private Button goBack;
-    private TextView goAnrButton;
-    private TextView goExceptionButton;
     private Button exportResults;
+    private TextView goExceptionButton;
     private GoBackMonkey goBackMonkey;
-    private GoAnr goAnr;
     private GoException goException;
     private ExportMonkeyResults exportMonkeyResults;
-    private Intent mainIntent;
-    private Intent anrIntent;
+    private Intent intent;
     private Intent exceptionIntent;
     private boolean isExternalStorageAvailable = false;
     private FileOutputStream fileOutputStream;
@@ -57,7 +53,7 @@ public class ReportActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report);
+        setContentView(R.layout.activity_report_anr);
 
         MONKEY_REPORT = this.getString(R.string.monkey_report);
         APP_NAME_VERSION = this.getString(R.string.app_name_version_pass);
@@ -71,18 +67,17 @@ public class ReportActivity extends AppCompatActivity {
         nameAndVersionPass = getIntent().getStringExtra(APP_NAME_VERSION);
         appIconIntent = getIntent().getParcelableExtra(APP_ICON);
 
-        reportArea = (TextView) findViewById(R.id.report_content);
-        appNameArea = (TextView) findViewById(R.id.app_name_field_report);
-        goBack = (Button) findViewById(R.id.back_monkey_report);
-        exportResults = (Button) findViewById(R.id.export_report);
-        goAnrButton = (TextView) findViewById(R.id.anr_report);
-        goExceptionButton = (TextView) findViewById(R.id.exception_report);
+        reportArea = (TextView) findViewById(R.id.report_content_anr);
+        appNameArea = (TextView) findViewById(R.id.app_name_field_report_anr);
+        goBack = (Button) findViewById(R.id.back_monkey_report_anr);
+        exportResults = (Button) findViewById(R.id.export_report_anr);
+        goExceptionButton = (TextView) findViewById(R.id.exception_report_anr);
 
         // content set
         reportArea.setText(report);
         appNameArea.setText(nameAndVersionPass);
 
-        imageView = (ImageView) findViewById(R.id.app_icon_field_report);
+        imageView = (ImageView) findViewById(R.id.app_icon_field_report_anr);
         imageView.setImageBitmap(appIconIntent);
 
         reportArea.setMovementMethod(new ScrollingMovementMethod());
@@ -90,33 +85,29 @@ public class ReportActivity extends AppCompatActivity {
         // go back to all app
         goBackMonkey = new GoBackMonkey();
         goBack.setOnClickListener(goBackMonkey);
-        mainIntent = new Intent(this, MainActivity.class);
+        intent = new Intent(this, MainActivity.class);
 
         // save the whole report to SD card
         exportMonkeyResults = new ExportMonkeyResults();
         exportResults.setOnClickListener(exportMonkeyResults);
-
-        // go to ANR report
-        goAnr = new GoAnr();
-        goAnrButton.setOnClickListener(goAnr);
-        anrIntent = new Intent(this, ReportAnrActivity.class);
 
         // go to exception report
         goException = new GoException();
         goExceptionButton.setOnClickListener(goException);
         exceptionIntent = new Intent(this, ReportExceptionActivity.class);
 
+
     }
 
-    public class GoBackMonkey implements View.OnClickListener {
+    private class GoBackMonkey implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             SettingValueAdapter.setMonkeySettingsObj(new MonkeySettings());
-            startActivity(mainIntent);
+            startActivity(intent);
         }
     }
 
-    public class ExportMonkeyResults implements View.OnClickListener {
+    private class ExportMonkeyResults implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             try {
@@ -129,29 +120,7 @@ public class ReportActivity extends AppCompatActivity {
         }
     }
 
-    public class GoAnr implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            // TODO report filter ANR
-            anrIntent.putExtra(MONKEY_REPORT, report);
-            anrIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
-            anrIntent.putExtra(APP_ICON, appIconIntent);
-            startActivity(anrIntent);
-        }
-    }
-
-    public class GoException implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            // TODO report filter exception
-            exceptionIntent.putExtra(MONKEY_REPORT, report);
-            exceptionIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
-            exceptionIntent.putExtra(APP_ICON, appIconIntent);
-            startActivity(exceptionIntent );
-        }
-    }
-
-    private boolean saveResultToSDCard(String fileName, String content) throws IOException {
+    public boolean saveResultToSDCard(String fileName, String content) throws IOException {
         file = new File(Environment.getExternalStorageDirectory(), fileName);
         if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             isExternalStorageAvailable = true;
@@ -162,6 +131,17 @@ public class ReportActivity extends AppCompatActivity {
             }
         }
         return isExternalStorageAvailable;
+    }
+
+    public class GoException implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            // TODO report filter exception
+            exceptionIntent.putExtra(MONKEY_REPORT, report);
+            exceptionIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
+            exceptionIntent.putExtra(APP_ICON, appIconIntent);
+            startActivity(exceptionIntent);
+        }
     }
 
 }
