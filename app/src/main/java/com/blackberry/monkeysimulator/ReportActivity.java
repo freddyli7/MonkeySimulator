@@ -41,9 +41,6 @@ public class ReportActivity extends AppCompatActivity {
     private Intent mainIntent;
     private Intent anrIntent;
     private Intent exceptionIntent;
-    private boolean isExternalStorageAvailable = false;
-    private FileOutputStream fileOutputStream;
-    private File file;
     private Bitmap appIconIntent;
     private ImageView imageView;
     private String MONKEY_REPORT;
@@ -120,7 +117,7 @@ public class ReportActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
-                saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass+RESULTS_TYPE, report);
+                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, report);
             } catch (IOException e) {
                 CommonTools.alarmToast(getBaseContext(), SAVE_MONKEY_RESULT_FAIL);
                 //e.printStackTrace();
@@ -147,21 +144,8 @@ public class ReportActivity extends AppCompatActivity {
             exceptionIntent.putExtra(MONKEY_REPORT, report);
             exceptionIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
             exceptionIntent.putExtra(APP_ICON, appIconIntent);
-            startActivity(exceptionIntent );
+            startActivity(exceptionIntent);
         }
-    }
-
-    private boolean saveResultToSDCard(String fileName, String content) throws IOException {
-        file = new File(Environment.getExternalStorageDirectory(), fileName);
-        if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            isExternalStorageAvailable = true;
-            fileOutputStream = new FileOutputStream(file);
-            fileOutputStream.write(content.getBytes());
-            if(fileOutputStream != null) {
-                fileOutputStream.close();
-            }
-        }
-        return isExternalStorageAvailable;
     }
 
 }

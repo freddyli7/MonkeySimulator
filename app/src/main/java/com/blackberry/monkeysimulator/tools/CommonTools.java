@@ -1,6 +1,7 @@
 package com.blackberry.monkeysimulator.tools;
 
 import android.content.Context;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
@@ -8,6 +9,8 @@ import android.widget.Toast;
 import com.blackberry.monkeysimulator.entity.MonkeySettings;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 
 /**
@@ -16,11 +19,18 @@ import java.lang.reflect.Field;
 
 public class CommonTools {
 
+    // input verify
     private static String NULL_STRING = "";
     private static String SERIALVERSIONID = "serialversionuid";
     private static String $CHANGE = "$change";
     private static String MONKNEYSETTINGS = "MonkeySettings";
 
+    // save to SD card
+    private static boolean isExternalStorageAvailable = false;
+    private static File file;
+    private static FileOutputStream fileOutputStream;
+
+    // self-object
     private static CommonTools commonTools;
 
     public static CommonTools getCommonTools() {
@@ -36,7 +46,6 @@ public class CommonTools {
 
     /**
      * Checks if the device is rooted.
-     *
      * @return <code>true</code> if the device is rooted, <code>false</code> otherwise.
      */
     public static boolean isRooted() {
@@ -72,10 +81,21 @@ public class CommonTools {
         return false;
     }
 
+    /**
+     * Alarm Toast public method
+     * @param context avtivity content
+     * @param message message shows on the screen
+     */
     public static void alarmToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Monkey parameters inout verification
+     * @param monkeySettings monkeySettings Object which contains all input value
+     * @param context activity content
+     * @return
+     */
     public static boolean paraInputVerify(@NonNull MonkeySettings monkeySettings, Context context) {
         boolean flag = true;
         Field[] fields = monkeySettings.getClass().getDeclaredFields();
@@ -150,5 +170,25 @@ public class CommonTools {
             }
         }
         return flag;
+    }
+
+    /**
+     * save Monkey report to SD card
+     * @param fileName file name
+     * @param content report content
+     * @return
+     * @throws IOException
+     */
+    public static boolean saveResultToSDCard(String fileName, String content) throws IOException {
+        file = new File(Environment.getExternalStorageDirectory(), fileName);
+        if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+            isExternalStorageAvailable = true;
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(content.getBytes());
+            if(fileOutputStream != null) {
+                fileOutputStream.close();
+            }
+        }
+        return isExternalStorageAvailable;
     }
 }

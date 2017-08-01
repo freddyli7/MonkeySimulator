@@ -39,9 +39,6 @@ public class ReportExceptionActivity extends AppCompatActivity {
     private Intent anrIntent;
     private Intent generalnIntent;
     private GoAnr goAnr;
-    private boolean isExternalStorageAvailable = false;
-    private FileOutputStream fileOutputStream;
-    private File file;
     private GoGeneral goGeneral;
     private Bitmap appIconIntent;
     private ImageView imageView;
@@ -106,7 +103,6 @@ public class ReportExceptionActivity extends AppCompatActivity {
         anrIntent = new Intent(this, ReportAnrActivity.class);
 
 
-
     }
 
     public class GoBackMonkey implements View.OnClickListener {
@@ -121,7 +117,7 @@ public class ReportExceptionActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
-                saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass+RESULTS_TYPE, report);
+                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, report);
             } catch (IOException e) {
                 CommonTools.alarmToast(getBaseContext(), SAVE_MONKEY_RESULT_FAIL);
                 //e.printStackTrace();
@@ -129,7 +125,7 @@ public class ReportExceptionActivity extends AppCompatActivity {
             CommonTools.alarmToast(getBaseContext(), SAVE_MONKEY_SD);
         }
     }
-    
+
     public class GoGeneral implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -152,16 +148,4 @@ public class ReportExceptionActivity extends AppCompatActivity {
         }
     }
 
-    private boolean saveResultToSDCard(String fileName, String content) throws IOException {
-        file = new File(Environment.getExternalStorageDirectory(), fileName);
-        if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            isExternalStorageAvailable = true;
-            fileOutputStream = new FileOutputStream(file);
-            fileOutputStream.write(content.getBytes());
-            if(fileOutputStream != null) {
-                fileOutputStream.close();
-            }
-        }
-        return isExternalStorageAvailable;
-    }
 }
