@@ -39,7 +39,7 @@ public class ReportAnrActivity extends AppCompatActivity {
     private ExportMonkeyResults exportMonkeyResults;
     private Intent intent;
     private Intent exceptionIntent;
-    private Intent generalnIntent;
+    private Intent generalIntent;
     private Bitmap appIconIntent;
     private ImageView imageView;
     private String MONKEY_REPORT;
@@ -101,7 +101,7 @@ public class ReportAnrActivity extends AppCompatActivity {
         // go to general report
         goGeneral = new GoGeneral();
         goGeneralButton.setOnClickListener(goGeneral);
-        generalnIntent = new Intent(this, ReportActivity.class);
+        generalIntent = new Intent(this, ReportActivity.class);
 
 
     }
@@ -140,10 +140,10 @@ public class ReportAnrActivity extends AppCompatActivity {
     private class GoGeneral implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            generalnIntent.putExtra(MONKEY_REPORT, report);
-            generalnIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
-            generalnIntent.putExtra(APP_ICON, appIconIntent);
-            startActivity(generalnIntent);
+            generalIntent.putExtra(MONKEY_REPORT, report);
+            generalIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
+            generalIntent.putExtra(APP_ICON, appIconIntent);
+            startActivity(generalIntent);
         }
     }
 
