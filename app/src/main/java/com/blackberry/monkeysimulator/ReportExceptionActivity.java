@@ -30,13 +30,19 @@ public class ReportExceptionActivity extends AppCompatActivity {
     private TextView reportArea;
     private TextView appNameArea;
     private Button goBack;
+    private TextView goAnrButton;
     private Button exportResults;
     private GoBackMonkey goBackMonkey;
     private ExportMonkeyResults exportMonkeyResults;
+    private TextView goGeneralButton;
     private Intent intent;
+    private Intent anrIntent;
+    private Intent generalnIntent;
+    private GoAnr goAnr;
     private boolean isExternalStorageAvailable = false;
     private FileOutputStream fileOutputStream;
     private File file;
+    private GoGeneral goGeneral;
     private Bitmap appIconIntent;
     private ImageView imageView;
     private String MONKEY_REPORT;
@@ -68,6 +74,8 @@ public class ReportExceptionActivity extends AppCompatActivity {
         appNameArea = (TextView) findViewById(R.id.app_name_field_report_exception);
         goBack = (Button) findViewById(R.id.back_monkey_report_exception);
         exportResults = (Button) findViewById(R.id.export_report_exception);
+        goGeneralButton = (TextView) findViewById(R.id.all_info_report_exception);
+        goAnrButton = (TextView) findViewById(R.id.anr_report_exception);
 
         // content set
         reportArea.setText(report);
@@ -87,11 +95,21 @@ public class ReportExceptionActivity extends AppCompatActivity {
         exportMonkeyResults = new ExportMonkeyResults();
         exportResults.setOnClickListener(exportMonkeyResults);
 
+        // go to general report
+        goGeneral = new GoGeneral();
+        goGeneralButton.setOnClickListener(goGeneral);
+        generalnIntent = new Intent(this, ReportActivity.class);
+
+        // go to ANR report
+        goAnr = new GoAnr();
+        goAnrButton.setOnClickListener(goAnr);
+        anrIntent = new Intent(this, ReportAnrActivity.class);
+
 
 
     }
 
-    private class GoBackMonkey implements View.OnClickListener {
+    public class GoBackMonkey implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             SettingValueAdapter.setMonkeySettingsObj(new MonkeySettings());
@@ -99,7 +117,7 @@ public class ReportExceptionActivity extends AppCompatActivity {
         }
     }
 
-    private class ExportMonkeyResults implements View.OnClickListener {
+    public class ExportMonkeyResults implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             try {
@@ -111,8 +129,30 @@ public class ReportExceptionActivity extends AppCompatActivity {
             CommonTools.alarmToast(getBaseContext(), SAVE_MONKEY_SD);
         }
     }
+    
+    public class GoGeneral implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            // TODO report filter exception
+            generalnIntent.putExtra(MONKEY_REPORT, report);
+            generalnIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
+            generalnIntent.putExtra(APP_ICON, appIconIntent);
+            startActivity(generalnIntent);
+        }
+    }
 
-    public boolean saveResultToSDCard(String fileName, String content) throws IOException {
+    public class GoAnr implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            // TODO report filter ANR
+            anrIntent.putExtra(MONKEY_REPORT, report);
+            anrIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
+            anrIntent.putExtra(APP_ICON, appIconIntent);
+            startActivity(anrIntent);
+        }
+    }
+
+    private boolean saveResultToSDCard(String fileName, String content) throws IOException {
         file = new File(Environment.getExternalStorageDirectory(), fileName);
         if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             isExternalStorageAvailable = true;
@@ -124,5 +164,4 @@ public class ReportExceptionActivity extends AppCompatActivity {
         }
         return isExternalStorageAvailable;
     }
-
 }
