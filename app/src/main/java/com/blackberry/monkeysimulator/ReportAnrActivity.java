@@ -75,6 +75,7 @@ public class ReportAnrActivity extends AppCompatActivity {
         goGeneralButton = (TextView) findViewById(R.id.all_info_report_anr);
 
         // content set
+        // TODO filter for ANR report
         reportArea.setText(report);
         appNameArea.setText(nameAndVersionPass);
 
@@ -105,7 +106,7 @@ public class ReportAnrActivity extends AppCompatActivity {
 
     }
 
-    public class GoBackMonkey implements View.OnClickListener {
+    private class GoBackMonkey implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             SettingValueAdapter.setMonkeySettingsObj(new MonkeySettings());
@@ -113,7 +114,7 @@ public class ReportAnrActivity extends AppCompatActivity {
         }
     }
 
-    public class ExportMonkeyResults implements View.OnClickListener {
+    private class ExportMonkeyResults implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             try {
@@ -126,10 +127,9 @@ public class ReportAnrActivity extends AppCompatActivity {
         }
     }
 
-    public class GoException implements View.OnClickListener {
+    private class GoException implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            // TODO report filter exception
             exceptionIntent.putExtra(MONKEY_REPORT, report);
             exceptionIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
             exceptionIntent.putExtra(APP_ICON, appIconIntent);
@@ -137,10 +137,9 @@ public class ReportAnrActivity extends AppCompatActivity {
         }
     }
 
-    public class GoGeneral implements View.OnClickListener {
+    private class GoGeneral implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            // TODO report filter exception
             generalnIntent.putExtra(MONKEY_REPORT, report);
             generalnIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
             generalnIntent.putExtra(APP_ICON, appIconIntent);

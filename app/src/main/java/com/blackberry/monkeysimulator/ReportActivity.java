@@ -105,7 +105,7 @@ public class ReportActivity extends AppCompatActivity {
 
     }
 
-    public class GoBackMonkey implements View.OnClickListener {
+    private class GoBackMonkey implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             SettingValueAdapter.setMonkeySettingsObj(new MonkeySettings());
@@ -113,7 +113,7 @@ public class ReportActivity extends AppCompatActivity {
         }
     }
 
-    public class ExportMonkeyResults implements View.OnClickListener {
+    private class ExportMonkeyResults implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             try {
@@ -126,10 +126,9 @@ public class ReportActivity extends AppCompatActivity {
         }
     }
 
-    public class GoAnr implements View.OnClickListener {
+    private class GoAnr implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            // TODO report filter ANR
             anrIntent.putExtra(MONKEY_REPORT, report);
             anrIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
             anrIntent.putExtra(APP_ICON, appIconIntent);
@@ -137,10 +136,9 @@ public class ReportActivity extends AppCompatActivity {
         }
     }
 
-    public class GoException implements View.OnClickListener {
+    private class GoException implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            // TODO report filter exception
             exceptionIntent.putExtra(MONKEY_REPORT, report);
             exceptionIntent.putExtra(APP_NAME_VERSION, nameAndVersionPass);
             exceptionIntent.putExtra(APP_ICON, appIconIntent);
