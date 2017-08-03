@@ -75,8 +75,7 @@ public class ReportExceptionActivity extends AppCompatActivity {
         goAnrButton = (TextView) findViewById(R.id.anr_report_exception);
 
         // content set
-        // TODO filter for exception report
-        reportArea.setText(report);
+        reportArea.setText(CommonTools.reportFilterForExcepiton(report));
         appNameArea.setText(nameAndVersionPass);
 
         imageView = (ImageView) findViewById(R.id.app_icon_field_report_exception);

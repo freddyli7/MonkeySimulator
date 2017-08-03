@@ -63,6 +63,7 @@ public class ReportAnrActivity extends AppCompatActivity {
         SAVE_MONKEY_RESULT_FAIL = this.getString(R.string.save_monkey_result_fail);
         SAVE_MONKEY_SD = this.getString(R.string.save_monkey_to_sd);
 
+        // the original report (full info)
         report = getIntent().getStringExtra(MONKEY_REPORT);
         nameAndVersionPass = getIntent().getStringExtra(APP_NAME_VERSION);
         appIconIntent = getIntent().getParcelableExtra(APP_ICON);
@@ -75,8 +76,7 @@ public class ReportAnrActivity extends AppCompatActivity {
         goGeneralButton = (TextView) findViewById(R.id.all_info_report_anr);
 
         // content set
-        // TODO filter for ANR report
-        reportArea.setText(report);
+        reportArea.setText(CommonTools.reportFilterForANR(report));
         appNameArea.setText(nameAndVersionPass);
 
         imageView = (ImageView) findViewById(R.id.app_icon_field_report_anr);

@@ -191,4 +191,26 @@ public class CommonTools {
         }
         return isExternalStorageAvailable;
     }
+
+    /**
+     * filter original report to ANR only
+     * @param originalReport original report
+     * @return ANR report
+     */
+    public static String reportFilterForANR(String originalReport){
+
+
+        return "";
+    }
+
+    /**
+     * filter original report to Exception only
+     * @param originalReport original report
+     * @return exception report
+     */
+    public static String reportFilterForExcepiton(String originalReport){
+
+
+        return "";
+    }
 }
