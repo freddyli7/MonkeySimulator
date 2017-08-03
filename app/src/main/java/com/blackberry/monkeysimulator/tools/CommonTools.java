@@ -200,7 +200,7 @@ public class CommonTools {
     public static String reportFilterForANR(String originalReport){
 
 
-        return "";
+        return "ANR REPORT";
     }
 
     /**
@@ -208,9 +208,9 @@ public class CommonTools {
      * @param originalReport original report
      * @return exception report
      */
-    public static String reportFilterForExcepiton(String originalReport){
+    public static String reportFilterForException(String originalReport){
 
 
-        return "";
+        return "exception report";
     }
 }

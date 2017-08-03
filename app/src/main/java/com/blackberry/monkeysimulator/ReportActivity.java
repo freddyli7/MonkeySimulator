@@ -76,6 +76,7 @@ public class ReportActivity extends AppCompatActivity {
         goExceptionButton = (TextView) findViewById(R.id.exception_report);
 
         // content set
+        // TODO set ANR and exception part as RED
         reportArea.setText(report);
         appNameArea.setText(nameAndVersionPass);
 

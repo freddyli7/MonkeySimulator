@@ -118,7 +118,7 @@ public class ReportAnrActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
-                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, report);
+                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + "(Crash issues)" + RESULTS_TYPE, CommonTools.reportFilterForANR(report));
             } catch (IOException e) {
                 CommonTools.alarmToast(getBaseContext(), SAVE_MONKEY_RESULT_FAIL);
                 //e.printStackTrace();
