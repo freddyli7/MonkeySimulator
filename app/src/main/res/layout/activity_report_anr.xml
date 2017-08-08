@@ -46,7 +46,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="70dp"
         android:layout_marginStart="130dp"
-        android:text="ANR"
+        android:text="Crash"
         android:textAlignment="center"
         android:textColor="@android:color/widget_edittext_dark"
         android:textSize="20sp" />
@@ -55,13 +55,15 @@
         android:id="@+id/exception_report_anr"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginStart="240dp"
+        android:layout_marginStart="9dp"
         android:text="Exception"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:background="@color/colorPrimaryDark"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/anr_report_anr"
+        android:layout_alignBottom="@+id/anr_report_anr"
+        android:layout_toEndOf="@+id/anr_report_anr" />
 
     <ScrollView
         android:id="@+id/report_content_scroller_anr"

@@ -45,7 +45,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="70dp"
         android:layout_marginStart="130dp"
-        android:text="ANR"
+        android:text="Crash"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:background="@color/colorPrimaryDark"
