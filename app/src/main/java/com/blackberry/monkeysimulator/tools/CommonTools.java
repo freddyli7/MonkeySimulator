@@ -34,6 +34,9 @@ public class CommonTools {
     // self-object
     private static CommonTools commonTools;
 
+    private static StringBuffer finalExceptionReport;
+    private static final String EXCEPTION_TEMP = "Exception";
+
     public static CommonTools getCommonTools() {
         if(commonTools == null){
             return new CommonTools();
@@ -216,15 +219,9 @@ public class CommonTools {
      * @return exception report
      */
     public static String reportFilterForException(String originalReport){
-        StringBuffer finalExceptionReport = new StringBuffer();
-//        originalReport = "Sleeping for 50 milliseconds\n" +
-//                ":Sending Flip keyboardOpen=false\n" +
-//                "Got IOException performing flipjava.io.FileNotFoundException: /dev/input/event0: open failed: EACCES (Permission denied)\n" +
-//                "    // Injection Failed\n" +
-//                "Sleeping for 50 milliseconds\n";
-        String temp = "Exception";
+        finalExceptionReport = new StringBuffer();
         while (true){
-            int start = originalReport.indexOf(temp);
+            int start = originalReport.indexOf(EXCEPTION_TEMP);
             if(start == -1){
                 break;
             }
