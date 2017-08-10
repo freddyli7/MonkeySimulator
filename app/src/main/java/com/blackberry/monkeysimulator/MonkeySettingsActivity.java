@@ -163,7 +163,6 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 //e.printStackTrace();
                 CommonTools.alarmToast(getBaseContext(), "Looks like something wrong to execute the Monkey");
             }
-
             // 7. Back to MonkeySimulator, Show result
             CommonTools.alarmToast(getBaseContext(), EXECUTION_COMPLETE);
             launchIntentCurrent = getPackageManager().getLaunchIntentForPackage(getPackageName());

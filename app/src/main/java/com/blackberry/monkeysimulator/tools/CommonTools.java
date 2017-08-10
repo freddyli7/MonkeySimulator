@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.regex.Pattern;
 
 /**
  * Created by ruins7 on 2017-06-26.
@@ -215,8 +216,28 @@ public class CommonTools {
      * @return exception report
      */
     public static String reportFilterForException(String originalReport){
-
-
-        return "exception report";
+        StringBuffer finalExceptionReport = new StringBuffer();
+//        originalReport = "Sleeping for 50 milliseconds\n" +
+//                ":Sending Flip keyboardOpen=false\n" +
+//                "Got IOException performing flipjava.io.FileNotFoundException: /dev/input/event0: open failed: EACCES (Permission denied)\n" +
+//                "    // Injection Failed\n" +
+//                "Sleeping for 50 milliseconds\n";
+        String temp = "Exception";
+        while (true){
+            int start = originalReport.indexOf(temp);
+            if(start == -1){
+                break;
+            }
+            int end = originalReport.indexOf("\n",start);
+            String frontHalf = originalReport.substring(0,start);
+            int lastTwo_N = frontHalf.lastIndexOf("\n", frontHalf.lastIndexOf("\n")-1);
+            finalExceptionReport.append(originalReport.substring(lastTwo_N, end));
+            finalExceptionReport.append("\n\n");
+            originalReport = originalReport.substring(end, originalReport.length()-1);
+        }
+        if(finalExceptionReport.length() == 0) {
+            return "There is not Exception found";
+        }
+        return finalExceptionReport.toString();
     }
 }
