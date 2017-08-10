@@ -195,7 +195,7 @@ public class CommonTools {
     /**
      * filter original report to ANR only
      * @param originalReport original report
-     * @return ANR report
+     * @return Crash(ANR) report
      */
     public static String reportFilterForANR(String originalReport){
 
