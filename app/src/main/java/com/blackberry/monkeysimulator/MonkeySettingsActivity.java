@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.blackberry.monkeysimulator.tools.AssembleMonkeyCommand;
 import com.blackberry.monkeysimulator.tools.CommonTools;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MonkeySettingsActivity extends AppCompatActivity {
@@ -58,6 +60,8 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private String EXECUTION_COMPLETE;
     private String MONKEY_REPORT_ACTIVITY;
     private String APP_NAME_VERSION;
+    private String MONKEY_RESULTS;
+    private String RESULTS_TYPE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,8 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         MONKEY_REPORT_ACTIVITY = this.getString(R.string.monkey_reportactivity);
         MONKEY_REPORT = this.getString(R.string.monkey_report);
         APP_NAME_VERSION = this.getString(R.string.app_name_version_pass);
+        MONKEY_RESULTS = this.getString(R.string.monkey_results);
+        RESULTS_TYPE = this.getString(R.string.results_type);
 
         appNameIntent = getIntent().getStringExtra(APP_NAME);
         appVersionIntent = getIntent().getStringExtra(APP_VERSION);
@@ -119,41 +125,45 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             if (!CommonTools.paraInputVerify(settingValueAdapter.getMonkeySettingsObj(), getBaseContext())) {
                 return;
             }
-            // 2.Assemble command
+            // 3. save current para values to application session
+            MonkeySettings.setMonkeySettings(settingValueAdapter.getMonkeySettingsObj());
+            // 4.Assemble command
             finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(appNameIntent, settingValueAdapter.getMonkeySettingsObj(), getBaseContext());
-            //Log.e("....", finalMonkeyCommand);
-            // 3.Open target application
+            // Log.e("....", finalMonkeyCommand);
+            // 5.Open target application
             launchIntent = getPackageManager().getLaunchIntentForPackage(appNameIntent);
             startActivity(launchIntent);
-            // 4.Execute monkey command
-            // TODO use side button to control
+            // 6.Execute monkey command (saving report while executing)
             try {
                 pc = Runtime.getRuntime().exec(finalMonkeyCommand);
-                // 5. record report
+                // record report
                 bufInput = new BufferedReader(new InputStreamReader(pc.getInputStream()));
                 bufError = new BufferedReader(new InputStreamReader(pc.getErrorStream()));
-                report = new String();
                 sbReport = new StringBuffer();
                 sbReport.append(MONKEY_COMMAND + finalMonkeyCommand + RETURN_LINE + RETURN_LINE);
+                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, MONKEY_COMMAND + finalMonkeyCommand + RETURN_LINE + RETURN_LINE, false);
                 while ((report = bufInput.readLine()) != null) {
-                    //Log.e("..reportInput..", report);
+                    Log.e("..reportInput..", report);
                     sbReport.append(report);
+                    CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, report, true);
                     sbReport.append(RETURN_LINE);
+                    CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, RETURN_LINE, true);
                 }
-
                 while ((report = bufError.readLine()) != null) {
-                    //Log.e("..reportError..", report);
+                    Log.e("..reportError..", report);
                     sbReport.append(ERROR_MESSAGE + RETURN_LINE);
+                    CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, ERROR_MESSAGE + RETURN_LINE, true);
                     sbReport.append(report);
+                    CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, report, true);
                     sbReport.append(RETURN_LINE);
+                    CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, RETURN_LINE, true);
                 }
             } catch (Exception e) {
                 //Log.e("....", "SOMETHING WRONG");
                 //e.printStackTrace();
                 CommonTools.alarmToast(getBaseContext(), "Looks like something wrong to execute the Monkey");
             }
-            // 6. save current para values to application session
-            MonkeySettings.setMonkeySettings(settingValueAdapter.getMonkeySettingsObj());
+
             // 7. Back to MonkeySimulator, Show result
             CommonTools.alarmToast(getBaseContext(), EXECUTION_COMPLETE);
             launchIntentCurrent = getPackageManager().getLaunchIntentForPackage(getPackageName());

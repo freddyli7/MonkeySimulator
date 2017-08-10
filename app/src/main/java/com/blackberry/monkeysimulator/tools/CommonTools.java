@@ -176,14 +176,19 @@ public class CommonTools {
      * save Monkey report to SD card
      * @param fileName file name
      * @param content report content
+     * @param isAppend report appended? if true, report content would be appended; if false, clean old content and rewrite new content
      * @return
      * @throws IOException
      */
-    public static boolean saveResultToSDCard(String fileName, String content) throws IOException {
+    public static boolean saveResultToSDCard(String fileName, String content, boolean isAppend) throws IOException {
         file = new File(Environment.getExternalStorageDirectory(), fileName);
         if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             isExternalStorageAvailable = true;
-            fileOutputStream = new FileOutputStream(file);
+            if(isAppend){
+                fileOutputStream = new FileOutputStream(file, true);
+            } else{
+                fileOutputStream = new FileOutputStream(file);
+            }
             fileOutputStream.write(content.getBytes());
             if(fileOutputStream != null) {
                 fileOutputStream.close();

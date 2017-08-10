@@ -118,7 +118,7 @@ public class ReportActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
-                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, report);
+                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, report, false);
             } catch (IOException e) {
                 CommonTools.alarmToast(getBaseContext(), SAVE_MONKEY_RESULT_FAIL);
                 //e.printStackTrace();

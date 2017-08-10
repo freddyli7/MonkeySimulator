@@ -117,7 +117,7 @@ public class ReportExceptionActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
-                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + "(Exception issues)" + RESULTS_TYPE, CommonTools.reportFilterForException(report));
+                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + "(Exception issues)" + RESULTS_TYPE, CommonTools.reportFilterForException(report), false);
             } catch (IOException e) {
                 CommonTools.alarmToast(getBaseContext(), SAVE_MONKEY_RESULT_FAIL);
                 //e.printStackTrace();
