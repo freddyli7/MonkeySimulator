@@ -233,7 +233,7 @@ public class CommonTools {
             originalReport = originalReport.substring(end, originalReport.length()-1);
         }
         if(finalExceptionReport.length() == 0) {
-            return "There is not Exception found";
+            return "There is no exception found";
         }
         return finalExceptionReport.toString();
     }
