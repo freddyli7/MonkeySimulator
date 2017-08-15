@@ -128,8 +128,8 @@ public class CommonTools {
                         flag = false;
                         break;
                     }
-                    if (field.getName().equalsIgnoreCase("event_number") && ((!NULL_STRING.equals(monkeySettings.getEvent_number()) || monkeySettings.getEvent_number() != null) && Integer.valueOf(field.get(monkeySettings).toString()) > 5000)) {
-                        alarmToast(context, "Illegal input with " + field.getName() + ", event number should be positive integer but less then 5000");
+                    if (field.getName().equalsIgnoreCase("event_number") && ((!NULL_STRING.equals(monkeySettings.getEvent_number()) || monkeySettings.getEvent_number() != null) && Integer.valueOf(field.get(monkeySettings).toString()) > 200000)) {
+                        alarmToast(context, "Illegal input with " + field.getName() + ", event number should be positive integer but less then 200000");
                         flag = false;
                         break;
                     }
