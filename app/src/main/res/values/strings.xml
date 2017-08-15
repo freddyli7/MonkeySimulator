@@ -2,7 +2,8 @@
     <string name="app_name">Monkey</string>
     <string name="app_real_name">monkeysimulator</string>
     <string name="title_activity_monkey_settings">Monkey Parameters Setting</string>
-    <string name="company_package">com.blackberry.</string>
+    <!--<string name="company_package">com.blackberry.</string>-->
+    <string name="company_package">com.google.</string>
     <string name="return_line">\n</string>
     <string name="app_version_small">v</string>
     <string name="app_version_large">Version</string>

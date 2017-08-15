@@ -47,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
         packageList = pm.getInstalledPackages(0);
         for (int i = 0; i < packageList.size(); i++){
             packageInfo = packageList.get(i);
+            // full installed apps
+            if(PACKAGE_NAME == null){
+                appsName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName, packageInfo.applicationInfo.loadIcon(getPackageManager())));
+            } else
+            // specific app (PACKAGE_NAME is app's full name)
+            if(packageInfo.packageName.equals(PACKAGE_NAME)){
+                appsName.add(new ApkApplications(packageInfo.packageName, packageInfo.versionName, packageInfo.applicationInfo.loadIcon(getPackageManager())));
+            } else
+            // specific company's apps (com.xxx.)
             if(packageInfo.packageName.startsWith(PACKAGE_NAME) && !packageInfo.packageName.endsWith(APP_REAL_NAME)){
                 launchIntent = this.getPackageManager().getLaunchIntentForPackage(packageInfo.packageName);
                 if(launchIntent != null){
