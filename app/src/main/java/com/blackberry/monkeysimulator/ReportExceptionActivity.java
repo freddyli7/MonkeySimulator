@@ -75,7 +75,7 @@ public class ReportExceptionActivity extends AppCompatActivity {
         goAnrButton = (TextView) findViewById(R.id.anr_report_exception);
 
         // content set
-        reportArea.setText(CommonTools.reportFilterForException(report));
+        reportArea.setText(CommonTools.reportFilterForIssue(report, "Exception"));
         appNameArea.setText(nameAndVersionPass);
 
         imageView = (ImageView) findViewById(R.id.app_icon_field_report_exception);
@@ -117,7 +117,7 @@ public class ReportExceptionActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
-                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + "(Exception issues)" + RESULTS_TYPE, CommonTools.reportFilterForException(report), false);
+                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + "(Exception issues)" + RESULTS_TYPE, CommonTools.reportFilterForIssue(report, "Exception"), false);
             } catch (IOException e) {
                 CommonTools.alarmToast(getBaseContext(), SAVE_MONKEY_RESULT_FAIL);
                 //e.printStackTrace();

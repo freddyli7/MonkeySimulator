@@ -76,7 +76,7 @@ public class ReportAnrActivity extends AppCompatActivity {
         goGeneralButton = (TextView) findViewById(R.id.all_info_report_anr);
 
         // content set
-        reportArea.setText(CommonTools.reportFilterForANR(report));
+        reportArea.setText(CommonTools.reportFilterForIssue(report, "ANR"));
         appNameArea.setText(nameAndVersionPass);
 
         imageView = (ImageView) findViewById(R.id.app_icon_field_report_anr);
@@ -118,7 +118,7 @@ public class ReportAnrActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
-                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + "(Crash issues)" + RESULTS_TYPE, CommonTools.reportFilterForANR(report), false);
+                CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + "(Crash issues)" + RESULTS_TYPE, CommonTools.reportFilterForIssue(report, "ANR"), false);
             } catch (IOException e) {
                 CommonTools.alarmToast(getBaseContext(), SAVE_MONKEY_RESULT_FAIL);
                 //e.printStackTrace();

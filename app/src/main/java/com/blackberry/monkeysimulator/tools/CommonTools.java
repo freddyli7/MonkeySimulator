@@ -34,8 +34,7 @@ public class CommonTools {
     // self-object
     private static CommonTools commonTools;
 
-    private static StringBuffer finalExceptionReport;
-    private static final String EXCEPTION_TEMP = "Exception";
+    private static StringBuffer finalIssueReport;
 
     public static CommonTools getCommonTools() {
         if(commonTools == null){
@@ -202,39 +201,27 @@ public class CommonTools {
     }
 
     /**
-     * filter original report to ANR only
+     * filter original report to a specific issue only (ANR, Exception)
      * @param originalReport original report
-     * @return Crash(ANR) report
+     * @return a specific issue report
      */
-    public static String reportFilterForANR(String originalReport){
-
-
-
-        return "ANR REPORT";
-    }
-
-    /**
-     * filter original report to Exception only
-     * @param originalReport original report
-     * @return exception report
-     */
-    public static String reportFilterForException(String originalReport){
-        finalExceptionReport = new StringBuffer();
+    public static String reportFilterForIssue(String originalReport, String issueKeyName){
+        finalIssueReport = new StringBuffer();
         while (true){
-            int start = originalReport.indexOf(EXCEPTION_TEMP);
+            int start = originalReport.indexOf(issueKeyName);
             if(start == -1){
                 break;
             }
             int end = originalReport.indexOf("\n",start);
             String frontHalf = originalReport.substring(0,start);
             int lastTwo_N = frontHalf.lastIndexOf("\n", frontHalf.lastIndexOf("\n")-1);
-            finalExceptionReport.append(originalReport.substring(lastTwo_N, end));
-            finalExceptionReport.append("\n\n");
+            finalIssueReport.append(originalReport.substring(lastTwo_N, end));
+            finalIssueReport.append("\n\n");
             originalReport = originalReport.substring(end, originalReport.length()-1);
         }
-        if(finalExceptionReport.length() == 0) {
-            return "There is no exception found";
+        if(finalIssueReport.length() == 0) {
+            return "There is no "+ issueKeyName +" found";
         }
-        return finalExceptionReport.toString();
+        return finalIssueReport.toString();
     }
 }
