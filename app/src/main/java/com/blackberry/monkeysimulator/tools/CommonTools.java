@@ -220,7 +220,7 @@ public class CommonTools {
             originalReport = originalReport.substring(end, originalReport.length()-1);
         }
         if(finalIssueReport.length() == 0) {
-            return "There is no "+ issueKeyName +" found";
+            return "There is no "+ issueKeyName +" issue found";
         }
         return finalIssueReport.toString();
     }
