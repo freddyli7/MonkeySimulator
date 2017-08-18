@@ -33,7 +33,7 @@
     <!-- Dialog -->
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
-    <string name="dialog_title">Entry value for :</string>
+    <string name="dialog_title">Entry value for : </string>
 
 
 
