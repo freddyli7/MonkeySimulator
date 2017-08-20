@@ -116,21 +116,21 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private class RunMonkeyCommand implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            // 1.Must be rooted first
+            // 1. Must be rooted
             if (!CommonTools.isRooted()) {
                 CommonTools.alarmToast(getBaseContext(), ROOT_DEVICE_WARNING);
                 return;
             }
-            // 2. verify parameters input
+            // 2. Verify parameters input
             if (!CommonTools.paraInputVerify(settingValueAdapter.getMonkeySettingsObj(), getBaseContext())) {
                 return;
             }
-            // 3. save current para values to application session
+            // 3. Save current para values to application scope
             MonkeySettings.setMonkeySettings(settingValueAdapter.getMonkeySettingsObj());
-            // 4.Assemble command
+            // 4. Assemble command
             finalMonkeyCommand = AssembleMonkeyCommand.assembleMonkeyCommand(appNameIntent, settingValueAdapter.getMonkeySettingsObj(), getBaseContext());
             // Log.e("....", finalMonkeyCommand);
-            // 5.Open target application
+            // 5. Open target application
             launchIntent = getPackageManager().getLaunchIntentForPackage(appNameIntent);
             startActivity(launchIntent);
             // 6.Execute monkey command (saving report while executing)
@@ -163,7 +163,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 //e.printStackTrace();
                 CommonTools.alarmToast(getBaseContext(), "Looks like something wrong to execute the Monkey");
             }
-            // 7. Back to MonkeySimulator, Show result
+            // 7. Back to MonkeySimulator, show result
             CommonTools.alarmToast(getBaseContext(), EXECUTION_COMPLETE);
             launchIntentCurrent = getPackageManager().getLaunchIntentForPackage(getPackageName());
             componentName = new ComponentName(getPackageName(), MONKEY_REPORT_ACTIVITY);
