@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MonkeySettings extends Application {
 
-    // 全局对象，用于存储monkey参数，以便下一次重用
+    // application object to store monkey para value for the convenience of next execution
     private static MonkeySettings monkeySettings;
 
     // Events
@@ -229,10 +229,10 @@ public class MonkeySettings extends Application {
         List<String> settings = new ArrayList<>();
         Field[] fields = MonkeySettings.class.getDeclaredFields();
         for (Field field :fields) {
-            //不需要展示的参数
+            //the list that don't need to be displayed on screen
             if(!field.getName().equalsIgnoreCase("serialversionuid") &&
                     !field.getName().startsWith("$change") &&
-            !field.getName().equalsIgnoreCase("monkeySettings")){
+                    !field.getName().equalsIgnoreCase("monkeySettings")){
                 settings.add(field.getName());
             }
         }

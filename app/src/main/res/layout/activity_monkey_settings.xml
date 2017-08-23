@@ -31,7 +31,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="540dp"
+        android:layout_height="480dp"
         android:id="@+id/monkey_settings_listView"
         android:layout_below="@+id/app_icon_field_setting"
         android:layout_alignParentStart="true" />
@@ -40,7 +40,7 @@
         android:id="@+id/back_monkey_setting"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="490dp"
         android:layout_marginStart="20dp"
         android:layout_below="@id/app_name_field_setting"
         android:text="Back"
@@ -51,7 +51,7 @@
         android:id="@+id/run_monkey"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="490dp"
         android:layout_marginStart="290dp"
         android:gravity="center"
         android:layout_below="@id/app_name_field_setting"

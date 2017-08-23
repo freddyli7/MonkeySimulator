@@ -21,6 +21,8 @@ public class AssembleMonkeyCommand {
     private static String $CHANGE = "$change";
     private static String event_num;
 
+    private static String NO_ACCESS_WARNING = "Can't access to this parameter currently";
+
     // General
     private static String EVENT_NUMBER = "event_number";
     private static String SEED_NUMBER = "seed_number";
@@ -120,7 +122,7 @@ public class AssembleMonkeyCommand {
                     }
                 } catch (IllegalAccessException e) {
                     //Log.e("ERROR TAG", "Illegal access field for monkeySettingsObj");
-                    CommonTools.alarmToast(context, "Can't access to this parameter currently");
+                    CommonTools.alarmToast(context, NO_ACCESS_WARNING);
                 }
             }
         }

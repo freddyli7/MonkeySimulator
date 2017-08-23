@@ -20,6 +20,8 @@ import java.util.regex.Pattern;
 
 public class CommonTools {
 
+    private static String NO_ACCESS_WARNING = "Can't access to this parameter currently";
+
     // input verify
     private static String NULL_STRING = "";
     private static String SERIALVERSIONID = "serialversionuid";
@@ -168,7 +170,7 @@ public class CommonTools {
                     }
                 } catch (IllegalAccessException e) {
                     //e.printStackTrace();
-                    alarmToast(context, "Can't access to this parameter currently");
+                    alarmToast(context, NO_ACCESS_WARNING);
                 }
             }
         }

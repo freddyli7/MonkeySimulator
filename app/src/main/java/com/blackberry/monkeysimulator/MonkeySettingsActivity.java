@@ -63,6 +63,8 @@ public class MonkeySettingsActivity extends AppCompatActivity {
     private String MONKEY_RESULTS;
     private String RESULTS_TYPE;
 
+    private static String EXECUTION_PROBLEM = "Looks like something wrong to execute the Monkey";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +112,6 @@ public class MonkeySettingsActivity extends AppCompatActivity {
         backToAppList = new BackToAppList();
         backToMainAppListButton.setOnClickListener(backToAppList);
         launchIntent = new Intent(this, MainActivity.class);
-
     }
 
     private class RunMonkeyCommand implements View.OnClickListener {
@@ -161,7 +162,7 @@ public class MonkeySettingsActivity extends AppCompatActivity {
             } catch (Exception e) {
                 //Log.e("....", "SOMETHING WRONG");
                 //e.printStackTrace();
-                CommonTools.alarmToast(getBaseContext(), "Looks like something wrong to execute the Monkey");
+                CommonTools.alarmToast(getBaseContext(), EXECUTION_PROBLEM);
             }
             // 7. Back to MonkeySimulator, show result
             CommonTools.alarmToast(getBaseContext(), EXECUTION_COMPLETE);

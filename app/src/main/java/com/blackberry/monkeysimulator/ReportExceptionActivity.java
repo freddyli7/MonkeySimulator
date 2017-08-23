@@ -101,8 +101,6 @@ public class ReportExceptionActivity extends AppCompatActivity {
         goAnr = new GoAnr();
         goAnrButton.setOnClickListener(goAnr);
         anrIntent = new Intent(this, ReportAnrActivity.class);
-
-
     }
 
     private class GoBackMonkey implements View.OnClickListener {
