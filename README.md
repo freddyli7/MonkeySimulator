@@ -3,6 +3,8 @@ Tool encapsulating monkey command for performance and pressure testing on Androi
 
 Current version is only used for **BlackBerry** apps.
 
+[Github for Monkey App](https://github.com/Ruins7/MonkeySimulator)
+
 **Version 1.0**
 
 1. Fetch all BlackBerry apps first(Both apps and services), displaying as app name with current version.
@@ -27,14 +29,19 @@ Current version is only used for **BlackBerry** apps.
     
     1. Inputing empty value on optional paras works fine on KeyOne but doesn't on DTEK60. 
     
-**Version 1.4**
-
-1. Add Category para.
-
 **Version 2.0**
 
-1. Add button to control Monkey during execution.
+1. Add Category para.
 
 **Version 2.1**
 
 1. Add filter to the final result display. eg. Exceptions, errors, crashes.
+2. Save execution result while monkey running to SD card(in case of crash).
+3. pre-load recommended parameters value.
+
+**Version 2.2**
+
+1. Add button to control Monkey during execution.
+2. Control Monkey to go deeper in a specific path in one app. 
+3. Improve result issue filter to get more valuable info so that
+  it’s easy to locate issue efficiently.

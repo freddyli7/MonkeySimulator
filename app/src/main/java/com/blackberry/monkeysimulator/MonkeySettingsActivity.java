@@ -143,14 +143,14 @@ public class MonkeySettingsActivity extends AppCompatActivity {
                 sbReport.append(MONKEY_COMMAND + finalMonkeyCommand + RETURN_LINE + RETURN_LINE);
                 CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, MONKEY_COMMAND + finalMonkeyCommand + RETURN_LINE + RETURN_LINE, false);
                 while ((report = bufInput.readLine()) != null) {
-                    Log.e("..reportInput..", report);
+                    //Log.e("..reportInput..", report);
                     sbReport.append(report);
                     CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, report, true);
                     sbReport.append(RETURN_LINE);
                     CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, RETURN_LINE, true);
                 }
                 while ((report = bufError.readLine()) != null) {
-                    Log.e("..reportError..", report);
+                    //Log.e("..reportError..", report);
                     sbReport.append(ERROR_MESSAGE + RETURN_LINE);
                     CommonTools.saveResultToSDCard(MONKEY_RESULTS + nameAndVersionPass + RESULTS_TYPE, ERROR_MESSAGE + RETURN_LINE, true);
                     sbReport.append(report);

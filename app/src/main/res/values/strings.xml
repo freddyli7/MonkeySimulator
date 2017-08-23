@@ -36,5 +36,27 @@
     <string name="dialog_title">Input value for : </string>
 
 
+    <!-- Pre-load parameter values -->
+    <string name="event_number">10000</string>
+    <string name="seed_number">200</string>
+    <string name="information_level">3</string>
+    <string name="throttle">100</string>
 
+    <string name="pct_touch"></string>
+    <string name="pct_motion"></string>
+    <string name="pct_trackball"></string>
+    <string name="pct_nav"></string>
+    <string name="pct_majornav"></string>
+    <string name="pct_syskeys"></string>
+    <string name="pct_appswitch"></string>
+    <string name="pct_anyevent"></string>
+
+    <string name="dbg_no_event"></string>
+    <string name="hprof">1</string>
+    <string name="ignore_crashes"></string>
+    <string name="ignore_timeouts"></string>
+    <string name="ignore_security_exceptions"></string>
+    <string name="kill_process_after_error"></string>
+    <string name="monitor_native_crashes"></string>
+    <string name="wait_dbg"></string>
 </resources>
