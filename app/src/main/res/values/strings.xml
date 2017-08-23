@@ -37,7 +37,8 @@
 
 
     <!-- Pre-load parameter values -->
-    <string name="event_number">10000</string>
+    <!-- config recommand parameter vlaue here -->
+    <string name="event_number">1000</string>
     <string name="seed_number">200</string>
     <string name="information_level">3</string>
     <string name="throttle">100</string>
