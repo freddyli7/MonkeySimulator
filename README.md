@@ -3,7 +3,7 @@ Tool encapsulating monkey command for performance and pressure testing on Androi
 
 Current version is only used for **BlackBerry** apps.
 
-For future update, please check my personal github:
+For future update, please check my personal Github:
 [Github for Monkey App](https://github.com/Ruins7/MonkeySimulator)
 
 Monkey parameters range:
