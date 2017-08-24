@@ -3,7 +3,39 @@ Tool encapsulating monkey command for performance and pressure testing on Androi
 
 Current version is only used for **BlackBerry** apps.
 
+For future update, please check my personal github:
 [Github for Monkey App](https://github.com/Ruins7/MonkeySimulator)
+
+Monkey parameters range:
+event number : 1-20000 (required)
+seed number : 0(empty)-2000
+information level : 0(empty)-5
+throttle : 0(empty)-1000
+
+pct-touch : 0(empty)-100(%)
+pct-motion : 0(empty)-100(%)
+pct-trackball : 0(empty)-100(%)
+pct-nav : 0(empty)-100(%)
+pct-majornav : 0(empty)-100(%)
+pct-syskeys : 0(empty)-100(%)
+pct-appswitch : 0(empty)-100(%)
+pct-anyevent : 0(empty)-100(%)
+
+dbg-no-event : empty or 1
+hprof : empty or 1
+ignore-timeouts : empty or 1
+ignore-crashes : empty or 1
+ignore-security-exceptions : empty or 1
+kill-process-after-error : empty or 1
+monitor-native-crashes : empty or 1
+wait-dbg : empty or 1
+
+For parameters detail, please check [Monkey offical document](https://developer.android.com/studio/test/monkey.html)
+
+**To install Monkey, the device has to be rooted**
+
+If there is system permission issue during installation, try to sign this app with 
+[signapk.jar](https://drive.google.com/file/d/0B2nrgXGUhkR8UDhIM2NjaEtNWnc/view?usp=sharing), [platform.x509.pem](https://drive.google.com/file/d/0B2nrgXGUhkR8T0VuVW1kUXluZjg/view?usp=sharing) and [platform.pk8](https://drive.google.com/file/d/0B2nrgXGUhkR8bHVBWjZRVjZYNTg/view?usp=sharing)
 
 **Version 1.0**
 

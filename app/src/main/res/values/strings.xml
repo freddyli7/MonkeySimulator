@@ -21,7 +21,7 @@
     <string name="app_not_open_warning">Service can not be opened</string>
     <string name="root_device_warning">Please root your device first or use ENG device</string>
     <string name="monkey_execution_completed">Monkey execution completed</string>
-    <string name="save_monkey_result_fail">Saving monkey result failed</string>
+    <string name="save_monkey_result_fail">Save monkey result failed</string>
     <string name="save_monkey_to_sd">Monkey result has been saved in SD card</string>
 
     <!-- Report -->
